@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TravelBug — Bespoke Travel Planning by Amanda</title>
+<meta name="description" content="TravelBug designs bespoke, unhurried itineraries — honeymoons, milestone trips, and family travel — planned end to end by Amanda.">
+<meta name="theme-color" content="#0f3d3e">
+
+<!-- Social preview -->
+<meta property="og:title" content="TravelBug — Bespoke Travel Planning by Amanda">
+<meta property="og:description" content="Thoughtfully planned trips, designed around you.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f3d3e'/%3E%3Cpath d='M16 7c-3.9 0-7 3.1-7 7 0 5.2 7 11 7 11s7-5.8 7-11c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 16 11a2.5 2.5 0 0 1 0 5.5z' fill='%23e08a5f'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ Reusable scenery illustration (colors set per-card in CSS) ============ -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <!-- Sky is a CSS gradient on the parent card; this draws only what sits on it,
+       so each tile can recolour the scene through custom properties. -->
+  <symbol id="scene" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">
+    <circle cx="306" cy="74" r="27" fill="var(--sun)" opacity=".95"/>
+    <path d="M0 186 L58 132 L104 158 L168 92 L226 146 L286 116 L340 162 L400 130 L400 260 L0 260Z"
+          fill="var(--far)" opacity=".78"/>
+    <path d="M0 214 L72 160 L128 196 L192 148 L248 194 L318 168 L400 202 L400 260 L0 260Z"
+          fill="var(--near)"/>
+    <path d="M0 236 Q90 224 178 234 T400 228 L400 260 L0 260Z" fill="var(--water)"/>
+  </symbol>
+</svg>
+
+<!-- ================================ HEADER ================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 3c-4.9 0-9 4-9 9 0 6.6 9 17 9 17s9-10.4 9-17c0-5-4.1-9-9-9zm0 12.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4z" fill="currentColor"/>
+      </svg>
+      <span class="brand-name">TravelBug</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#process">How it works</a>
+      <a href="#about">About</a>
+      <a class="btn btn-sm btn-primary" href="#contact">Start planning</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================================= HERO ================================= -->
+<section class="hero" id="top">
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stop-color="#0c3234"/>
+          <stop offset="52%" stop-color="#1d5f5b"/>
+          <stop offset="100%" stop-color="#e9a072"/>
+        </linearGradient>
+        <radialGradient id="heroGlow" cx="76%" cy="72%" r="34%">
+          <stop offset="0%"   stop-color="#ffd9a8" stop-opacity=".95"/>
+          <stop offset="100%" stop-color="#ffd9a8" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1440" height="700" fill="url(#heroSky)"/>
+      <circle cx="1094" cy="504" r="66" fill="#ffcf9b" opacity=".92"/>
+      <rect width="1440" height="700" fill="url(#heroGlow)"/>
+      <path d="M0 470 L210 322 L376 452 L560 344 L742 486 L960 372 L1180 494 L1440 396 L1440 700 L0 700Z" fill="#0d3a3b" opacity=".55"/>
+      <path d="M0 556 L188 430 L372 542 L580 438 L790 566 L1010 470 L1240 574 L1440 502 L1440 700 L0 700Z" fill="#0a2f30" opacity=".85"/>
+      <path d="M0 632 Q240 606 480 632 T960 632 T1440 620 L1440 700 L0 700Z" fill="#072425"/>
+    </svg>
+  </div>
+
+  <div class="wrap hero-inner">
+    <p class="eyebrow reveal">Bespoke travel planning</p>
+    <h1 class="hero-title reveal">Trips worth the<br><em>time off.</em></h1>
+    <p class="hero-sub reveal">I'm Amanda — I plan unhurried, personal itineraries so you can stop
+      juggling forty browser tabs and start looking forward to the trip.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="#contact">Start planning</a>
+      <a class="btn btn-ghost" href="#process">How it works</a>
+    </div>
+  </div>
+
+  <div class="hero-strip">
+    <div class="wrap hero-strip-inner">
+      <span>Bespoke itineraries</span>
+      <span>Insider access &amp; local guides</span>
+      <span>Support while you're away</span>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== SERVICES =============================== -->
+<section class="section" id="services">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="eyebrow">What I do</p>
+      <h2>Three ways to travel together</h2>
+      <p class="lede">Every trip starts with a conversation. Where you land depends on
+        what you're planning — and how much of it you'd like off your plate.</p>
+    </header>
+
+    <div class="cards">
+      <article class="card reveal">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </div>
+        <h3>Custom itineraries</h3>
+        <p>A day-by-day plan built around your pace, your budget, and the things you
+          actually care about. Flights, stays, transfers, reservations — booked and confirmed.</p>
+        <ul class="card-list">
+          <li>Route &amp; pacing designed around you</li>
+          <li>Hotels vetted, never guessed at</li>
+          <li>Restaurants and tickets held in advance</li>
+        </ul>
+      </article>
+
+      <article class="card card-feature reveal">
+        <span class="card-tag">Most requested</span>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 2.5C19 15.4 12 20 12 20z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Honeymoons &amp; milestones</h3>
+        <p>The trips you only take once. I handle the logistics and the quiet extras —
+          the room upgrade, the table by the window, the car waiting when you land.</p>
+        <ul class="card-list">
+          <li>Honeymoons, anniversaries, big birthdays</li>
+          <li>Perks &amp; upgrades through partner properties</li>
+          <li>Surprises arranged with your other half</li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="10" r="2.4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5M15.5 19c0-2.2 1.6-3.6 3.6-3.6 1.2 0 2.4.5 2.9 1.4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Group &amp; family travel</h3>
+        <p>Multiple households, different budgets, one calendar. I coordinate the moving
+          parts so nobody has to run a spreadsheet or chase a deposit.</p>
+        <ul class="card-list">
+          <li>Family reunions and multi-generation trips</li>
+          <li>Small groups, wedding parties, friends</li>
+          <li>One point of contact for everyone</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= DESTINATIONS ============================= -->
+<section class="section section-tint" id="destinations">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="eyebrow">Where to</p>
+      <h2>Places I know well</h2>
+      <p class="lede">I plan trips worldwide, but these are the regions I've walked myself —
+        and where I have people on the ground.</p>
+    </header>
+
+    <div class="dest-grid">
+      <a class="dest dest-a reveal" href="#contact">
+        <svg class="dest-art" aria-hidden="true"><use href="#scene"/></svg>
+        <div class="dest-body"><h3>Greece &amp; the Islands</h3><p>Island-hopping at a human pace</p></div>
+      </a>
+      <a class="dest dest-b reveal" href="#contact">
+        <svg class="dest-art" aria-hidden="true"><use href="#scene"/></svg>
+        <div class="dest-body"><h3>Italy</h3><p>Coastlines, cities, and long lunches</p></div>
+      </a>
+      <a class="dest dest-c reveal" href="#contact">
+        <svg class="dest-art" aria-hidden="true"><use href="#scene"/></svg>
+        <div class="dest-body"><h3>Japan</h3><p>Rail routes and quiet ryokan</p></div>
+      </a>
+      <a class="dest dest-d reveal" href="#contact">
+        <svg class="dest-art" aria-hidden="true"><use href="#scene"/></svg>
+        <div class="dest-body"><h3>Portugal &amp; Spain</h3><p>Slow coast, old towns, great food</p></div>
+      </a>
+      <a class="dest dest-e reveal" href="#contact">
+        <svg class="dest-art" aria-hidden="true"><use href="#scene"/></svg>
+        <div class="dest-body"><h3>Iceland &amp; the North</h3><p>Big landscapes, short drives</p></div>
+      </a>
+      <a class="dest dest-f reveal" href="#contact">
+        <svg class="dest-art" aria-hidden="true"><use href="#scene"/></svg>
+        <div class="dest-body"><h3>Costa Rica</h3><p>Cloud forest to coastline</p></div>
+      </a>
+    </div>
+
+    <p class="dest-note reveal">Somewhere else in mind? <a href="#contact">Tell me about it</a> — most of my
+      favourite trips started as a place I hadn't planned before.</p>
+  </div>
+</section>
+
+<!-- =============================== PROCESS =============================== -->
+<section class="section" id="process">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="eyebrow">How it works</p>
+      <h2>Four steps, and I take it from there</h2>
+    </header>
+
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step-num">01</span>
+        <h3>A conversation</h3>
+        <p>Thirty minutes, no cost. Where you're thinking, who's coming, what "a good trip"
+          means to you. If I'm not the right fit, I'll say so.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">02</span>
+        <h3>A first draft</h3>
+        <p>I come back with a route, a budget range, and two or three shapes the trip
+          could take — so you're choosing between good options, not starting from scratch.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">03</span>
+        <h3>We refine it</h3>
+        <p>You tell me what to change. We go back and forth until the plan feels like
+          yours, then I book and confirm everything.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">04</span>
+        <h3>You go</h3>
+        <p>You get a clean day-by-day guide before you leave, and my number while you're
+          away — for the flight that moves or the restaurant that cancels.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================================ ABOUT ================================ -->
+<section class="section section-dark" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal" aria-hidden="true">
+      <!-- Swap this block for <img src="assets/img/amanda.jpg" alt="Amanda"> -->
+      <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="aboutSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#3d8f92"/>
+            <stop offset="55%"  stop-color="#7cb6a4"/>
+            <stop offset="100%" stop-color="#f0b585"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="480" fill="url(#aboutSky)"/>
+        <circle cx="284" cy="126" r="50" fill="#fff0d2" opacity=".9"/>
+        <path d="M0 318 L84 232 L156 292 L232 214 L306 300 L400 246 L400 480 L0 480Z" fill="#1d6360" opacity=".8"/>
+        <path d="M0 382 L98 300 L186 368 L272 306 L352 372 L400 344 L400 480 L0 480Z" fill="#10403f"/>
+        <path d="M0 428 Q100 414 200 426 T400 418 L400 480 L0 480Z" fill="#092d2e"/>
+      </svg>
+      <span class="photo-hint">Amanda's photo goes here</span>
+    </div>
+
+    <div class="about-copy reveal">
+      <p class="eyebrow">About</p>
+      <h2>Hi — I'm Amanda.</h2>
+      <p>I've been planning other people's trips for as long as I can remember, usually
+        without being asked. At some point it stopped being a hobby.</p>
+      <p>I work with a small number of travellers at a time, which means you get real
+        attention rather than a template with your name pasted in. I'd rather plan twelve
+        trips properly than sixty in a hurry.</p>
+      <p>Most of my clients come from someone they know. That's the whole business model,
+        and it keeps me honest.</p>
+      <a class="btn btn-primary" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TESTIMONIALS =============================
+     PLACEHOLDER COPY — replace with real client quotes before sharing publicly.
+========================================================================= -->
+<section class="section" id="testimonials">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="eyebrow">Kind words</p>
+      <h2>From people who went</h2>
+    </header>
+
+    <div class="quotes">
+      <figure class="quote reveal">
+        <blockquote>She planned our honeymoon down to the ferry times and we didn't
+          think about logistics once. That was the whole point.</blockquote>
+        <figcaption>Sarah &amp; Tom — Greece</figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <blockquote>Nine of us, three families, four cities. I don't know how she
+          did it, but nobody argued once.</blockquote>
+        <figcaption>The Whitfields — Italy</figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <blockquote>Our flight was cancelled at 6am local time. She had us rebooked
+          before we'd finished queuing.</blockquote>
+        <figcaption>Priya R. — Japan</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================================= FAQ ================================= -->
+<section class="section section-tint" id="faq">
+  <div class="wrap wrap-narrow">
+    <header class="section-head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>Before you ask</h2>
+    </header>
+
+    <div class="faq reveal">
+      <details>
+        <summary>What does it cost?</summary>
+        <p>Planning fees depend on the length and complexity of the trip, and I'll quote
+          you a flat figure after our first conversation — before you commit to anything.</p>
+      </details>
+      <details>
+        <summary>Is it more expensive than booking myself?</summary>
+        <p>Usually not. I have partner rates and perks at many properties that aren't
+          available publicly, which often offsets a good portion of the fee.</p>
+      </details>
+      <details>
+        <summary>How far ahead should I book?</summary>
+        <p>Four to six months is comfortable for most trips. Peak season, big groups,
+          and honeymoons want longer. If it's sooner than that, ask anyway.</p>
+      </details>
+      <details>
+        <summary>What if something goes wrong while I'm away?</summary>
+        <p>You call me. Rebookings, cancellations, a hotel that lost your reservation —
+          that's included, and it's the part people say they value most.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== CONTACT =============================== -->
+<section class="section section-dark" id="contact">
+  <div class="wrap wrap-narrow">
+    <header class="section-head reveal">
+      <p class="eyebrow">Start planning</p>
+      <h2>Tell me about the trip</h2>
+      <p class="lede">A few lines is plenty. I'll come back within two working days
+        to set up a call.</p>
+    </header>
+
+    <form class="form reveal" id="inquiryForm" novalidate>
+      <div class="field-row">
+        <p class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </p>
+        <p class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </p>
+      </div>
+      <div class="field-row">
+        <p class="field">
+          <label for="f-where">Where are you thinking?</label>
+          <input id="f-where" name="where" type="text" placeholder="Or “no idea yet”">
+        </p>
+        <p class="field">
+          <label for="f-when">Roughly when?</label>
+          <input id="f-when" name="when" type="text" placeholder="e.g. next spring">
+        </p>
+      </div>
+      <p class="field">
+        <label for="f-msg">Anything else</label>
+        <textarea id="f-msg" name="message" rows="5" placeholder="Who's travelling, what you'd love the trip to feel like, budget if you have one in mind."></textarea>
+      </p>
+
+      <button class="btn btn-primary btn-block" type="submit">Send enquiry</button>
+      <p class="form-note" id="formNote" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ================================ FOOTER ================================ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">TravelBug</span>
+      <p>Bespoke travel planning by Amanda.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#services">Services</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#process">How it works</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="wrap footer-base">
+    <p>&copy; <span id="year">2026</span> TravelBug.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
