@@ -54,6 +54,117 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
   revealables.forEach((el) => observer.observe(el));
 }
 
+/* ---------------------------- hero video montage ------------------------ */
+/* Cycles short clips behind the homepage hero. Design constraints:
+   - The poster <img> is the only thing guaranteed to load. Clips fade in over
+     it, so a slow connection or a blocked autoplay just leaves the photo.
+   - preload="none" plus loading one clip at a time: a visitor who scrolls
+     straight past downloads ~2.6MB, not the full 10.8MB.
+   - Small screens get the first clip on a loop rather than the whole montage,
+     to avoid spending someone's mobile data on five files.
+   - Nothing is fetched at all under reduced-motion or data-saver. */
+const heroVideos = document.querySelectorAll('.hero-video');
+
+if (heroVideos.length === 2) {
+  const CLIPS = [
+    { src: 'assets/video/hero-1-ridge.mp4',  caption: '' },
+    { src: 'assets/video/hero-2-halong.mp4', caption: 'Ha Long Bay, Vietnam' },
+    { src: 'assets/video/hero-3-petra.mp4',  caption: 'Petra, Jordan' },
+    { src: 'assets/video/hero-4-sahara.mp4', caption: 'The Sahara, Morocco' },
+    { src: 'assets/video/hero-5-machu.mp4',  caption: 'Machu Picchu, Peru' },
+  ];
+  const DWELL = 7000;
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData = navigator.connection && navigator.connection.saveData;
+  const small = matchMedia('(max-width: 700px)').matches;
+  const caption = document.getElementById('heroCaption');
+
+  if (!reduced && !saveData) {
+    const playlist = small ? CLIPS.slice(0, 1) : CLIPS;
+    let index = 0;
+    let slot = 0;
+    let timer = null;
+    let visible = true;
+    // show() awaits before it sets `timer`, so without this a second
+    // IntersectionObserver callback in that window starts a parallel run and
+    // the montage skips a clip.
+    let busy = false;
+
+    const load = (video, clip) => new Promise((resolve, reject) => {
+      video.src = clip.src;
+      video.load();
+      video.addEventListener('canplay', resolve, { once: true });
+      video.addEventListener('error', reject, { once: true });
+    });
+
+    const show = async () => {
+      if (busy) return;
+      busy = true;
+
+      const clip = playlist[index];
+      const next = heroVideos[slot];
+      const prev = heroVideos[1 - slot];
+
+      try {
+        await load(next, clip);
+        await next.play();
+      } catch {
+        busy = false;
+        return; // autoplay refused or file missing — poster stays, no retry
+      }
+
+      busy = false;
+
+      next.classList.add('is-live');
+      prev.classList.remove('is-live');
+
+      if (caption) {
+        caption.classList.toggle('is-live', Boolean(clip.caption));
+        if (clip.caption) caption.textContent = clip.caption;
+      }
+
+      // Free the outgoing clip once it has faded out.
+      setTimeout(() => {
+        if (!prev.classList.contains('is-live')) { prev.pause(); prev.removeAttribute('src'); prev.load(); }
+      }, 1000);
+
+      slot = 1 - slot;
+      index = (index + 1) % playlist.length;
+
+      if (playlist.length > 1 && visible) timer = setTimeout(show, DWELL);
+    };
+
+    // Don't start until the hero is actually on screen, and stop when it isn't.
+    const hero = document.querySelector('.hero');
+    const gate = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !timer) {
+        show();
+      } else if (!visible) {
+        clearTimeout(timer);
+        timer = null;
+        heroVideos.forEach((v) => v.pause());
+      }
+    }, { threshold: 0.15 });
+
+    if (hero) gate.observe(hero);
+
+    // Tab hidden: stop burning battery decoding video nobody can see.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearTimeout(timer);
+        timer = null;
+        heroVideos.forEach((v) => v.pause());
+      } else if (visible && !timer) {
+        const live = [...heroVideos].find((v) => v.classList.contains('is-live'));
+        if (live) live.play().catch(() => {});
+        if (playlist.length > 1) timer = setTimeout(show, DWELL);
+      }
+    });
+  }
+}
+
 /* ------------------------------ enquiry form ---------------------------- */
 /* No backend: the form composes an email in the visitor's mail client.
    Swap for a form service (Formspree / Netlify Forms) once the real address

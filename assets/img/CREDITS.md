@@ -38,3 +38,20 @@ attributes in the HTML exactly — keep them in sync if you swap an image.
 | `amanda.jpg` | 800×1000 | [pexels.com/photo/6808521](https://www.pexels.com/photo/6808521/) | A trekker looking out over the snow-capped Annapurna range in Nepal |
 
 Total: 24 images, 3.96 MB.
+
+## Hero video clips
+
+The homepage hero cycles these. Same Pexels licence as the photographs.
+
+Downloaded at **960×540**, not 720p: the same five clips at 1280×720 came to
+35 MB, and behind the hero's dark gradient the difference isn't visible.
+
+| File | Size | Source | Description |
+|---|---|---|---|
+| `assets/video/hero-1-ridge.mp4` | 960×540 | [pexels.com/video/17424959](https://www.pexels.com/video/17424959/) | A walker following a ridgeline trail above green valleys |
+| `assets/video/hero-2-halong.mp4` | 960×540 | [pexels.com/video/3783927](https://www.pexels.com/video/3783927/) | Aerial pass over the limestone islands of Ha Long Bay, Vietnam |
+| `assets/video/hero-3-petra.mp4` | 960×540 | [pexels.com/video/4361420](https://www.pexels.com/video/4361420/) | The Treasury at Petra seen from within the Siq, Jordan |
+| `assets/video/hero-4-sahara.mp4` | 960×540 | [pexels.com/video/5442766](https://www.pexels.com/video/5442766/) | A camel caravan crossing the dunes of the Sahara, Morocco |
+| `assets/video/hero-5-machu.mp4` | 960×540 | [pexels.com/video/4361882](https://www.pexels.com/video/4361882/) | Cloud moving over the ruins of Machu Picchu, Peru |
+
+Total: 5 clips, 10.83 MB.

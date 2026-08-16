@@ -50,9 +50,15 @@
 
 <!-- ================================= HERO ================================= -->
 <section class="hero">
+  <!-- Poster image paints first; main.js fades the clips in over it once they
+       can play. Two <video> elements so one can buffer while the other shows.
+       Skipped entirely for reduced-motion or data-saver — see main.js. -->
   <div class="hero-media">
     <img src="assets/img/hero-group.jpg" width="1800" height="1000" alt="" fetchpriority="high">
+    <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   </div>
+  <p class="hero-caption" id="heroCaption" aria-hidden="true"></p>
   <div class="wrap hero-inner">
     <p class="eyebrow reveal">Small-group adventures</p>
     <h1 class="reveal">Big trips,<br><em>small groups.</em></h1>

@@ -20,6 +20,7 @@ Plain HTML, CSS and JavaScript — no build step, no dependencies. Every push to
 | `assets/css/styles.css` | All styling. Colour tokens and the contrast rule are at the top |
 | `assets/js/main.js` | Sticky header, mobile menu, scroll reveals, both forms |
 | `assets/img/` | Photos, plus `CREDITS.md` listing every source |
+| `assets/video/` | The five hero montage clips |
 
 Pages are flat files at the repo root rather than in folders, so every page
 references `assets/…` by the same relative path. Keep it that way — it's the
@@ -90,6 +91,30 @@ imply that person *is* Amanda. Replace it with her own photo and delete the
 
 Resize to roughly 1400px wide and save as JPEG before committing — the repo
 shouldn't carry 8MB camera files. Current total is about 4MB.
+
+## Hero video
+
+The homepage hero cycles five clips, 7 seconds each, with the destination
+named in the corner. The list lives at the top of the hero block in
+`assets/js/main.js` — add, remove or reorder entries there and drop the file
+in `assets/video/`. A clip with no `caption` shows no label.
+
+It's built to not cost anyone much:
+
+- The poster photo (`hero-group.jpg`) paints first and is the only thing
+  guaranteed to load. Clips fade in over it, so a slow connection, a blocked
+  autoplay or a missing file just leaves the photograph.
+- Clips load one at a time, so someone who scrolls straight past fetches about
+  2.6MB rather than all 10.8MB.
+- **Phones get the first clip on a loop**, not the montage — five files is not
+  a reasonable thing to spend someone's mobile data on.
+- Nothing is fetched at all if the visitor has "reduce motion" turned on or
+  data-saver enabled. They see the poster photo.
+- Playback pauses when the hero scrolls off screen or the tab is hidden.
+
+Video is the heaviest thing on the site by far — 10.8MB against 4MB of
+photographs. If that ever feels like too much, cutting the list to three clips
+is a one-line change and takes it under 7MB.
 
 ## Forms
 
