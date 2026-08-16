@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get in touch — TravelBug</title>
+<meta name="description" content="Ask about a trip, request a spot, or find out whether a departure is right for you.">
+<meta name="theme-color" content="#00BFA6">
+<!-- REMOVE when the real trips, prices and reviews are in. See README. -->
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2300BFA6'/%3E%3Cpath d='M16 6c-3.9 0-7 3.1-7 7 0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 16 10a2.5 2.5 0 0 1 0 5.5z' fill='%2310322F'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2C7.9 2 4.5 5.4 4.5 9.5 4.5 15.2 12 22 12 22s7.5-6.8 7.5-12.5C19.5 5.4 16.1 2 12 2zm0 10.2a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4z" fill="currentColor"/></svg>
+      </span>
+      <span class="brand-name">TravelBug</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="trips.html">Trips</a>
+      <a href="past-journeys.html">Past journeys</a>
+      <a href="about.html">About</a>
+      <a class="btn btn-sm btn-primary" href="contact.html" aria-current="page">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero page-hero">
+  <div class="hero-media">
+    <img src="assets/img/vietnam-hoian.jpg" width="1000" height="750" alt="" fetchpriority="high">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow reveal">Say hello</p>
+    <h1 class="reveal">Get in touch</h1>
+    <p class="hero-sub reveal">Questions, a spot on a trip, or just checking whether something's
+      your sort of thing. I answer everything myself.</p>
+  </div>
+  <div class="wave wave-white" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,48 C180,96 360,8 540,36 C720,64 900,4 1080,32 C1260,60 1380,30 1440,20 L1440,90 L0,90 Z"/></svg>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap wrap-narrow">
+    <header class="section-head reveal">
+      <p class="eyebrow" id="tripPrefillNote">Enquiries</p>
+      <h2>Tell me what you're thinking</h2>
+      <p class="lede">A couple of lines is plenty. I'll come back within two working days —
+        usually sooner unless I'm away with a group.</p>
+    </header>
+
+    <div class="form-card reveal">
+      <form id="inquiryForm" novalidate>
+        <div class="field-row">
+          <p class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </p>
+          <p class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </p>
+        </div>
+
+        <div class="field-row">
+          <p class="field">
+            <label for="f-trip">Which trip?</label>
+            <select id="f-trip" name="trip">
+              <option value="">Not sure yet</option>
+              <option>Vietnam — North to South, Oct 2026</option>
+              <option>Jordan — Petra, Wadi Rum &amp; the Dead Sea, Nov 2026</option>
+              <option>Iceland — Fire, Ice &amp; Northern Lights, Feb 2027</option>
+              <option>Morocco — Sahara Nights &amp; Atlas Trails, Mar 2027</option>
+              <option>Peru — Sacred Valley &amp; Machu Picchu, May 2027</option>
+              <option>A past trip I'd like to see run again</option>
+            </select>
+          </p>
+          <p class="field">
+            <label for="f-people">How many of you?</label>
+            <input id="f-people" name="people" type="text" placeholder="e.g. just me">
+          </p>
+        </div>
+
+        <p class="field">
+          <label for="f-msg">Anything else</label>
+          <textarea id="f-msg" name="message" rows="6"
+            placeholder="What you're hoping for, anything you're unsure about, dietary or mobility things I should know."></textarea>
+        </p>
+
+        <button class="btn btn-primary btn-block" type="submit">Send enquiry</button>
+        <p class="form-note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="wave on-white wave-mist" aria-hidden="true">
+  <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,40 C200,4 380,72 560,44 C740,16 920,72 1100,50 C1280,28 1380,44 1440,54 L1440,90 L0,90 Z"/></svg>
+</div>
+
+<section class="section section-mist">
+  <div class="wrap wrap-narrow">
+    <header class="section-head is-centred reveal">
+      <p class="eyebrow">Before you ask</p>
+      <h2>Common questions</h2>
+    </header>
+
+    <div class="faq reveal">
+      <details>
+        <summary>What's included in the price?</summary>
+        <p>Accommodation, internal transport, guides, permits and entry fees, and most meals —
+          the exact split is listed on each trip page. Flights are not included, but I'll tell you
+          which ones to book and when.</p>
+      </details>
+      <details>
+        <summary>I'd be travelling on my own. Is that odd?</summary>
+        <p>It's the most common way people come. There's no single supplement if you're happy to
+          share a twin room, and if you'd rather have your own it's an optional extra.</p>
+      </details>
+      <details>
+        <summary>How fit do I need to be?</summary>
+        <p>Each trip has a level on it. Moderate means several days of walking three to five hours
+          on uneven ground. Challenging adds altitude or consecutive long days. If you're unsure,
+          ask me — I'd rather talk you out of the wrong trip than have you on it.</p>
+      </details>
+      <details>
+        <summary>What happens if a trip doesn't fill?</summary>
+        <p>Departures run with a minimum of six. If a trip doesn't reach that, I'll tell you at
+          least ten weeks out and you can move to another date or take a full refund.</p>
+      </details>
+      <details>
+        <summary>Do I need travel insurance?</summary>
+        <p>Yes, and it needs to cover the activities on your trip. I'll ask for the policy number
+          before departure.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2C7.9 2 4.5 5.4 4.5 9.5 4.5 15.2 12 22 12 22s7.5-6.8 7.5-12.5C19.5 5.4 16.1 2 12 2zm0 10.2a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4z" fill="currentColor"/></svg>
+        </span>
+        <span class="brand-name">TravelBug</span>
+      </a>
+      <p>Small-group adventures, run by Amanda.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="trips.html">Trips</a>
+      <a href="past-journeys.html">Past journeys</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="wrap footer-base">
+    <p>&copy; <span id="year">2026</span> TravelBug.</p>
+    <p>Draft site — trips, prices and reviews are placeholders.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
