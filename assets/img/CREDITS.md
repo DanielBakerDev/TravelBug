@@ -1,5 +1,57 @@
 # Photo credits
 
+## Amanda's own photographs
+
+These came from the "Website text" document and are Amanda's own pictures of
+real trips. They are **not** stock and are not covered by the Pexels licence
+below — they show identifiable people, so check everyone is happy to appear on
+a public site before launch.
+
+| File | Used for |
+|---|---|
+| `amanda.jpg` | Amanda, on the Home and About pages |
+| `past-antarctica.jpg` | Antarctica — also the Past journeys hero |
+| `past-patagonia.jpg` | Patagonia, Chile |
+| `past-egypt.jpg` | Egypt |
+| `past-uganda.jpg` | Uganda |
+| `past-rwanda.jpg` | Rwanda |
+| `past-burundi.jpg` | Burundi |
+| `past-bulgaria.jpg` | Bulgaria — ski & snowboard |
+| `past-norway.jpg` | Norway — Northern Lights |
+| `past-slovenia.jpg` | Slovenia |
+| `past-montenegro.jpg` | Montenegro |
+| `past-bosnia.jpg` | Bosnia |
+| `past-uk.jpg` | London & the UK |
+| `past-greece.jpg` | Greece |
+| `past-italy.jpg` | Italy |
+| `past-china.jpg` | China |
+| `past-olympics.jpg` | Summer Olympics, Paris |
+| `past-euros.jpg` | Euros, Germany |
+| `past-uzbekistan.jpg` | Uzbekistan |
+| `past-oktoberfest.jpg` | Oktoberfest, Munich |
+| `past-tunisia.jpg` | Tunisia |
+| `past-tomorrowland.jpg` | Tomorrowland, Belgium |
+| `past-austria.jpg` | Austria |
+| `past-guyana.jpg` | Guyana |
+
+Each was extracted from the PDF, had its screenshot letterboxing trimmed, and
+was cropped to 1000×750 (`amanda.jpg` to 800×1000) and saved as JPEG.
+
+**Which photo goes with which trip is my best guess** from the order of the
+photos in the document and what is visible in them. Worth a quick check —
+Patagonia and Antarctica in particular look alike, and both were near the top
+of the document with no caption between them.
+
+Five destinations in the document have no card yet, because the only pictures
+of them were low-resolution phone screenshots: **Winter Olympics (Italy),
+Trinidad & Tobago, Kazakhstan, Mongolia, and Paraguay & Uruguay.** They are
+named in a line under the grid. Send better photos and they become cards.
+
+---
+
+## Stock photography
+
+
 Placeholder photography, to be replaced with Amanda's own images.
 
 All images are from **Pexels** and used under the [Pexels License](https://www.pexels.com/license/),
@@ -29,15 +81,9 @@ attributes in the HTML exactly — keep them in sync if you swap an image.
 | `iceland-icecave.jpg` | 1000×750 | [pexels.com/photo/22944463](https://www.pexels.com/photo/22944463/) | The blue interior of a glacier ice cave in Iceland |
 | `peru-sacredvalley.jpg` | 1000×750 | [pexels.com/photo/17848290](https://www.pexels.com/photo/17848290/) | Terraced farmland and mountains around Pisac in the Sacred Valley, Peru |
 | `peru-rainbow.jpg` | 1000×750 | [pexels.com/photo/16948959](https://www.pexels.com/photo/16948959/) | The striped mineral slopes of Rainbow Mountain, Peru, under a blue sky |
-| `past-namibia.jpg` | 1000×750 | [pexels.com/photo/34175038](https://www.pexels.com/photo/34175038/) | Red sand dunes under a clear sky at Sossusvlei, Namibia |
-| `past-srilanka.jpg` | 1000×750 | [pexels.com/photo/14023536](https://www.pexels.com/photo/14023536/) | Patterned rows of tea bushes covering the hills of Haputale, Sri Lanka |
-| `past-nepal.jpg` | 1000×750 | [pexels.com/photo/34973191](https://www.pexels.com/photo/34973191/) | Two trekkers on a trail below the peaks of the Annapurna range, Nepal |
-| `past-guatemala.jpg` | 1000×750 | [pexels.com/photo/8635246](https://www.pexels.com/photo/8635246/) | Lake Atitlan and its volcanoes seen from above, Guatemala |
-| `past-albania.jpg` | 1000×750 | [pexels.com/photo/13228741](https://www.pexels.com/photo/13228741/) | The clear water and headlands of Jala Beach on the Albanian coast |
-| `past-georgia.jpg` | 1000×750 | [pexels.com/photo/10026140](https://www.pexels.com/photo/10026140/) | Autumn colour across the Caucasus mountains near Gudauri, Georgia |
-| `amanda.jpg` | 800×1000 | [pexels.com/photo/6808521](https://www.pexels.com/photo/6808521/) | A trekker looking out over the snow-capped Annapurna range in Nepal |
 
-Total: 24 images, 3.96 MB.
+The remaining stock images are the five trip cards and the page-heading
+backgrounds. They go once the trips are decided.
 
 ## Hero video clips
 

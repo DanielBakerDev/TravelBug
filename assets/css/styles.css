@@ -795,6 +795,18 @@ img { max-width: 100%; height: auto; display: block; }
 .footer-nav { display: flex; flex-wrap: wrap; gap: .7rem 1.6rem; }
 .footer-nav a { color: rgba(234,247,244,.72); text-decoration: none; font-size: .94rem; }
 .footer-nav a:hover { color: var(--sunshine); }
+
+.footer-social { display: flex; flex-wrap: wrap; gap: .7rem 1.2rem; }
+.footer-social a {
+  color: var(--ink);
+  background: var(--sunshine);
+  padding: .3rem .8rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: .85rem; font-weight: 700;
+}
+.footer-social a:hover { background: var(--lime); color: var(--ink); }
 .footer-base {
   padding-top: 1.4rem; font-size: .85rem;
   display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; justify-content: space-between;

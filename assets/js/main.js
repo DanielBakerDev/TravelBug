@@ -1,10 +1,7 @@
 /* =========================================================================
-   TravelBug — site behaviour
-   ------------------------------------------------------------------------
-   CHANGE ME: the address enquiries are sent to. Until this is real, nothing
-   submitted through the forms actually reaches anyone.
+   Travel Bug Tours — site behaviour
    ========================================================================= */
-const CONTACT_EMAIL = 'hello@travelbug.example';
+const CONTACT_EMAIL = 'exploretravelbugtours@gmail.com';
 
 /* ------------------------- sticky header state ------------------------- */
 const header = document.getElementById('siteHeader');
@@ -269,7 +266,7 @@ if (newsletter) {
 
     input.removeAttribute('aria-invalid');
     window.location.href = `mailto:${CONTACT_EMAIL}`
-      + `?subject=${encodeURIComponent('Add me to the TravelBug list')}`
+      + `?subject=${encodeURIComponent('Add me to the Travel Bug Tours list')}`
       + `&body=${encodeURIComponent(`Please add ${value} to the mailing list.`)}`;
     if (out) { out.textContent = 'Opening your email app to confirm.'; out.classList.remove('is-error'); }
   });

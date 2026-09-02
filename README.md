@@ -1,8 +1,11 @@
-# TravelBug
+# Travel Bug Tours
 
 Website for Amanda's small-group adventure trips.
 
 **Live:** https://danielbakerdev.github.io/TravelBug/
+
+Enquiries open the visitor's mail app addressed to
+`exploretravelbugtours@gmail.com` (set at the top of `assets/js/main.js`).
 
 Plain HTML, CSS and JavaScript — no build step, no dependencies. Every push to
 `main` is live within about a minute.
@@ -52,45 +55,82 @@ or Astro instead.
 
 ## Before this goes public
 
-Everything below is invented. It exists so the site can be judged as a design;
-none of it is Amanda's real information.
+Amanda's copy from the "Website text" document is now in for the site-wide
+furniture, the whole Home page, the About page and Past journeys. What is left
+is listed here.
 
-- [ ] **Contact email** — `CONTACT_EMAIL` at the top of `assets/js/main.js` is
-      `hello@travelbug.example`. Both forms compose a `mailto:` link, so
-      **nothing reaches anyone** until this is a real address.
-- [ ] **The five trips** — names, dates, prices, deposits, spot counts and
-      every itinerary are made up. Replace with real departures.
-- [ ] **Testimonials** — the three quotes on the homepage are fiction.
-- [ ] **The numbers** — "19 trips run, 28 countries, 112 travellers, 68% come
-      back" on the homepage are invented.
-- [ ] **FAQ answers** — the refund policy, minimum group size, single
-      supplement and insurance requirements are all plausible guesses, not
-      Amanda's actual terms. These are the ones that matter legally.
-- [ ] **Past journeys** — six trips with dates that never happened.
-- [ ] **Photos** — see below.
+**Blocking — the trips are still invented.**
+The document says: *"IM NOT SURE WHAT YOU WANT FOR TRIPS OR IF WE SHOULD JUST
+HAVE THE ONE FOR MADAGASCAR FOR NOW."* — so no replacement trips were supplied.
+The five departures on the site (Vietnam, Jordan, Iceland, Morocco, Peru) are
+still the ones I made up, including every date, price, deposit and itinerary,
+and they contradict the destinations Amanda now lists (Madagascar, Antarctica,
+Uganda, Rwanda, Burundi). These need real data before anyone sees the Trips
+page:
+
+- [ ] Which trips are actually on sale, and their dates
+- [ ] Prices and deposits per trip (the deposit is €500 site-wide per HOME-23)
+- [ ] Itineraries, inclusions and difficulty levels
+- [ ] The dropdown on `contact.html`, which lists the same five invented trips
+- [ ] `trip-*.html` — five pages of invented itinerary
+- [ ] The trip card photos, still stock
+
+**Still placeholder elsewhere:**
+
+- [ ] **Three of the four figures** on the Home page — "19 trips run",
+      "28 countries", "112 travellers". Only "68% have come back again" was
+      confirmed. (The document had "(not kevin)" against that one; I read that
+      as a joke and left it off the page — say if it was meant seriously.)
+- [ ] **Contact page** — the FAQ answers on refunds, minimum group size, the
+      single supplement and insurance are still my guesses, not Amanda's terms.
+      These are the ones that matter legally. The document left them blank.
+- [ ] **Trips page** hero and sign-up copy — left blank in the document.
 - [ ] **Remove `<meta name="robots" content="noindex">`** from all 10 pages.
-      It's there so invented prices don't get indexed by search engines while
-      the site is a draft.
-- [ ] **Remove the footer line** "Draft site — trips, prices and reviews are
-      placeholders." from all 10 pages.
+      It is still there deliberately: the footer notice now says
+      "2027 Tours: Sign-up Open" instead of warning that the site is a draft,
+      so noindex is the only thing keeping invented prices out of Google.
+      **Take it off only once the trips are real.**
+
+**Judgement calls I made — worth a look:**
+
+- The mission and "our concept" copy sat in the document next to the *About*
+  nav row rather than against a numbered reference, so I put it on the About
+  page as "Our concept" and "Where the money goes".
+- HOME-36 and HOME-37 overlapped (both said "each year since… friends of
+  friends"). I used "Hey there, I'm Amanda" as the heading and merged the rest
+  into one paragraph so it isn't said twice.
+- The paragraph about video calls was written against HOME-09, which is the
+  "How it works" button. It reads as a paragraph, not a button, so it is the
+  intro to that section.
+- Group size went from twelve to fifteen everywhere, including the About
+  section that used to be "Why twelve people". The reasoning in that section is
+  still my prose, not Amanda's.
+- HOME-54 asks for the mailing-list field to show
+  `exploretravelbugtours@gmail.com` as its placeholder. I have done that, but
+  it is the box a *visitor* types their own address into, so it now suggests
+  they should type Amanda's. Worth changing back to `you@example.com`.
 
 ## Photos
 
-All 24 images are placeholders from [Pexels](https://www.pexels.com/license/),
-free for commercial use with no attribution required. `assets/img/CREDITS.md`
-lists every one with its source and dimensions.
+Two sets, and the difference matters.
 
-To swap one in, keep the same filename and update the `width`/`height`
+**Amanda's own photographs** — `amanda.jpg` and the 23 `past-*.jpg` cards on
+Past journeys. These came out of the "Website text" document. They show real,
+identifiable people, so get everyone's agreement before the site goes public.
+`assets/img/CREDITS.md` lists which photo is used where, and flags that the
+photo-to-destination matching is my best guess from the order they appeared in
+the document.
+
+**Stock placeholders** — the five trip cards and the big page-heading
+backgrounds, still from [Pexels](https://www.pexels.com/license/) (free for
+commercial use, no attribution required). These go when the real trips land.
+
+To swap any image, keep the same filename and update the `width`/`height`
 attributes wherever it appears — they're set explicitly to stop the page
 jumping as images load.
 
-`amanda.jpg` is deliberately a figure photographed from behind. It's a
-stand-in: putting a recognisable stranger next to "Hi — I'm Amanda" would
-imply that person *is* Amanda. Replace it with her own photo and delete the
-"Photo placeholder" sticker in `index.html` and `about.html`.
-
 Resize to roughly 1400px wide and save as JPEG before committing — the repo
-shouldn't carry 8MB camera files. Current total is about 4MB.
+shouldn't carry 8MB camera files. Images are about 6MB in total.
 
 ## Hero video
 
