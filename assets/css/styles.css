@@ -406,6 +406,13 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 1.6rem;
 }
 
+/* Only one departure open: a lone card sitting in the first of three tracks
+   reads as a layout bug, so give it its own centred column instead. */
+.trip-grid.is-single {
+  grid-template-columns: minmax(0, 520px);
+  justify-content: center;
+}
+
 .trip-card {
   background: var(--white);
   border: 1px solid var(--line);

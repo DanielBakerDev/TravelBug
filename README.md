@@ -16,14 +16,14 @@ Plain HTML, CSS and JavaScript — no build step, no dependencies. Every push to
 |---|---|
 | `index.html` | Homepage — hero, trip grid, how it works, numbers, about, quotes, newsletter |
 | `trips.html` | All open departures |
-| `trip-<name>.html` | One page per trip: itinerary, gallery, what's included, price card |
+| `trip-madagascar.html` | The one open departure: plan, gallery, what's included, price card |
 | `past-journeys.html` | Grid of trips already run |
 | `about.html` | Amanda's story |
 | `contact.html` | Enquiry form + FAQ |
 | `assets/css/styles.css` | All styling. Colour tokens and the contrast rule are at the top |
 | `assets/js/main.js` | Sticky header, mobile menu, scroll reveals, both forms |
 | `assets/img/` | Photos, plus `CREDITS.md` listing every source |
-| `assets/video/` | The five hero montage clips |
+| `assets/video/` | The three hero montage clips |
 
 Pages are flat files at the repo root rather than in folders, so every page
 references `assets/…` by the same relative path. Keep it that way — it's the
@@ -49,31 +49,32 @@ git add -A && git commit -m "Describe the change" && git push
 ```
 
 **Header and footer are duplicated in every page.** That's the trade-off for
-having no build tool. Changing the nav means editing all 10 files. If the trip
+having no build tool. Changing the nav means editing all six files. If the trip
 count goes much past ten, or a blog gets added, it's worth moving to Eleventy
 or Astro instead.
 
 ## Before this goes public
 
-Amanda's copy from the "Website text" document is now in for the site-wide
-furniture, the whole Home page, the About page and Past journeys. What is left
-is listed here.
+Amanda's copy from the "Website text" document is in. The five invented trips
+have been deleted and replaced with a single Madagascar departure for 2027.
 
-**Blocking — the trips are still invented.**
-The document says: *"IM NOT SURE WHAT YOU WANT FOR TRIPS OR IF WE SHOULD JUST
-HAVE THE ONE FOR MADAGASCAR FOR NOW."* — so no replacement trips were supplied.
-The five departures on the site (Vietnam, Jordan, Iceland, Morocco, Peru) are
-still the ones I made up, including every date, price, deposit and itinerary,
-and they contradict the destinations Amanda now lists (Madagascar, Antarctica,
-Uganda, Rwanda, Burundi). These need real data before anyone sees the Trips
-page:
+**Madagascar is a real destination with placeholder commercial terms.**
+No dates, price, duration or itinerary were supplied, so rather than invent
+them the page says so: the price reads "TBC", dates read "2027, TBC", and the
+route is headed *"What we're planning"* and explicitly described as not a fixed
+schedule. The call to action is "Register your interest", not "Book". Fill in:
 
-- [ ] Which trips are actually on sale, and their dates
-- [ ] Prices and deposits per trip (the deposit is €500 site-wide per HOME-23)
-- [ ] Itineraries, inclusions and difficulty levels
-- [ ] The dropdown on `contact.html`, which lists the same five invented trips
-- [ ] `trip-*.html` — five pages of invented itinerary
-- [ ] The trip card photos, still stock
+- [ ] Dates and trip length
+- [ ] Price (the €500 deposit and three-month balance come from HOME-23 and
+      are already on the page)
+- [ ] The real day-by-day, replacing the six planned stops
+- [ ] Whether "Adventurous" is the right difficulty label
+- [ ] The meal split in "What's included"
+
+The inclusions list is not invented — it is built from what Amanda says she
+books in HOME-25 (accommodation, internal transport, park permits, local
+flights, restaurants, guides, drivers, a photographer) and the About page's
+commitment to local-owned hotels. Worth confirming it's accurate for this trip.
 
 **Still placeholder elsewhere:**
 
@@ -84,12 +85,13 @@ page:
 - [ ] **Contact page** — the FAQ answers on refunds, minimum group size, the
       single supplement and insurance are still my guesses, not Amanda's terms.
       These are the ones that matter legally. The document left them blank.
-- [ ] **Trips page** hero and sign-up copy — left blank in the document.
-- [ ] **Remove `<meta name="robots" content="noindex">`** from all 10 pages.
-      It is still there deliberately: the footer notice now says
-      "2027 Tours: Sign-up Open" instead of warning that the site is a draft,
-      so noindex is the only thing keeping invented prices out of Google.
-      **Take it off only once the trips are real.**
+- [ ] **Madagascar photography** — everything on the trip page is stock.
+      Amanda's own photos replace it, same filenames.
+- [ ] **Remove `<meta name="robots" content="noindex">`** from all six pages.
+      It is still there deliberately: the footer notice says "2027 Tours:
+      Sign-up Open" rather than warning that the site is a draft, so noindex is
+      the only thing keeping an unpriced trip out of search results.
+      **Take it off once the Madagascar dates and price are real.**
 
 **Judgement calls I made — worth a look:**
 
@@ -105,6 +107,12 @@ page:
 - Group size went from twelve to fifteen everywhere, including the About
   section that used to be "Why twelve people". The reasoning in that section is
   still my prose, not Amanda's.
+- The trip-grid intro was Amanda's "We currently have several trips open".
+  With one departure that read as a bug, so it now says "First up for 2027".
+  Put her wording back when there is more than one trip.
+- The hero video used to name Ha Long Bay, Petra, the Sahara and Machu Picchu.
+  Those aren't trips any more, so naming them would have been misleading —
+  they're replaced with two Madagascar clips.
 - HOME-54 asks for the mailing-list field to show
   `exploretravelbugtours@gmail.com` as its placeholder. I have done that, but
   it is the box a *visitor* types their own address into, so it now suggests
@@ -121,9 +129,10 @@ identifiable people, so get everyone's agreement before the site goes public.
 photo-to-destination matching is my best guess from the order they appeared in
 the document.
 
-**Stock placeholders** — the five trip cards and the big page-heading
-backgrounds, still from [Pexels](https://www.pexels.com/license/) (free for
-commercial use, no attribution required). These go when the real trips land.
+**Stock placeholders** — everything on the Madagascar trip page and the big
+page-heading backgrounds, from [Pexels](https://www.pexels.com/license/) (free
+for commercial use, no attribution required). These go when Amanda's own
+Madagascar photos arrive.
 
 To swap any image, keep the same filename and update the `width`/`height`
 attributes wherever it appears — they're set explicitly to stop the page
@@ -134,7 +143,7 @@ shouldn't carry 8MB camera files. Images are about 6MB in total.
 
 ## Hero video
 
-The homepage hero cycles five clips, 7 seconds each, with the destination
+The homepage hero cycles three clips, 7 seconds each, with the destination
 named in the corner. The list lives at the top of the hero block in
 `assets/js/main.js` — add, remove or reorder entries there and drop the file
 in `assets/video/`. A clip with no `caption` shows no label.
@@ -145,16 +154,15 @@ It's built to not cost anyone much:
   guaranteed to load. Clips fade in over it, so a slow connection, a blocked
   autoplay or a missing file just leaves the photograph.
 - Clips load one at a time, so someone who scrolls straight past fetches about
-  2.6MB rather than all 10.8MB.
-- **Phones get the first clip on a loop**, not the montage — five files is not
-  a reasonable thing to spend someone's mobile data on.
+  2.6MB rather than all 6.1MB.
+- **Phones get the first clip on a loop**, not the montage — no point spending
+  someone's mobile data on the full set.
 - Nothing is fetched at all if the visitor has "reduce motion" turned on or
   data-saver enabled. They see the poster photo.
 - Playback pauses when the hero scrolls off screen or the tab is hidden.
 
-Video is the heaviest thing on the site by far — 10.8MB against 4MB of
-photographs. If that ever feels like too much, cutting the list to three clips
-is a one-line change and takes it under 7MB.
+Video is 6.1MB against about 6MB of photographs. Adding or removing a clip is
+a one-line change to that list.
 
 ## Forms
 
@@ -166,9 +174,10 @@ When the real address is live, swap for a form service —
 [Formspree](https://formspree.io) has a free tier and needs only an `action`
 attribute on the `<form>`.
 
-"Request a spot" on a trip page links to `contact.html?trip=<trip name>`, and
-`main.js` uses that to pre-select the dropdown and pre-fill the message. If you
-add a trip, add a matching `<option>` in `contact.html` so the names line up.
+"Register your interest" on the trip page links to
+`contact.html?trip=<trip name>`, and `main.js` uses that to pre-select the
+dropdown and pre-fill the message. If you add a trip, add a matching
+`<option>` in `contact.html` so the names line up exactly.
 
 Taking actual deposits needs a payment provider. Stripe Payment Links are the
 cheapest route and need no backend.

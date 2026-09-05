@@ -56,7 +56,7 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
    - The poster <img> is the only thing guaranteed to load. Clips fade in over
      it, so a slow connection or a blocked autoplay just leaves the photo.
    - preload="none" plus loading one clip at a time: a visitor who scrolls
-     straight past downloads ~2.6MB, not the full 10.8MB.
+     straight past downloads ~2.6MB, not the full 6.1MB.
    - Small screens get the first clip on a loop rather than the whole montage,
      to avoid spending someone's mobile data on five files.
    - Nothing is fetched at all under reduced-motion or data-saver. */
@@ -65,10 +65,8 @@ const heroVideos = document.querySelectorAll('.hero-video');
 if (heroVideos.length === 2) {
   const CLIPS = [
     { src: 'assets/video/hero-1-ridge.mp4',  caption: '' },
-    { src: 'assets/video/hero-2-halong.mp4', caption: 'Ha Long Bay, Vietnam' },
-    { src: 'assets/video/hero-3-petra.mp4',  caption: 'Petra, Jordan' },
-    { src: 'assets/video/hero-4-sahara.mp4', caption: 'The Sahara, Morocco' },
-    { src: 'assets/video/hero-5-machu.mp4',  caption: 'Machu Picchu, Peru' },
+    { src: 'assets/video/hero-2-baobab.mp4', caption: 'Madagascar' },
+    { src: 'assets/video/hero-3-forest.mp4', caption: 'Madagascar' },
   ];
   const DWELL = 7000;
 
