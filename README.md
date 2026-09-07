@@ -2,13 +2,14 @@
 
 Website for Amanda's small-group adventure trips.
 
-**Live:** https://danielbakerdev.github.io/TravelBug/
+**Live:** https://exploretravelbugtours.com/
 
 Enquiries open the visitor's mail app addressed to
 `exploretravelbugtours@gmail.com` (set at the top of `assets/js/main.js`).
 
-Plain HTML, CSS and JavaScript — no build step, no dependencies. Every push to
-`main` is live within about a minute.
+Plain HTML, CSS and JavaScript — no frontend build step or dependencies. The
+site is hosted in a private Amazon S3 bucket behind CloudFront; deployment
+resources and instructions live in `infrastructure/`.
 
 ## Files
 
@@ -16,7 +17,8 @@ Plain HTML, CSS and JavaScript — no build step, no dependencies. Every push to
 |---|---|
 | `index.html` | Homepage — hero, trip grid, how it works, numbers, about, quotes, newsletter |
 | `trips.html` | All open departures |
-| `trip-madagascar.html` | The one open departure: plan, gallery, what's included, price card |
+| `trip-madagascar-<date>.html` | One page per departure — three of them, same trip |
+| `trip-madagascar.html` | Redirect to `trips.html`, so the old link doesn't 404 |
 | `past-journeys.html` | Grid of trips already run |
 | `about.html` | Amanda's story |
 | `contact.html` | Enquiry form + FAQ |
@@ -53,86 +55,83 @@ having no build tool. Changing the nav means editing all six files. If the trip
 count goes much past ten, or a blog gets added, it's worth moving to Eleventy
 or Astro instead.
 
+## The Madagascar trip
+
+Real dates, real price, real itinerary, Amanda's own photographs — all from the
+second "Website text" document.
+
+**It runs on three dates, and each has its own page:**
+
+| Departure | Page |
+|---|---|
+| 30 June – 9 July 2027 | `trip-madagascar-jun2027.html` |
+| 20–29 July 2027 | `trip-madagascar-jul2027.html` |
+| 10–19 August 2027 | `trip-madagascar-aug2027.html` |
+
+Same trip, same price (from €2,400 / £2,060), same 10-day itinerary — only the
+dates differ. **So a change to the itinerary, price or inclusions has to be made
+in all three files.** Each page also links to the other two dates from its
+sidebar, so those links need updating if a departure is added or dropped.
+
+`trip-madagascar.html` is now a redirect to `trips.html` — it used to be the
+single trip page and old links pointed at it.
+
+The trip name is Amanda's, split in two: **"Lemurs, Baobabs & the Wild Coast"**
+is the heading, **"Canoe, Climb & Hike from Capital to Coast"** sits under it as
+a tagline.
+
 ## Before this goes public
 
-Amanda's copy from the "Website text" document is in. The five invented trips
-have been deleted and replaced with a single Madagascar departure for 2027.
-
-**Madagascar is a real destination with placeholder commercial terms.**
-No dates, price, duration or itinerary were supplied, so rather than invent
-them the page says so: the price reads "TBC", dates read "2027, TBC", and the
-route is headed *"What we're planning"* and explicitly described as not a fixed
-schedule. The call to action is "Register your interest", not "Book". Fill in:
-
-- [ ] Dates and trip length
-- [ ] Price (the €500 deposit and three-month balance come from HOME-23 and
-      are already on the page)
-- [ ] The real day-by-day, replacing the six planned stops
-- [ ] Whether "Adventurous" is the right difficulty label
-- [ ] The meal split in "What's included"
-
-The inclusions list is not invented — it is built from what Amanda says she
-books in HOME-25 (accommodation, internal transport, park permits, local
-flights, restaurants, guides, drivers, a photographer) and the About page's
-commitment to local-owned hotels. Worth confirming it's accurate for this trip.
-
-**Still placeholder elsewhere:**
-
+- [ ] **Day 10 reads oddly.** It says *"a few days of doing very little after a
+      fortnight of moving"* — left over from my placeholder text, and this is a
+      10-day trip ending on day 10. Days 1–9 are all Amanda's. Worth a rewrite.
+- [ ] **Part Two and the Grand Tour** are mentioned in the trip's own copy
+      ("You may do Part One, Part Two, or the whole Experience Madagascar Grand
+      Tour") but have no pages. The contact dropdown has an option for them so
+      enquiries still work. The second document lists Part Two dates
+      (9–18 July, 29 July – 7 Aug, 19–28 Aug 2027) but nothing else.
 - [ ] **Three of the four figures** on the Home page — "19 trips run",
       "28 countries", "112 travellers". Only "68% have come back again" was
-      confirmed. (The document had "(not kevin)" against that one; I read that
-      as a joke and left it off the page — say if it was meant seriously.)
+      confirmed.
 - [ ] **Contact page** — the FAQ answers on refunds, minimum group size, the
       single supplement and insurance are still my guesses, not Amanda's terms.
-      These are the ones that matter legally. The document left them blank.
-- [ ] **Madagascar photography** — everything on the trip page is stock.
-      Amanda's own photos replace it, same filenames.
-- [ ] **Remove `<meta name="robots" content="noindex">`** from all six pages.
-      It is still there deliberately: the footer notice says "2027 Tours:
-      Sign-up Open" rather than warning that the site is a draft, so noindex is
-      the only thing keeping an unpriced trip out of search results.
-      **Take it off once the Madagascar dates and price are real.**
+      These are the ones that matter legally.
+- [ ] **Group size** is set to 15 everywhere. The second document didn't say,
+      so it carried over from the first one.
+- [ ] **Remove `<meta name="robots" content="noindex">`** from every page. Now
+      that the trip is real this is mostly about the FAQ terms above — take it
+      off once those are right.
 
-**Judgement calls I made — worth a look:**
+Later trips sketched in the second document but not started: Uganda / Rwanda /
+Burundi, Antarctica, Egypt, Indonesia. Only the country names are filled in.
 
-- The mission and "our concept" copy sat in the document next to the *About*
-  nav row rather than against a numbered reference, so I put it on the About
+**Judgement calls worth a look:**
+
+- The document had two "included" lists that disagreed — a short one saying
+  "most meals" and a bulleted one saying "all breakfasts & most dinners". I used
+  the bulleted one, because it matches "Lunches" appearing under *not* included.
+- Day 8's sentence was cut off in the document; Daniel supplied the ending.
+- The mission and "our concept" copy sat next to the *About* nav row in the
+  first document rather than against a numbered reference, so it's on the About
   page as "Our concept" and "Where the money goes".
-- HOME-36 and HOME-37 overlapped (both said "each year since… friends of
-  friends"). I used "Hey there, I'm Amanda" as the heading and merged the rest
-  into one paragraph so it isn't said twice.
-- The paragraph about video calls was written against HOME-09, which is the
-  "How it works" button. It reads as a paragraph, not a button, so it is the
-  intro to that section.
-- Group size went from twelve to fifteen everywhere, including the About
-  section that used to be "Why twelve people". The reasoning in that section is
-  still my prose, not Amanda's.
-- The trip-grid intro was Amanda's "We currently have several trips open".
-  With one departure that read as a bug, so it now says "First up for 2027".
-  Put her wording back when there is more than one trip.
-- The hero video used to name Ha Long Bay, Petra, the Sahara and Machu Picchu.
-  Those aren't trips any more, so naming them would have been misleading —
-  they're replaced with two Madagascar clips.
 - HOME-54 asks for the mailing-list field to show
-  `exploretravelbugtours@gmail.com` as its placeholder. I have done that, but
-  it is the box a *visitor* types their own address into, so it now suggests
-  they should type Amanda's. Worth changing back to `you@example.com`.
+  `exploretravelbugtours@gmail.com` as its placeholder. It does, but that's the
+  box a *visitor* types their own address into.
 
 ## Photos
 
 Two sets, and the difference matters.
 
-**Amanda's own photographs** — `amanda.jpg` and the 23 `past-*.jpg` cards on
-Past journeys. These came out of the "Website text" document. They show real,
-identifiable people, so get everyone's agreement before the site goes public.
-`assets/img/CREDITS.md` lists which photo is used where, and flags that the
-photo-to-destination matching is my best guess from the order they appeared in
-the document.
+**Amanda's own photographs** — `amanda.jpg`, the 23 `past-*.jpg` cards, and now
+the five Madagascar photos (`trip-madagascar.jpg` and `mad-1` to `mad-4`). They
+show real, identifiable people, so get everyone's agreement before the site goes
+public. `assets/img/CREDITS.md` lists which photo is used where.
 
-**Stock placeholders** — everything on the Madagascar trip page and the big
-page-heading backgrounds, from [Pexels](https://www.pexels.com/license/) (free
-for commercial use, no attribution required). These go when Amanda's own
-Madagascar photos arrive.
+**Stock** — only the two page-heading backgrounds are left
+(`hero-group.jpg`, `band-summit.jpg`), from
+[Pexels](https://www.pexels.com/license/). Checked: free for commercial use, no
+attribution required. Both show strangers, so they're next in line to be
+replaced.
 
 To swap any image, keep the same filename and update the `width`/`height`
 attributes wherever it appears — they're set explicitly to stop the page
@@ -191,5 +190,7 @@ with white text is 2.3:1 and fails badly; with ink it's 5.9:1 and passes.
 
 ## Deployment
 
-GitHub Pages, serving `main` from the repository root.
-Settings → Pages → Source: *Deploy from a branch* → `main` / `/ (root)`.
+AWS hosts the static site in a private S3 bucket behind CloudFront, with Route
+53 DNS and an ACM certificate. The contact form uses API Gateway, Lambda and
+Amazon SES; it does not use a database. See `infrastructure/README.md` for the
+stack and upload commands.

@@ -33,6 +33,11 @@ a public site before launch.
 | `past-tomorrowland.jpg` | Tomorrowland, Belgium |
 | `past-austria.jpg` | Austria |
 | `past-guyana.jpg` | Guyana |
+| `trip-madagascar.jpg` | Madagascar trip card + hero, and the Trips page heading |
+| `mad-1-lemur.jpg` | Madagascar trip gallery |
+| `mad-2-cave.jpg` | Madagascar trip gallery |
+| `mad-3-baobab.jpg` | Madagascar trip gallery |
+| `mad-4-canoe.jpg` | Madagascar trip gallery, and the Contact page heading |
 
 Each was extracted from the PDF, had its screenshot letterboxing trimmed, and
 was cropped to 1000×750 (`amanda.jpg` to 800×1000) and saved as JPEG.
@@ -51,27 +56,23 @@ named in a line under the grid. Send better photos and they become cards.
 
 ## Stock photography
 
-Placeholders for the Madagascar trip and the big page-heading backgrounds,
-**to be swapped for Amanda's own Madagascar photos when they arrive.**
+What's left is the two page-heading backgrounds. Everything on the Madagascar
+trip is now Amanda's own.
 
-All from **Pexels** under the [Pexels License](https://www.pexels.com/license/),
-which permits free commercial use and does not require attribution. Sources are
-recorded anyway so each can be traced or re-fetched at a different size.
-
-Fetched at fixed crops, so the `width`/`height` here match the HTML exactly —
-keep them in sync if you swap an image.
+From **Pexels** under the [Pexels License](https://www.pexels.com/license/):
+commercial use allowed, attribution not required. Verified against each photo's
+Pexels page.
 
 | File | Size | Source | Description |
 |---|---|---|---|
 | `hero-group.jpg` | 1800×1000 | [pexels.com/photo/8532284](https://www.pexels.com/photo/8532284/) | A group of travellers pausing to take in a wide mountain view on a hike |
 | `band-summit.jpg` | 1600×800 | [pexels.com/photo/16775991](https://www.pexels.com/photo/16775991/) | Hikers celebrating together at a mountain summit under a clear blue sky |
-| `trip-madagascar.jpg` | 1400×875 | [pexels.com/photo/4153968](https://www.pexels.com/photo/4153968/) | The Avenue of the Baobabs in Madagascar, with people walking the dirt road between the trees |
-| `mad-lemur.jpg` | 1000×750 | [pexels.com/photo/31849008](https://www.pexels.com/photo/31849008/) | A ring-tailed lemur with bright orange eyes, close up in the forest |
-| `mad-chameleon.jpg` | 1000×750 | [pexels.com/photo/36182698](https://www.pexels.com/photo/36182698/) | A Parson's chameleon, vivid green and yellow, resting on a palm frond |
-| `mad-highlands.jpg` | 1000×750 | [pexels.com/photo/11627650](https://www.pexels.com/photo/11627650/) | Villages and terraced farmland across the rolling highlands near Fianarantsoa, Madagascar |
-| `mad-coast.jpg` | 1000×750 | [pexels.com/photo/38043873](https://www.pexels.com/photo/38043873/) | Two fishermen in a wooden pirogue loaded with coconuts, in clear turquoise water off Madagascar |
 
-`mad-coast.jpg` doubles as the heading photo on the Contact page.
+Both show identifiable strangers. The Pexels licence says not to *"imply
+endorsement of your product by people or brands on the imagery"*, so these are
+the two worth replacing with Amanda's own photos when there are spare ones —
+`hero-group.jpg` especially, since it sits directly under "I'm Amanda…" on the
+homepage.
 
 ## Hero video clips
 

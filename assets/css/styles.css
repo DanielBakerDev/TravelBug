@@ -364,6 +364,21 @@ img { max-width: 100%; height: auto; display: block; }
   background: linear-gradient(180deg, rgba(4,32,29,.62) 0%, rgba(4,32,29,.3) 42%, rgba(4,32,29,.72) 100%);
 }
 
+/* Hero text is left-aligned, and a photo with a bright centre (a sunset behind
+   the baobabs, say) leaves it unreadable. This scrim darkens the side the words
+   sit on and fades out before it flattens the picture. */
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg,
+    rgba(4,32,29,.74) 0%, rgba(4,32,29,.52) 34%, rgba(4,32,29,.14) 62%, rgba(4,32,29,0) 80%);
+}
+@media (max-width: 760px) {
+  /* Narrow screens: the text spans the full width, so does the scrim. */
+  .hero::after {
+    background: linear-gradient(180deg, rgba(4,32,29,.5) 0%, rgba(4,32,29,.42) 60%, rgba(4,32,29,.3) 100%);
+  }
+}
+
 .hero-inner {
   display: flex; flex-direction: column; align-items: flex-start;
   justify-content: center;
@@ -682,6 +697,33 @@ img { max-width: 100%; height: auto; display: block; }
 .trip-facts dt, .trip-facts .k { color: var(--ink-faint); }
 .trip-facts .v { font-weight: 600; text-align: right; }
 .trip-aside-note { margin-top: .9rem; font-size: .84rem; color: var(--ink-faint); text-align: center; }
+
+/* Two currencies don't fit at the display size a single figure uses. */
+.trip-card-price.is-dual { font-size: 1.15rem; letter-spacing: -.02em; }
+.trip-aside-price.is-dual { font-size: 1.65rem; }
+
+/* Same trip, other departures — on the trip page and under the cards. */
+.other-dates { margin-top: 1.3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+.other-dates-label {
+  margin: 0 0 .6rem;
+  font-family: var(--font-display);
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.date-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+.date-chip {
+  display: inline-block;
+  padding: .38rem .8rem;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: .85rem; font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color .16s, border-color .16s;
+}
+.date-chip:hover { background: var(--sunshine); border-color: var(--sunshine); color: var(--ink); }
 
 /* itinerary */
 .itinerary { list-style: none; margin: 0; padding: 0; }

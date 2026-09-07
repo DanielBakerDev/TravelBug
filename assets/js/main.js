@@ -161,11 +161,12 @@ if (heroVideos.length === 2) {
 }
 
 /* ------------------------------ enquiry form ---------------------------- */
-/* No backend: the form composes an email in the visitor's mail client.
-   Swap for a form service (Formspree / Netlify Forms) once the real address
-   is live — it only needs an `action` on the <form>. */
+/* The AWS endpoint is configured separately so deployment details never need
+   to live in this file. An empty endpoint keeps a development-safe mailto
+   fallback until the serverless API is deployed. */
 const form = document.getElementById('inquiryForm');
 const note = document.getElementById('formNote');
+const INQUIRY_ENDPOINT = window.TRAVEL_BUG_CONFIG?.inquiryEndpoint || '';
 
 const setNote = (text, isError = false) => {
   if (!note) return;
@@ -200,7 +201,7 @@ if (form) {
     }
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const data = new FormData(form);
@@ -226,21 +227,52 @@ if (form) {
       return;
     }
 
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Trip: ${get('trip') || '—'}`,
-      `Travellers: ${get('people') || '—'}`,
-      '',
-      get('message') || '(no additional details)',
-    ].join('\n');
+    if (!INQUIRY_ENDPOINT) {
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Trip: ${get('trip') || '—'}`,
+        `Travellers: ${get('people') || '—'}`,
+        '',
+        get('message') || '(no additional details)',
+      ].join('\n');
+      const href = `mailto:${CONTACT_EMAIL}`
+        + `?subject=${encodeURIComponent(`Trip enquiry — ${name}`)}`
+        + `&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
+      setNote('Opening your email app — press send and it’s on its way.');
+      return;
+    }
 
-    const href = `mailto:${CONTACT_EMAIL}`
-      + `?subject=${encodeURIComponent(`Trip enquiry — ${name}`)}`
-      + `&body=${encodeURIComponent(body)}`;
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.setAttribute('aria-busy', 'true');
+    setNote('Sending your enquiry…');
 
-    window.location.href = href;
-    setNote('Opening your email app — press send and it’s on its way.');
+    try {
+      const reply = await fetch(INQUIRY_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          trip: get('trip'),
+          people: get('people'),
+          message: get('message'),
+          website: get('website'),
+        }),
+      });
+      const result = await reply.json().catch(() => ({}));
+      if (!reply.ok) throw new Error(result.error || 'Unable to send enquiry');
+
+      form.reset();
+      setNote('Thanks — Amanda has your enquiry and will be in touch within two working days.');
+    } catch (error) {
+      setNote(error.message || 'We could not send that just now. Please email us directly instead.', true);
+    } finally {
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
+    }
   });
 }
 
