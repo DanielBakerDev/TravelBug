@@ -269,8 +269,25 @@ It's built to not cost anyone much:
   data-saver enabled. They see the poster photo.
 - Playback pauses when the hero scrolls off screen or the tab is hidden.
 
-Video is 6.1MB against about 6MB of photographs. Adding or removing a clip is
+Video is 8.4MB against about 6MB of photographs. Adding or removing a clip is
 a one-line change to that list.
+
+**The climbing clip came in as a 31MB vertical phone video**, 2160x3840 at
+60fps. Three things had to happen to it, and they are worth knowing if another
+arrives the same way:
+
+- **It was portrait.** The hero is a landscape band, and `object-fit: cover`
+  would have thrown away about two thirds of the frame while still downloading
+  all of it. It is cropped to the centre 16:9 band instead, which is the slice
+  that keeps the climbers in shot for the whole clip.
+- **It was too fast.** Time is stretched 2x, so 4.1 seconds becomes 8.2. The
+  source was 60fps and the output is 29.97, so every frame is kept exactly
+  once - real slow motion, not dropped frames.
+- **It was 31MB.** Re-encoded to 960x540 H.264 to match the others, which
+  brought it to 2MB.
+
+The exact command is in the commit that added it. `ffmpeg` is not installed on
+this machine; `pip install imageio-ffmpeg` brings a bundled binary.
 
 ## Forms
 

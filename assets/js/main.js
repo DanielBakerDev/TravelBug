@@ -67,6 +67,9 @@ if (heroVideos.length === 2) {
     { src: 'assets/video/hero-1-ridge.mp4',  caption: '' },
     { src: 'assets/video/hero-2-baobab.mp4', caption: 'Madagascar' },
     { src: 'assets/video/hero-3-forest.mp4', caption: 'Madagascar' },
+    // Amanda's own footage. No caption because nobody has said where it was
+    // shot yet - give it one the moment she does.
+    { src: 'assets/video/hero-4-climb.mp4',  caption: '' },
   ];
   const DWELL = 7000;
 

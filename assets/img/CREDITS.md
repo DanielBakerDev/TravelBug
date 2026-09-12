@@ -104,4 +104,11 @@ the difference isn't visible, and it is a third of the weight.
 | `assets/video/hero-2-baobab.mp4` | 960×540 | [pexels.com/video/18510304](https://www.pexels.com/video/18510304/) | Looking up the trunk of a baobab into its canopy |
 | `assets/video/hero-3-forest.mp4` | 960×540 | [pexels.com/video/6003703](https://www.pexels.com/video/6003703/) | Sunlight moving through a forest canopy |
 
-Total: 3 clips, 6.1 MB.
+**`assets/video/hero-4-climb.mp4` is not stock.** It is Amanda's own drone
+footage, supplied as `20260804_154202_161.mp4`: a pull-back over a roped group
+on a limestone ridge. **It shows identifiable people in helmets**, so it falls
+under the same check-before-launch note as her photographs above, and the
+Pexels licence does not cover it. Nobody has said where it was shot, so it runs
+without a location caption.
+
+Total: 4 clips, 8.4 MB.
