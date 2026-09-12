@@ -26,7 +26,7 @@ resources and instructions live in `infrastructure/`.
 | `contact.html` | Enquiry form + FAQ |
 | `assets/css/styles.css` | All styling. Colour tokens and the contrast rule are at the top |
 | `assets/js/main.js` | Sticky header, mobile menu, scroll reveals, both forms |
-| `assets/img/` | Photos, plus `CREDITS.md` listing every source |
+| `assets/img/` | Photos and the logo files, plus `CREDITS.md` listing every source |
 | `assets/video/` | The three hero montage clips |
 
 Pages are flat files at the repo root rather than in folders, so every page
@@ -185,6 +185,45 @@ has a matching `<option>` so people can still register interest.
 
 **To make it real:** swap the whole `<article>` for a copy of a Madagascar card
 pointing at the new page, and drop `is-soon` and `trip-card-inner` with it.
+
+## Logo
+
+Amanda's logo arrived as a single 2048px JPEG on a flat white background: the
+mascot on the left, "TRAVEL BUG TOURS" beside him. Four files are cut from it,
+all in `assets/img/`.
+
+| File | Where it goes | Rendered at |
+|---|---|---|
+| `logo-lockup.png` | Footer | 205px wide |
+| `logo-mark.png` | Header, next to the site name | 52px tall, 42px once stuck |
+| `favicon.png` | Browser tab | 16—32px |
+| `apple-touch-icon.png` | iOS home screen | 180px |
+
+**The full lockup is not used in the header, and that is deliberate.** It is
+1352—800, so at any height that fits a header the word "TOURS" is about four
+pixels tall. The header therefore shows the mascot on his own and keeps the
+name as live text in Outfit. The footer has room, so it gets the real thing.
+
+**The three crops are different on purpose**, because each is read at a
+different size. The header mark is the hat, sunglasses and grin; wider crops
+that take in his arm and backpack turn to mush at 42px. The favicon is tighter
+still, just the sunglasses and grin, because at 16px the hat brim is only a
+dark smear. **At 16px it is a coloured blob whatever you do** — that is what
+happens to a detailed illustration at tab size, and the fix would be a
+simplified icon drawn to match, which is Amanda's call and not something to
+invent from her artwork.
+
+**How the background was removed:** by connected component, not by turning
+white transparent. The character wears a white shirt and has white highlights
+in his sunglasses, and a global swap would have punched holes in both. Instead
+the white region that touches the border is found and only that is cleared;
+both of those are walled off by black outline so the region never reaches them.
+The cut is then feathered over two pixels, otherwise a pale halo shows up as
+soon as the logo sits on the dark header. The script is in the scratchpad, not
+the repo — rerun it from `travel-bug-logo.jpg` if the artwork is ever redrawn.
+
+All four are palette PNGs at around 160 colours. The lockup is 59KB that way
+against 336KB as full RGBA, with no banding visible in the gradients.
 
 ## Photos
 
