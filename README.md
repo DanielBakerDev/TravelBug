@@ -17,7 +17,9 @@ resources and instructions live in `infrastructure/`.
 |---|---|
 | `index.html` | Homepage — hero, trip grid, how it works, numbers, about, quotes, newsletter |
 | `trips.html` | All open departures, plus the Egypt coming-soon card |
-| `trip-madagascar-<date>.html` | One page per departure — three of them, same trip |
+| `trip-madagascar-<month>2027.html` | Part One, one page per departure — three of them |
+| `trip-madagascar-p2-<date>2027.html` | Part Two, one page per departure — three of them |
+| `trip-madagascar-grand.html` | The Grand Tour — one page covering all three windows |
 | `trip-madagascar.html` | Redirect to `trips.html`, so the old link doesn't 404 |
 | `past-journeys.html` | Grid of trips already run |
 | `about.html` | Amanda's story |
@@ -30,6 +32,12 @@ resources and instructions live in `infrastructure/`.
 Pages are flat files at the repo root rather than in folders, so every page
 references `assets/…` by the same relative path. Keep it that way — it's the
 main reason nothing breaks without a build step.
+
+**Filenames are inconsistent between the two halves** and it is deliberate.
+Part One is named by start month (`jun2027`), which broke down for Part Two
+because two of its departures start in July. Part Two is therefore named by
+start *date* (`p2-09jul2027`). Renaming Part One to match would change three
+URLs that are already pushed, for no gain.
 
 ## Working on it
 
@@ -55,36 +63,72 @@ having no build tool. Changing the nav means editing all six files. If the trip
 count goes much past ten, or a blog gets added, it's worth moving to Eleventy
 or Astro instead.
 
-## The Madagascar trip
+## The Madagascar trips
 
-Real dates, real price, real itinerary, Amanda's own photographs — all from the
-second "Website text" document.
+Real dates, real prices, real itineraries, Amanda's own words — all from the
+"Website text" documents. **It is one island sold as three products.**
 
-**It runs on three dates, and each has its own page:**
+| Product | Days | Price from | Route |
+|---|---|---|---|
+| Part One — Lemurs, Baobabs, & Canoeing the Wild Tsiribihina | 10 | €2,400 / £2,060 | Tana to Morondava |
+| Part Two — Coast, Canyons, Climbing & Rainforest | 10 | €2,800 / £2,425 | Ifaty to Tana |
+| Grand Tour — both, back to back | 19 | €5,200 / £4,485 | Tana to Tana |
 
-| Departure | Page |
-|---|---|
-| 30 June – 9 July 2027 | `trip-madagascar-jun2027.html` |
-| 20–29 July 2027 | `trip-madagascar-jul2027.html` |
-| 10–19 August 2027 | `trip-madagascar-aug2027.html` |
+**The two halves dovetail, and that is the whole design of the page.** Each
+Part One departure ends on the morning its Part Two departure begins, and the
+changeover day belongs to both. That is why the Grand Tour is 19 days and not
+20, and why every Madagascar page carries a `.part-switch` nav and a sidebar
+chip pointing at its partner.
 
-Same trip, same price (from €2,400 / £2,060), same 10-day itinerary — only the
-dates differ. **So a change to the itinerary, price or inclusions has to be made
-in all three files.** Each page also links to the other two dates from its
-sidebar, so those links need updating if a departure is added or dropped.
+| Window | Part One | Part Two | Grand Tour |
+|---|---|---|---|
+| 1 | 30 Jun – 9 Jul | 9 – 18 Jul | 30 Jun – 18 Jul |
+| 2 | 20 – 29 Jul | 29 Jul – 7 Aug | 20 Jul – 7 Aug |
+| 3 | 10 – 19 Aug | 19 – 28 Aug | 10 – 28 Aug |
 
-`trip-madagascar.html` is now a redirect to `trips.html` — it used to be the
-single trip page and old links pointed at it.
+Six departure pages, one per row per half. **Within a half the pages are
+identical except for dates**, so a change to an itinerary, price or inclusion
+list has to be made in all three. Each also links to its two siblings and to
+its partner in the other half, so adding or dropping a departure means editing
+more than just the new file.
 
-The trip name is Amanda's, split in two: **"Lemurs, Baobabs & the Wild Coast"**
-is the heading, **"Canoe, Climb & Hike from Capital to Coast"** sits under it as
-a tagline.
+The Grand Tour is a **single page**, not three, because all three windows share
+everything but their dates. It does not repeat the itineraries — it links to
+both halves instead.
+
+`trip-madagascar.html` is a redirect to `trips.html`. It used to be the single
+trip page and old links pointed at it.
+
+### Where the trips page copy comes from
+
+The Trips and Home grids show **one card per product, not one per departure**,
+with the three dates as chips inside the card. Those chips sit outside the
+card's `<a>` — see the note on `.trip-card-dates` in the CSS, links cannot
+nest. Before this, three identical Part One cards sat side by side; adding Part
+Two would have made that six.
 
 ## Before this goes public
 
-- [ ] **"Avenue de Baobabs"** appears in day 9's copy, one sentence after the
-      heading calls it "Avenue of the Baobabs". Both spellings are Amanda's,
-      straight out of her text. Worth asking which she wants.
+- [ ] **The Grand Tour price is not Amanda's.** €5,200 / £4,485 is Part One
+      plus Part Two added together, and the document gives no combined figure.
+      Daniel chose to show the sum rather than "on request". The sidebar note
+      on that page says the price is confirmed on the video call, but this
+      needs her sign-off before the noindex comes off.
+- [ ] **Part Two has no photographs.** Its hero and card both borrow
+      `mad-1-lemur.jpg` from Part One, marked with a PLACEHOLDER comment in
+      each file. It also has no gallery at all, deliberately — showing Part
+      One's Tsingy cave on a trip that doesn't go there would be worse than
+      showing nothing. Amanda's document has empty photo slots for it.
+- [ ] **Part Two's inclusion list is two lines shorter than Part One's**,
+      missing tips/gratuities and the packing list. The document omits them, so
+      the site omits them. Almost certainly an oversight in the document rather
+      than a real difference between the halves.
+- [ ] **Spellings to check with Amanda.** Part Two days 5 and 6 say "Tsaranoa"
+      and "Ranomofana"; the usual spellings are Tsaranoro and Ranomafana. Both
+      are hers, left as written.
+- [ ] **"Avenue de Baobabs"** appears in Part One day 9's copy, one sentence
+      after the heading calls it "Avenue of the Baobabs". Both spellings are
+      Amanda's, straight out of her text. Worth asking which she wants.
 - [ ] **Egypt has no page.** The card on Home and Trips is a placeholder with
       every field reading TBC — see "The Egypt card" below.
 - [ ] **Part Two and the Grand Tour** are mentioned in the trip's own copy
@@ -104,8 +148,13 @@ a tagline.
       that the trip is real this is mostly about the FAQ terms above — take it
       off once those are right.
 
-Later trips sketched in the second document but not started: Uganda / Rwanda /
-Burundi, Antarctica, Egypt, Indonesia. Only the country names are filled in.
+Later trips, from the third document. **Uganda / Rwanda / Burundi** now has
+real numbers — February 2028, 12 days or 15 with the Burundi add-on, from
+€2,500 / £2,150, €500 deposit, named "Gorillas, Volcanoes, & the Royal Drums
+of Africa" — but no blurb, itinerary, difficulty or spot count, so it has no
+card yet. **Antarctica, Egypt and Indonesia** are still entirely blank in the
+document; Egypt has a coming-soon card only because Amanda sent a photograph
+separately.
 
 **Judgement calls worth a look:**
 
@@ -143,7 +192,8 @@ Two sets, and the difference matters.
 
 **Amanda's own photographs** — `amanda.jpg`, the 23 `past-*.jpg` cards, the five
 Madagascar photos (`trip-madagascar.jpg` and `mad-1` to `mad-4`) and
-`trip-egypt.jpg`. They
+`trip-egypt.jpg`. All five Madagascar shots are **Part One**; Part Two has none
+of its own and borrows one of them. They
 show real, identifiable people, so get everyone's agreement before the site goes
 public. `assets/img/CREDITS.md` lists which photo is used where.
 
