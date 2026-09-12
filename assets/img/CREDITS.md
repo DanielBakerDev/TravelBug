@@ -2,8 +2,8 @@
 
 ## The logo
 
-`logo-lockup.png`, `logo-mark.png`, `favicon.png` and `apple-touch-icon.png`
-are all cut from one file Amanda supplied, `travel-bug-logo.jpg`, a 2048px
+`logo-lockup.png`, `favicon.png` and `apple-touch-icon.png` are all cut from
+one file Amanda supplied, `travel-bug-logo.jpg`, a 2048px
 square with the artwork on flat white. It is **her commissioned artwork, not
 stock**, and the source JPEG is not in the repo — ask her for it if the logo
 ever needs recutting. See "Logo" in the README for how the crops were chosen

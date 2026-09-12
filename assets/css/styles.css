@@ -65,7 +65,7 @@
   --shadow-md: 0 4px 10px rgba(16,50,47,.07), 0 22px 48px rgba(16,50,47,.12);
 
   --ease: cubic-bezier(.22,.61,.36,1);
-  --header-h: 74px;
+  --header-h: 108px;
 }
 
 /* -------------------------------- base --------------------------------- */
@@ -320,28 +320,20 @@ img { max-width: 100%; height: auto; display: block; }
 
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 
-.brand {
-  display: inline-flex; align-items: center; gap: .5rem;
-  color: var(--white); text-decoration: none;
-  transition: color .3s var(--ease);
-}
-.site-header.is-stuck .brand { color: var(--ink); }
-/* The mark is the mascot cut out of Amanda's logo. Her artwork puts the
-   wordmark beside him, but it is unreadable below about 100px tall, so the
-   header keeps the name as live text and he carries the picture. The full
-   lockup goes in the footer instead, where there is room for it. */
-.brand-mark {
-  height: 52px; width: auto; flex: none;
+.brand { display: inline-flex; align-items: center; text-decoration: none; }
+
+/* Amanda's whole logo, wordmark and all. It is what sets --header-h: below
+   about 70px tall the word TOURS stops being readable, which is why the bar
+   is deeper than a text wordmark would need. Shrinking on scroll buys some of
+   that back without dropping under the legible size. */
+.brand-logo {
+  height: 76px; width: auto; flex: none;
   transition: height .3s var(--ease);
 }
-.site-header.is-stuck .brand-mark { height: 42px; }
-@media (max-width: 420px) {
-  .brand-mark, .site-header.is-stuck .brand-mark { height: 36px; }
-  .brand-name { font-size: 1.15rem; }
-}
-.brand-name {
-  font-family: var(--font-display);
-  font-size: 1.4rem; font-weight: 800; letter-spacing: -.035em;
+.site-header.is-stuck .brand-logo { height: 58px; }
+@media (max-width: 620px) {
+  .brand-logo { height: 60px; }
+  .site-header.is-stuck .brand-logo { height: 50px; }
 }
 
 .nav { display: flex; align-items: center; gap: 1.7rem; }

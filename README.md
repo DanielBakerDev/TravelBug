@@ -189,29 +189,32 @@ pointing at the new page, and drop `is-soon` and `trip-card-inner` with it.
 ## Logo
 
 Amanda's logo arrived as a single 2048px JPEG on a flat white background: the
-mascot on the left, "TRAVEL BUG TOURS" beside him. Four files are cut from it,
+mascot on the left, "TRAVEL BUG TOURS" beside him. Three files are cut from it,
 all in `assets/img/`.
 
 | File | Where it goes | Rendered at |
 |---|---|---|
-| `logo-lockup.png` | Footer | 205px wide |
-| `logo-mark.png` | Header, next to the site name | 52px tall, 42px once stuck |
-| `favicon.png` | Browser tab | 16—32px |
+| `logo-lockup.png` | Header and footer | 76px tall in the header, 58px once stuck, 205px wide in the footer |
 | `apple-touch-icon.png` | iOS home screen | 180px |
+| `favicon.png` | Browser tab | 16—32px |
 
-**The full lockup is not used in the header, and that is deliberate.** It is
-1352—800, so at any height that fits a header the word "TOURS" is about four
-pixels tall. The header therefore shows the mascot on his own and keeps the
-name as live text in Outfit. The footer has room, so it gets the real thing.
+**The whole logo is used everywhere it fits.** An earlier version cropped the
+mascot out for the header and set the name in Outfit beside him; Daniel didn't
+like it, and it is gone.
 
-**The three crops are different on purpose**, because each is read at a
-different size. The header mark is the hat, sunglasses and grin; wider crops
-that take in his arm and backpack turn to mush at 42px. The favicon is tighter
-still, just the sunglasses and grin, because at 16px the hat brim is only a
-dark smear. **At 16px it is a coloured blob whatever you do** — that is what
-happens to a detailed illustration at tab size, and the fix would be a
-simplified icon drawn to match, which is Amanda's call and not something to
-invent from her artwork.
+**That is what sets the header height.** The lockup is 1352×800, so the word
+TOURS stops being readable below about 70px tall. The header carries it at
+76px, which makes the bar 108px deep — much deeper than a text wordmark would
+need. `--header-h` exists for exactly this reason: the hero's top padding and
+two sticky offsets are all calculated from it, so **changing the logo height
+means changing that token, not the padding**. Scrolling shrinks it to 58px,
+which is as small as it goes while staying legible.
+
+**The tab icon is the one exception**, and it is a physical limit rather than a
+preference: a 1.7:1 lockup squeezed into a 16px square is an unreadable smear.
+The favicon is a tight crop of the sunglasses and grin, which is the most of
+him that survives at that size. The touch icon is 180px, big enough for the
+real logo, so it gets it.
 
 **How the background was removed:** by connected component, not by turning
 white transparent. The character wears a white shirt and has white highlights
@@ -222,7 +225,7 @@ The cut is then feathered over two pixels, otherwise a pale halo shows up as
 soon as the logo sits on the dark header. The script is in the scratchpad, not
 the repo — rerun it from `travel-bug-logo.jpg` if the artwork is ever redrawn.
 
-All four are palette PNGs at around 160 colours. The lockup is 59KB that way
+The files are palette PNGs at around 160 colours. The lockup is 59KB that way
 against 336KB as full RGBA, with no banding visible in the gradients.
 
 ## Photos
