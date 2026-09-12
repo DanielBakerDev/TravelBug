@@ -4,10 +4,16 @@
    CONTRAST RULE (please keep to it):
    The bright colours all fail WCAG against white text — turquoise is 2.3:1,
    coral 3.0:1. So bright fills always carry --ink text:
-       turquoise + ink  5.9:1      coral + ink   4.6:1
-       sunshine  + ink  9.5:1      lime  + ink   8.7:1
-   --deep-teal is the ONLY coloured surface that takes white text (6.4:1).
+       turquoise + ink  5.9:1      coral     + ink  4.6:1
+       sunshine  + ink  9.5:1      lime      + ink  8.7:1
+       tangerine + ink  5.3:1
+   Two coloured surfaces take WHITE text, and only these two:
+       deep-teal + white  6.4:1    grape     + white  9.4:1
    --lime and --sunshine are fill-only: never use them as a text colour.
+
+   The pale washes (--cream, --blush, --lilac, --mist) are near-white, so ink
+   reads on all of them. They exist so the page can alternate through several
+   colours instead of white → mist → white.
 
    Sections: tokens · base · layout · waves · buttons · header · heroes
              trips · stats · steps · included · about · quotes · gallery
@@ -22,16 +28,28 @@
   --coral-d:     #F0455C;
   --lime:        #A8E10C;
   --sunshine:    #FFD23F;
+  --tangerine:   #FF7A2F;   /* picked out of the logo's wordmark */
+  --tangerine-d: #F06515;
 
   --ink:         #10322F;
   --ink-soft:    #4A6360;
   --ink-faint:   #7C918E;
   --deep-teal:   #006B5E;
   --deep-teal-d: #00524A;
+  --grape:       #5B2E91;   /* second dark surface, so teal isn't the only one */
+  --grape-d:     #4A2378;
 
   --white:       #FFFFFF;
-  --mist:        #F2FBF9;   /* barely-there tint for alternating sections */
+  --mist:        #F2FBF9;   /* the four pale washes below alternate sections */
+  --cream:       #FFF8E6;
+  --blush:       #FFF1F2;
+  --lilac:       #F6F1FE;
   --line:        #DCEAE7;
+
+  /* Sits behind the rainbow rules — the header underline and the footer cap. */
+  --spectrum: linear-gradient(90deg,
+    var(--coral) 0%, var(--tangerine) 20%, var(--sunshine) 40%,
+    var(--lime) 60%, var(--turquoise) 80%, var(--grape) 100%);
 
   --font-display: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -111,11 +129,22 @@ img { max-width: 100%; height: auto; display: block; }
 .wrap-narrow { width: min(100% - 2.5rem, var(--wrap-narrow)); margin-inline: auto; }
 
 .section { padding: clamp(4rem, 8vw, 6.5rem) 0; position: relative; }
-.section-mist { background: var(--mist); }
-.section-teal { background: var(--deep-teal); color: #EAF7F4; }
-.section-teal h2, .section-teal h3 { color: var(--white); }
-.section-teal a { color: var(--sunshine); }
 .section-tight { padding-top: clamp(2.5rem, 5vw, 4rem); }
+
+/* Pale washes — ink text reads on all four, nothing else needs adjusting. */
+.section-mist  { background: var(--mist); }
+.section-cream { background: var(--cream); }
+.section-blush { background: var(--blush); }
+.section-lilac { background: var(--lilac); }
+
+/* The two dark surfaces. Everything inside flips to light text, so any new
+   rule for one needs the same rule for the other — they are always paired. */
+.section-teal  { background: var(--deep-teal); color: #EAF7F4; }
+.section-grape { background: var(--grape);     color: #F1E9FB; }
+.section-teal h2, .section-teal h3,
+.section-grape h2, .section-grape h3 { color: var(--white); }
+.section-teal a  { color: var(--sunshine); }
+.section-grape a { color: var(--sunshine); }
 
 .note-centred {
   margin: 2.4rem auto 0;
@@ -128,7 +157,8 @@ img { max-width: 100%; height: auto; display: block; }
 .section-head { max-width: 660px; margin-bottom: clamp(2.2rem, 4.5vw, 3.4rem); }
 .section-head.is-centred { margin-inline: auto; text-align: center; }
 .section-head .lede { color: var(--ink-soft); font-size: 1.1rem; }
-.section-teal .section-head .lede { color: rgba(234,247,244,.82); }
+.section-teal .section-head .lede  { color: rgba(234,247,244,.82); }
+.section-grape .section-head .lede { color: rgba(241,233,251,.84); }
 
 .eyebrow {
   display: inline-block;
@@ -142,11 +172,18 @@ img { max-width: 100%; height: auto; display: block; }
   margin: 0 0 1rem;
   transform: rotate(-1.2deg);
 }
-.section-teal .eyebrow { background: var(--sunshine); }
+.section-teal .eyebrow, .section-grape .eyebrow { background: var(--sunshine); }
+
+/* Eyebrow colour is picked per section in the markup, so consecutive sections
+   don't all open with the same lime tab. All five carry ink text. */
+.eyebrow-coral     { background: var(--coral); }
+.eyebrow-sunshine  { background: var(--sunshine); }
+.eyebrow-turquoise { background: var(--turquoise); }
+.eyebrow-tangerine { background: var(--tangerine); }
 
 /* squiggly underline used on a word or two inside a heading */
 .squiggle {
-  background-image: linear-gradient(var(--sunshine), var(--sunshine));
+  background-image: linear-gradient(90deg, var(--sunshine), var(--lime));
   background-size: 100% .3em;
   background-position: 0 88%;
   background-repeat: no-repeat;
@@ -169,17 +206,32 @@ img { max-width: 100%; height: auto; display: block; }
    below. Compose them, e.g. <div class="wave on-mist wave-teal">.
    Inside a .hero it self-positions over the photo instead. */
 .wave { display: block; line-height: 0; }
-.wave svg { display: block; width: 100%; height: clamp(38px, 5vw, 74px); }
+.wave svg { display: block; width: 100%; height: clamp(38px, 5vw, 74px); overflow: visible; }
 .wave svg path { fill: var(--wave-fill, var(--white)); }
 
-.wave-white { --wave-fill: var(--white); }
-.wave-mist  { --wave-fill: var(--mist); }
-.wave-teal  { --wave-fill: var(--deep-teal); }
-.wave-ink   { --wave-fill: var(--ink); }
+/* The crest: a hard-edged drop shadow offset UPWARDS paints a coloured band
+   that follows the curve exactly, with no second path in the markup. Zero
+   blur is what keeps the edge crisp — don't add one. */
+.wave svg path { filter: drop-shadow(0 -5px 0 var(--wave-crest, transparent)); }
+@media (max-width: 700px) { .wave svg path { filter: drop-shadow(0 -3px 0 var(--wave-crest, transparent)); } }
+
+/* Each fill carries its own crest, so a wave only ever needs its fill class. */
+.wave-white { --wave-fill: var(--white);     --wave-crest: var(--turquoise); }
+.wave-mist  { --wave-fill: var(--mist);      --wave-crest: var(--lime); }
+.wave-cream { --wave-fill: var(--cream);     --wave-crest: var(--tangerine); }
+.wave-blush { --wave-fill: var(--blush);     --wave-crest: var(--coral); }
+.wave-lilac { --wave-fill: var(--lilac);     --wave-crest: var(--grape); }
+.wave-teal  { --wave-fill: var(--deep-teal); --wave-crest: var(--sunshine); }
+.wave-grape { --wave-fill: var(--grape);     --wave-crest: var(--sunshine); }
+.wave-ink   { --wave-fill: var(--ink);       --wave-crest: var(--lime); }
 
 .on-white { background: var(--white); }
 .on-mist  { background: var(--mist); }
+.on-cream { background: var(--cream); }
+.on-blush { background: var(--blush); }
+.on-lilac { background: var(--lilac); }
 .on-teal  { background: var(--deep-teal); }
+.on-grape { background: var(--grape); }
 
 .hero > .wave { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 1; background: none; }
 
@@ -204,6 +256,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 .btn-coral { background: var(--coral); color: var(--ink); box-shadow: var(--shadow-sm); }
 .btn-coral:hover { background: var(--coral-d); color: var(--ink); }
+
+.btn-tangerine { background: var(--tangerine); color: var(--ink); box-shadow: var(--shadow-sm); }
+.btn-tangerine:hover { background: var(--tangerine-d); color: var(--ink); }
+
+.btn-sunshine { background: var(--sunshine); color: var(--ink); box-shadow: var(--shadow-sm); }
+.btn-sunshine:hover { background: #F5BC12; color: var(--ink); }
 
 .btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn-outline:hover { background: var(--ink); color: var(--white); }
@@ -231,6 +289,7 @@ img { max-width: 100%; height: auto; display: block; }
 .sticker-coral    { background: var(--coral); }
 .sticker-sunshine { background: var(--sunshine); }
 .sticker-lime     { background: var(--lime); }
+.sticker-tangerine{ background: var(--tangerine); }
 .sticker-white    { background: var(--white); }
 .sticker-tilt     { transform: rotate(-2deg); }
 
@@ -244,9 +303,20 @@ img { max-width: 100%; height: auto; display: block; }
 .site-header.is-stuck {
   background: rgba(255,255,255,.95);
   backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 var(--line), 0 8px 26px rgba(16,50,47,.07);
+  box-shadow: 0 8px 26px rgba(16,50,47,.07);
   padding: .55rem 0;
 }
+
+/* Replaces the plain hairline under the stuck header. It fades in with the
+   bar rather than sitting over the hero, where it would cut the photo. */
+.site-header::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: var(--spectrum);
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+.site-header.is-stuck::after { opacity: 1; }
 
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 
@@ -387,7 +457,18 @@ img { max-width: 100%; height: auto; display: block; }
   padding-bottom: clamp(4.5rem, 10vh, 7rem);
 }
 .hero h1 { margin-bottom: .9rem; text-shadow: 0 2px 26px rgba(3,26,24,.4); }
-.hero h1 em { font-style: normal; color: var(--sunshine); }
+/* The gradient needs a transparent text fill, which would show the h1's
+   text-shadow straight through the letters — hence the override. The three
+   stops are all bright enough to hold up against the hero scrim without it. */
+.hero h1 em {
+  font-style: normal;
+  color: var(--sunshine);
+  background: linear-gradient(96deg, var(--sunshine) 0%, var(--tangerine) 55%, var(--lime) 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
 .hero-sub {
   max-width: 46ch;
   font-size: clamp(1.05rem, 1.7vw, 1.25rem);
@@ -428,15 +509,43 @@ img { max-width: 100%; height: auto; display: block; }
   justify-content: center;
 }
 
+/* Each card picks an accent off the palette by position, so a row of the same
+   trip on three dates doesn't come out as three identical cards. The accent
+   drives the top bar, the meta dots and the hover border together. */
 .trip-card {
+  --accent: var(--turquoise);
+  display: flex; flex-direction: column;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   overflow: hidden;
   transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
 }
-.trip-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: transparent; }
-.trip-card > a { display: block; color: inherit; text-decoration: none; height: 100%; }
+.trip-grid > .trip-card:nth-child(4n+2) { --accent: var(--coral); }
+.trip-grid > .trip-card:nth-child(4n+3) { --accent: var(--sunshine); }
+.trip-grid > .trip-card:nth-child(4n+4) { --accent: var(--tangerine); }
+
+.trip-card::before { content: ""; flex: none; height: 6px; background: var(--accent); }
+.trip-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+.trip-card > a,
+.trip-card > .trip-card-inner { flex: 1; display: block; color: inherit; text-decoration: none; }
+
+/* A trip that has been announced but has no page yet. It behaves like a card
+   under the pointer — lift on hover, press on click — but it is not a link
+   and carries no tabindex, so keyboard and screen-reader users are not sent
+   hunting for a destination that doesn't exist. */
+.trip-card.is-soon {
+  border-style: dashed;
+  border-width: 2px;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--white) 55%);
+  cursor: default;
+}
+.trip-card.is-soon:active { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.trip-card.is-soon .trip-card-media img { filter: saturate(.55); transition: filter .45s var(--ease), transform .55s var(--ease); }
+.trip-card.is-soon:hover .trip-card-media img { filter: saturate(1); transform: scale(1.05); }
+.trip-card.is-soon .trip-card-price,
+.trip-card.is-soon .trip-card-go { color: var(--ink-faint); }
+.trip-card.is-soon:hover .trip-card-go { color: var(--tangerine-d); }
 
 .trip-card-media { position: relative; overflow: hidden; aspect-ratio: 16 / 10; }
 .trip-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
@@ -470,7 +579,7 @@ img { max-width: 100%; height: auto; display: block; }
 .trip-card-meta li { display: inline-flex; align-items: center; gap: .4rem; }
 .trip-card-meta li::before {
   content: ""; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--turquoise); flex: none;
+  background: var(--accent); flex: none;
 }
 
 .trip-card-foot {
@@ -552,9 +661,12 @@ img { max-width: 100%; height: auto; display: block; }
 .included-col {
   background: var(--white);
   border: 1px solid var(--line);
+  border-top: 5px solid var(--lime);
   border-radius: var(--r);
   padding: 1.6rem 1.5rem;
 }
+/* The "not included" column is the one carrying the cross list. */
+.included-col:has(.cross-list) { border-top-color: var(--coral); }
 .included-col h3 { margin-bottom: .9rem; font-size: 1.15rem; }
 .tick-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .65rem; }
 .tick-list li {
@@ -621,6 +733,8 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 3.6rem; font-weight: 800; line-height: 1;
   color: var(--turquoise);
 }
+.quotes > .quote:nth-child(3n+2)::before { color: var(--coral); }
+.quotes > .quote:nth-child(3n+3)::before { color: var(--tangerine); }
 .quote blockquote { margin: 0 0 1.1rem; font-size: 1.04rem; }
 .quote figcaption {
   font-family: var(--font-display);
@@ -649,10 +763,21 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 1.4rem;
 }
 .past-card {
+  --accent: var(--turquoise);
   border-radius: var(--r-lg);
   overflow: hidden;
   position: relative;
   box-shadow: var(--shadow-sm);
+}
+/* Six accents cycling through a long grid of otherwise similar photographs. */
+.past-grid > .past-card:nth-child(6n+2) { --accent: var(--coral); }
+.past-grid > .past-card:nth-child(6n+3) { --accent: var(--sunshine); }
+.past-grid > .past-card:nth-child(6n+4) { --accent: var(--lime); }
+.past-grid > .past-card:nth-child(6n+5) { --accent: var(--tangerine); }
+.past-grid > .past-card:nth-child(6n+6) { --accent: var(--grape); }
+.past-card::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 5px; background: var(--accent); z-index: 1;
 }
 .past-card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; transition: transform .55s var(--ease); }
 .past-card:hover img { transform: scale(1.05); }
@@ -681,6 +806,12 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: var(--r-lg);
   padding: 1.6rem 1.5rem;
   box-shadow: var(--shadow-sm);
+  /* The bar is drawn inside the border rather than added as an element, so it
+     follows the 2px ink outline and the corner radius without a wrapper. */
+  background-image: linear-gradient(var(--tangerine), var(--tangerine));
+  background-repeat: no-repeat;
+  background-size: 100% 8px;
+  padding-top: 2rem;
 }
 @media (max-width: 940px) { .trip-aside { position: static; } }
 .trip-aside-price {
@@ -747,6 +878,11 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: var(--font-display);
   font-size: .85rem; font-weight: 800;
 }
+/* Five bright fills cycling down the days. All of them carry ink text. */
+.itin-day:nth-child(5n+2) .itin-num { background: var(--sunshine); }
+.itin-day:nth-child(5n+3) .itin-num { background: var(--coral); }
+.itin-day:nth-child(5n+4) .itin-num { background: var(--lime); }
+.itin-day:nth-child(5n+5) .itin-num { background: var(--tangerine); }
 .itin-day h3 { font-size: 1.12rem; margin-bottom: .3rem; }
 .itin-day p { color: var(--ink-soft); font-size: .95rem; margin: 0; }
 
@@ -806,8 +942,8 @@ img { max-width: 100%; height: auto; display: block; }
 
 .form-note { margin: .9rem 0 0; min-height: 1.4em; font-size: .92rem; color: var(--ink-soft); }
 .form-note.is-error { color: var(--coral-d); font-weight: 600; }
-.section-teal .form-note { color: rgba(234,247,244,.85); }
-.section-teal .form-note.is-error { color: var(--sunshine); }
+.section-teal .form-note, .section-grape .form-note { color: rgba(234,247,244,.85); }
+.section-teal .form-note.is-error, .section-grape .form-note.is-error { color: var(--sunshine); }
 
 /* --------------------------------- faq --------------------------------- */
 .faq { border-top: 2px solid var(--line); }
@@ -820,10 +956,15 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 1.12rem; font-weight: 700;
 }
 .faq summary::-webkit-details-marker { display: none; }
+.faq details:nth-child(5n+1) { --accent: var(--turquoise); }
+.faq details:nth-child(5n+2) { --accent: var(--coral); }
+.faq details:nth-child(5n+3) { --accent: var(--tangerine); }
+.faq details:nth-child(5n+4) { --accent: var(--lime); }
+.faq details:nth-child(5n+5) { --accent: var(--grape); }
 .faq summary::after {
   content: ""; position: absolute; right: .4rem; top: 50%;
   width: 11px; height: 11px;
-  border-right: 3px solid var(--turquoise); border-bottom: 3px solid var(--turquoise);
+  border-right: 3px solid var(--accent); border-bottom: 3px solid var(--accent);
   transform: translateY(-70%) rotate(45deg);
   transition: transform .25s var(--ease);
 }
@@ -831,7 +972,15 @@ img { max-width: 100%; height: auto; display: block; }
 .faq details p { margin: 0; padding: 0 2.5rem 1.4rem 0; color: var(--ink-soft); font-size: .97rem; }
 
 /* -------------------------------- footer ------------------------------- */
-.site-footer { background: var(--ink); color: rgba(234,247,244,.72); padding: 3.4rem 0 1.8rem; }
+.site-footer {
+  position: relative;
+  background: var(--ink); color: rgba(234,247,244,.72);
+  padding: 3.4rem 0 1.8rem;
+}
+.site-footer::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0;
+  height: 6px; background: var(--spectrum);
+}
 .footer-inner {
   display: flex; flex-wrap: wrap; gap: 2rem;
   justify-content: space-between; align-items: flex-start;
@@ -855,7 +1004,10 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: var(--font-display);
   font-size: .85rem; font-weight: 700;
 }
-.footer-social a:hover { background: var(--lime); color: var(--ink); }
+.footer-social a:nth-child(2) { background: var(--lime); }
+.footer-social a:nth-child(3) { background: var(--turquoise); }
+.footer-social a:nth-child(4) { background: var(--tangerine); }
+.footer-social a:hover { background: var(--coral); color: var(--ink); }
 .footer-base {
   padding-top: 1.4rem; font-size: .85rem;
   display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; justify-content: space-between;

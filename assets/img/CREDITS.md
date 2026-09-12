@@ -38,9 +38,17 @@ a public site before launch.
 | `mad-2-cave.jpg` | Madagascar trip gallery |
 | `mad-3-baobab.jpg` | Madagascar trip gallery |
 | `mad-4-canoe.jpg` | Madagascar trip gallery, and the Contact page heading |
+| `trip-egypt.jpg` | The Egypt coming-soon card on Home and Trips |
 
 Each was extracted from the PDF, had its screenshot letterboxing trimmed, and
 was cropped to 1000×750 (`amanda.jpg` to 800×1000) and saved as JPEG.
+
+`trip-egypt.jpg` came separately and later: a 1600×1200 original, cropped to
+16:10 and resized to 1400×875 to match the other trip-card images. The crop
+takes 120px off the top and 80px off the bottom, which is the only window that
+keeps both the apex of the Step Pyramid and the group's feet in frame. **It
+shows three identifiable people**, so it falls under the same
+check-before-launch note as everything else in this table.
 
 **Which photo goes with which trip is my best guess** from the order of the
 photos in the document and what is visible in them. Worth a quick check —

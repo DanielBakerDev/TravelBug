@@ -16,7 +16,7 @@ resources and instructions live in `infrastructure/`.
 | Path | What's in it |
 |---|---|
 | `index.html` | Homepage — hero, trip grid, how it works, numbers, about, quotes, newsletter |
-| `trips.html` | All open departures |
+| `trips.html` | All open departures, plus the Egypt coming-soon card |
 | `trip-madagascar-<date>.html` | One page per departure — three of them, same trip |
 | `trip-madagascar.html` | Redirect to `trips.html`, so the old link doesn't 404 |
 | `past-journeys.html` | Grid of trips already run |
@@ -82,9 +82,11 @@ a tagline.
 
 ## Before this goes public
 
-- [ ] **Day 10 reads oddly.** It says *"a few days of doing very little after a
-      fortnight of moving"* — left over from my placeholder text, and this is a
-      10-day trip ending on day 10. Days 1–9 are all Amanda's. Worth a rewrite.
+- [ ] **"Avenue de Baobabs"** appears in day 9's copy, one sentence after the
+      heading calls it "Avenue of the Baobabs". Both spellings are Amanda's,
+      straight out of her text. Worth asking which she wants.
+- [ ] **Egypt has no page.** The card on Home and Trips is a placeholder with
+      every field reading TBC — see "The Egypt card" below.
 - [ ] **Part Two and the Grand Tour** are mentioned in the trip's own copy
       ("You may do Part One, Part Two, or the whole Experience Madagascar Grand
       Tour") but have no pages. The contact dropdown has an option for them so
@@ -118,12 +120,30 @@ Burundi, Antarctica, Egypt, Indonesia. Only the country names are filled in.
   `exploretravelbugtours@gmail.com` as its placeholder. It does, but that's the
   box a *visitor* types their own address into.
 
+## The Egypt card
+
+Egypt is announced on Home and Trips but has no trip page, so the card is
+**not a link**. It is a plain `<article class="trip-card is-soon">` wrapping a
+`<div class="trip-card-inner">` where a real card wraps an `<a>`.
+
+It still lifts on hover, presses on click, and brings the photograph up from
+desaturated to full colour — all from `.trip-card.is-soon` in the CSS. What it
+deliberately does *not* do is carry a `tabindex`, so keyboard and screen-reader
+users are never sent looking for a destination that does not exist.
+
+Every fact on it reads TBC, because none of them are decided. `contact.html`
+has a matching `<option>` so people can still register interest.
+
+**To make it real:** swap the whole `<article>` for a copy of a Madagascar card
+pointing at the new page, and drop `is-soon` and `trip-card-inner` with it.
+
 ## Photos
 
 Two sets, and the difference matters.
 
-**Amanda's own photographs** — `amanda.jpg`, the 23 `past-*.jpg` cards, and now
-the five Madagascar photos (`trip-madagascar.jpg` and `mad-1` to `mad-4`). They
+**Amanda's own photographs** — `amanda.jpg`, the 23 `past-*.jpg` cards, the five
+Madagascar photos (`trip-madagascar.jpg` and `mad-1` to `mad-4`) and
+`trip-egypt.jpg`. They
 show real, identifiable people, so get everyone's agreement before the site goes
 public. `assets/img/CREDITS.md` lists which photo is used where.
 
@@ -184,9 +204,31 @@ cheapest route and need no backend.
 ## Colours
 
 The palette is bright, which makes contrast the easy thing to get wrong. The
-rule is at the top of `styles.css`: **bright fills always carry dark ink text**,
-and `--deep-teal` is the only coloured surface that takes white text. Turquoise
-with white text is 2.3:1 and fails badly; with ink it's 5.9:1 and passes.
+rule is at the top of `styles.css`: **bright fills always carry dark ink text.**
+Turquoise with white text is 2.3:1 and fails badly; with ink it's 5.9:1 and
+passes. Two surfaces are the exception and take white text instead —
+`--deep-teal` (6.4:1) and `--grape` (9.4:1). Nothing else does.
+
+There are two bright fills (`--tangerine`, `--lime`) and one dark surface
+(`--grape`) beyond the original four, plus four near-white washes
+(`--mist`, `--cream`, `--blush`, `--lilac`) so a page can alternate through
+several colours rather than white → mist → white. Ink reads on all four washes.
+
+Colour mostly arrives through **position, not markup**. Trip cards, past-journey
+cards, itinerary days, FAQ rows and quotes each set an `--accent` from an
+`:nth-child` cycle, so adding a fourth trip or a twenty-fourth country picks up
+the next colour on its own. The two places that are chosen by hand are the
+section background (`.section-cream`, `.section-blush`, `.section-lilac`,
+`.section-grape`) and the eyebrow tab (`.eyebrow-coral` and friends).
+
+**Waves** carry a coloured crest along the top edge. There is no second path in
+the markup — it is a `drop-shadow` on the existing one, offset upwards with
+zero blur, which traces the curve exactly. Each `.wave-*` fill class sets its
+own `--wave-crest`, so a wave still only needs its fill class. Don't add blur
+to that shadow; the crisp edge is the whole effect.
+
+The rainbow rules under the stuck header and above the footer both come from
+one token, `--spectrum`.
 
 ## Deployment
 

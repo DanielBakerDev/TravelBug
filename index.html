@@ -79,7 +79,7 @@
 <section class="section" id="trips">
   <div class="wrap">
     <header class="section-head reveal">
-      <p class="eyebrow">Upcoming adventures</p>
+      <p class="eyebrow eyebrow-coral">Upcoming adventures</p>
       <h2>Where to <span class="squiggle">next?</span></h2>
       <p class="lede">We currently have several trips open, maximum 15 explorers, &amp; they fill
         up fast. Don't miss your chance to join a dynamic group trip.</p>
@@ -165,19 +165,49 @@
         </a>
       </article>
 
+      <!-- Egypt has been announced but has no trip page yet, so this is a plain
+           <article> rather than a link, and it stays out of the tab order. The
+           hover and press feedback comes from .trip-card.is-soon in the CSS.
+           Swap the whole block for a normal card once the departure is set. -->
+      <article class="trip-card is-soon reveal">
+        <div class="trip-card-inner">
+          <div class="trip-card-media">
+            <img src="assets/img/trip-egypt.jpg" width="1400" height="875" loading="lazy"
+                 alt="Two travellers and a local guide on a donkey in front of the Step Pyramid at Saqqara">
+            <span class="sticker sticker-sunshine sticker-tilt">Coming soon</span>
+            <span class="trip-card-level">Level TBC</span>
+          </div>
+          <div class="trip-card-body">
+            <p class="trip-card-where">Egypt</p>
+            <h3>Trip in the works</h3>
+            <p class="trip-card-blurb">Egypt is back on the list. We have run it before and we are
+              putting a new departure together now — dates, route and price are all still to be
+              settled.</p>
+            <ul class="trip-card-meta">
+              <li>Dates to be confirmed</li>
+              <li>Length to be confirmed</li>
+            </ul>
+            <div class="trip-card-foot">
+              <p class="trip-card-price"><span>price</span>TBC</p>
+              <span class="trip-card-go">Details to come</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
-<div class="wave on-white wave-mist" aria-hidden="true">
+<div class="wave on-white wave-cream" aria-hidden="true">
   <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,40 C200,4 380,72 560,44 C740,16 920,72 1100,50 C1280,28 1380,44 1440,54 L1440,90 L0,90 Z"/></svg>
 </div>
 
 <!-- ============================= HOW IT WORKS ============================= -->
-<section class="section section-mist" id="how">
+<section class="section section-cream" id="how">
   <div class="wrap">
     <header class="section-head is-centred reveal">
-      <p class="eyebrow">How it works</p>
+      <p class="eyebrow eyebrow-turquoise">How it works</p>
       <h2>Four steps and you're on the plane</h2>
       <p class="lede">Some of our adventures take us off the tourist track and into the complete
         unknown. We set up a video call to give you more fine details about the program, and make
@@ -216,13 +246,13 @@
   </div>
 </section>
 
-<div class="wave on-mist wave-teal" aria-hidden="true">
+<div class="wave on-cream wave-grape" aria-hidden="true">
   <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,52 C160,20 340,64 520,44 C700,24 880,68 1060,48 C1240,28 1380,50 1440,40 L1440,90 L0,90 Z"/></svg>
 </div>
 
 <!-- =============================== NUMBERS =============================== -->
 <!-- PLACEHOLDER FIGURES — replace with Amanda's real numbers. -->
-<section class="section section-teal">
+<section class="section section-grape">
   <div class="wrap">
     <header class="section-head is-centred reveal">
       <p class="eyebrow">So far</p>
@@ -240,7 +270,7 @@
   </div>
 </section>
 
-<div class="wave on-teal wave-white" aria-hidden="true">
+<div class="wave on-grape wave-white" aria-hidden="true">
   <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,36 C180,68 360,12 540,40 C720,68 900,16 1080,44 C1260,72 1380,40 1440,30 L1440,90 L0,90 Z"/></svg>
 </div>
 
@@ -252,7 +282,7 @@
            alt="Amanda in a sun hat and hiking gear, striking a pose on a trip">
     </div>
     <div class="about-copy reveal">
-      <p class="eyebrow">About</p>
+      <p class="eyebrow eyebrow-tangerine">About</p>
       <h2>Hey there, I'm Amanda</h2>
       <p>On a major cross-continent trip 10 years ago, I met my travel soulmates. Each year since
         the Mongol Rally in 2016, I have been organizing super adventurous trips for our friends
@@ -270,7 +300,7 @@
   </div>
 </section>
 
-<div class="wave on-white wave-mist" aria-hidden="true">
+<div class="wave on-white wave-blush" aria-hidden="true">
   <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,44 C200,12 380,66 560,46 C740,26 920,70 1100,46 C1280,22 1380,42 1440,50 L1440,90 L0,90 Z"/></svg>
 </div>
 
@@ -278,10 +308,10 @@
      PLACEHOLDER COPY — these quotes are invented. Replace with real ones
      before this site is promoted anywhere.
 ========================================================================= -->
-<section class="section section-mist">
+<section class="section section-blush">
   <div class="wrap">
     <header class="section-head is-centred reveal">
-      <p class="eyebrow">Kind words</p>
+      <p class="eyebrow eyebrow-sunshine">Kind words</p>
       <h2>From people who came along</h2>
     </header>
 
@@ -306,7 +336,7 @@
   </div>
 </section>
 
-<div class="wave on-mist wave-teal" aria-hidden="true">
+<div class="wave on-blush wave-teal" aria-hidden="true">
   <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,50 C160,18 340,62 520,42 C700,22 880,66 1060,46 C1240,26 1380,48 1440,38 L1440,90 L0,90 Z"/></svg>
 </div>
 
