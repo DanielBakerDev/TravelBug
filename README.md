@@ -239,8 +239,8 @@ of its own and borrows one of them. They
 show real, identifiable people, so get everyone's agreement before the site goes
 public. `assets/img/CREDITS.md` lists which photo is used where.
 
-**Stock** — only the two page-heading backgrounds are left
-(`hero-group.jpg`, `band-summit.jpg`), from
+**Stock** — only one page-heading background is left
+(`band-summit.jpg`, on the About page), from
 [Pexels](https://www.pexels.com/license/). Checked: free for commercial use, no
 attribution required. Both show strangers, so they're next in line to be
 replaced.
@@ -254,43 +254,61 @@ shouldn't carry 8MB camera files. Images are about 6MB in total.
 
 ## Hero video
 
-The homepage hero cycles three clips, 7 seconds each, with the destination
-named in the corner. The list lives at the top of the hero block in
-`assets/js/main.js` — add, remove or reorder entries there and drop the file
-in `assets/video/`. A clip with no `caption` shows no label.
+The homepage hero cycles four clips, 7 seconds each. **All four are Amanda's
+own footage**; the Pexels stock clips that used to be here are gone. The list
+lives at the top of the hero block in `assets/js/main.js` — add, remove or
+reorder entries there and drop the file in `assets/video/`. A clip with a
+`caption` gets that label in the corner. **None of the four has one yet**,
+because the files carry no location and nobody has said where they were shot.
+
+| File | What it shows | Source | Speed |
+|---|---|---|---|
+| `hero-1-climb.mp4` | Drone pull-back from three climbers on a ridge | Insta360, 2160×3840 | 0.5× |
+| `hero-2-traverse.mp4` | A roped line crossing a sloping rock face | WhatsApp copy, 478×850 | 0.8× |
+| `hero-3-summit.mp4` | The group on a summit, then the view along the ridge | WhatsApp copy, 478×850 | 0.65× |
+| `hero-4-lookout.mp4` | Drone pull-back from the group on a lookout | Insta360, 2160×3840 | 0.4× |
 
 It's built to not cost anyone much:
 
-- The poster photo (`hero-group.jpg`) paints first and is the only thing
-  guaranteed to load. Clips fade in over it, so a slow connection, a blocked
-  autoplay or a missing file just leaves the photograph.
+- The poster (`hero-poster.jpg`) paints first and is the only thing guaranteed
+  to load. Clips fade in over it, so a slow connection, a blocked autoplay or
+  a missing file just leaves the still. **It is the first frame of
+  `hero-1-climb.mp4`, cropped identically**, so the fade in is invisible. If
+  the first clip ever changes, regenerate the poster from the new one.
 - Clips load one at a time, so someone who scrolls straight past fetches about
-  2.6MB rather than all 6.1MB.
+  2MB rather than all 6.7MB.
 - **Phones get the first clip on a loop**, not the montage — no point spending
-  someone's mobile data on the full set.
+  someone's mobile data on the full set. That is a second reason the sharpest
+  clip is first.
 - Nothing is fetched at all if the visitor has "reduce motion" turned on or
-  data-saver enabled. They see the poster photo.
+  data-saver enabled. They see the poster.
 - Playback pauses when the hero scrolls off screen or the tab is hidden.
 
-Video is 8.4MB against about 6MB of photographs. Adding or removing a clip is
-a one-line change to that list.
+### Preparing a clip
 
-**The climbing clip came in as a 31MB vertical phone video**, 2160x3840 at
-60fps. Three things had to happen to it, and they are worth knowing if another
-arrives the same way:
+Every clip so far has arrived **vertical, too fast and too big**, so each one
+went through the same three steps. Worth repeating for the next.
 
-- **It was portrait.** The hero is a landscape band, and `object-fit: cover`
-  would have thrown away about two thirds of the frame while still downloading
-  all of it. It is cropped to the centre 16:9 band instead, which is the slice
-  that keeps the climbers in shot for the whole clip.
-- **It was too fast.** Time is stretched 2x, so 4.1 seconds becomes 8.2. The
-  source was 60fps and the output is 29.97, so every frame is kept exactly
-  once - real slow motion, not dropped frames.
-- **It was 31MB.** Re-encoded to 960x540 H.264 to match the others, which
-  brought it to 2MB.
+- **Crop to a 16:9 band.** The hero is landscape, and `object-fit: cover` on a
+  portrait file throws away about two thirds of it while still downloading all
+  of it. Which band to keep is a per-clip decision: look at frames from across
+  the clip and keep the slice where the people stay in shot.
+- **Slow it down.** Stretch time until the clip is a little over the 7-second
+  dwell, so it doesn't loop back to its opening mid-display. When the new rate
+  divides evenly into the source's 60fps — 30 at 0.5×, 24 at 0.4× — every frame is
+  kept once and it is genuine slow motion.
+- **Re-encode to 960×540 H.264** with the audio stripped. That takes a 30MB
+  camera file down to about 2MB.
 
-The exact command is in the commit that added it. `ffmpeg` is not installed on
-this machine; `pip install imageio-ffmpeg` brings a bundled binary.
+**The two WhatsApp clips are soft, and cropping can't fix it.** WhatsApp had
+already shrunk them to 478 pixels wide before they reached us, so the 16:9 band
+is 478×268 and the site upscales it 2×. Behind the dark scrim it passes as
+depth of field, but the original files off Amanda's phone would be noticeably
+sharper. Re-run the same crop on those if she can send them.
+
+`ffmpeg` is not installed on this machine; `pip install imageio-ffmpeg` brings
+a bundled binary. The exact crop, trim and speed for each clip is in the commit
+that added it.
 
 ## Forms
 

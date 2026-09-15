@@ -56,20 +56,22 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
    - The poster <img> is the only thing guaranteed to load. Clips fade in over
      it, so a slow connection or a blocked autoplay just leaves the photo.
    - preload="none" plus loading one clip at a time: a visitor who scrolls
-     straight past downloads ~2.6MB, not the full 6.1MB.
+     straight past downloads ~2MB, not the full 6.7MB.
    - Small screens get the first clip on a loop rather than the whole montage,
-     to avoid spending someone's mobile data on five files.
+     to avoid spending someone's mobile data on all four files.
    - Nothing is fetched at all under reduced-motion or data-saver. */
 const heroVideos = document.querySelectorAll('.hero-video');
 
 if (heroVideos.length === 2) {
+  // All four are Amanda's own footage. None has a caption because nobody has
+  // said where they were shot - add one the moment she does. The first entry
+  // is also what phones get on its own, and the poster image is its first
+  // frame, so keep those two matched if the order ever changes.
   const CLIPS = [
-    { src: 'assets/video/hero-1-ridge.mp4',  caption: '' },
-    { src: 'assets/video/hero-2-baobab.mp4', caption: 'Madagascar' },
-    { src: 'assets/video/hero-3-forest.mp4', caption: 'Madagascar' },
-    // Amanda's own footage. No caption because nobody has said where it was
-    // shot yet - give it one the moment she does.
-    { src: 'assets/video/hero-4-climb.mp4',  caption: '' },
+    { src: 'assets/video/hero-1-climb.mp4',    caption: '' },
+    { src: 'assets/video/hero-2-traverse.mp4', caption: '' },
+    { src: 'assets/video/hero-3-summit.mp4',   caption: '' },
+    { src: 'assets/video/hero-4-lookout.mp4',  caption: '' },
   ];
   const DWELL = 7000;
 

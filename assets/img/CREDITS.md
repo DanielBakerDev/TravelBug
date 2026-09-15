@@ -73,42 +73,36 @@ named in a line under the grid. Send better photos and they become cards.
 
 ## Stock photography
 
-What's left is the two page-heading backgrounds. Everything on the Madagascar
-trip is now Amanda's own.
+One stock image is left: the About page heading. The homepage poster used to be
+stock too and is now a frame of Amanda's own footage (below).
 
 From **Pexels** under the [Pexels License](https://www.pexels.com/license/):
-commercial use allowed, attribution not required. Verified against each photo's
+commercial use allowed, attribution not required. Verified against the photo's
 Pexels page.
 
 | File | Size | Source | Description |
 |---|---|---|---|
-| `hero-group.jpg` | 1800×1000 | [pexels.com/photo/8532284](https://www.pexels.com/photo/8532284/) | A group of travellers pausing to take in a wide mountain view on a hike |
 | `band-summit.jpg` | 1600×800 | [pexels.com/photo/16775991](https://www.pexels.com/photo/16775991/) | Hikers celebrating together at a mountain summit under a clear blue sky |
 
-Both show identifiable strangers. The Pexels licence says not to *"imply
-endorsement of your product by people or brands on the imagery"*, so these are
-the two worth replacing with Amanda's own photos when there are spare ones —
-`hero-group.jpg` especially, since it sits directly under "I'm Amanda…" on the
-homepage.
+It shows identifiable strangers. The Pexels licence says not to *"imply
+endorsement of your product by people or brands on the imagery"*, so it is the
+one worth replacing with Amanda's own photo when there is a spare one.
 
-## Hero video clips
+## Hero video and poster
 
-The homepage hero cycles these. Same Pexels licence as the photographs.
+**All of it is Amanda's own footage. None of it is stock**, so the Pexels
+licence covers none of it. Every clip shows identifiable people, so it falls
+under the same check-before-launch note as her photographs above. Nobody has
+said where any of it was shot, so none of the clips carries a location caption.
 
-Downloaded at **960×540** rather than 720p — behind the hero's dark gradient
-the difference isn't visible, and it is a third of the weight.
+| File | Size | Supplied as |
+|---|---|---|
+| `assets/video/hero-1-climb.mp4` | 960×540 | `20260804_154202_161.mp4` (Insta360) |
+| `assets/video/hero-2-traverse.mp4` | 960×540 | `WhatsApp Video 2026-09-07 at 10.30.02 AM.mp4` |
+| `assets/video/hero-3-summit.mp4` | 960×540 | `WhatsApp Video 2026-09-07 at 10.30.01 AM.mp4` |
+| `assets/video/hero-4-lookout.mp4` | 960×540 | `20260827_142627_320.mp4` (Insta360) |
+| `assets/img/hero-poster.jpg` | 1600×900 | First frame of `20260804_154202_161.mp4` |
 
-| File | Size | Source | Description |
-|---|---|---|---|
-| `assets/video/hero-1-ridge.mp4` | 960×540 | [pexels.com/video/17424959](https://www.pexels.com/video/17424959/) | A walker following a ridgeline trail above green valleys |
-| `assets/video/hero-2-baobab.mp4` | 960×540 | [pexels.com/video/18510304](https://www.pexels.com/video/18510304/) | Looking up the trunk of a baobab into its canopy |
-| `assets/video/hero-3-forest.mp4` | 960×540 | [pexels.com/video/6003703](https://www.pexels.com/video/6003703/) | Sunlight moving through a forest canopy |
-
-**`assets/video/hero-4-climb.mp4` is not stock.** It is Amanda's own drone
-footage, supplied as `20260804_154202_161.mp4`: a pull-back over a roped group
-on a limestone ridge. **It shows identifiable people in helmets**, so it falls
-under the same check-before-launch note as her photographs above, and the
-Pexels licence does not cover it. Nobody has said where it was shot, so it runs
-without a location caption.
-
-Total: 4 clips, 8.4 MB.
+Total: 4 clips, 6.7 MB, plus a 198KB poster. The Pexels clips and the
+`hero-group.jpg` poster that used to be here were removed rather than kept
+unused; they are in the git history if ever wanted.
