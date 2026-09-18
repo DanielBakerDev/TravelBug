@@ -446,6 +446,40 @@ img { max-width: 100%; height: auto; display: block; }
   }
 }
 
+/* Homepage: let the footage show its own colour.
+   The teal scrim above suits the still photos on the inner pages, but over
+   Amanda's video it turned every clip the same murky green: two stacked
+   layers, up to ~90% dark at the top left, tinted teal. Here the tint is
+   neutral black and exists in only two places - a band under the header for
+   the nav links, and a soft shadow behind the words. The right side, the
+   bottom and the middle of the frame are left untouched.
+
+   Measured against the four clips, the area behind the words gets as bright
+   as a relative luminance of 0.70 (open sky in the summit clip at 5s), where
+   bare white text is 1.4:1. The shadow alone doesn't close that gap without
+   greying the picture again, so the words carry a heavy shadow of their own
+   and the two together do it. Re-check against the brightest frame if a
+   clip is added: see "Hero video" in the README. */
+.hero.is-home::before {
+  background: linear-gradient(180deg, rgba(0,0,0,.34) 0%, rgba(0,0,0,0) 22%);
+}
+.hero.is-home::after {
+  background: radial-gradient(ellipse 60% 64% at 22% 60%,
+    rgba(0,0,0,.52) 0%, rgba(0,0,0,.36) 45%, rgba(0,0,0,0) 100%);
+}
+@media (max-width: 760px) {
+  .hero.is-home::after {
+    background: linear-gradient(180deg,
+      rgba(0,0,0,0) 10%, rgba(0,0,0,.44) 36%, rgba(0,0,0,.44) 80%, rgba(0,0,0,0) 97%);
+  }
+}
+.hero.is-home h1 { text-shadow: 0 2px 4px rgba(0,0,0,.45), 0 4px 30px rgba(0,0,0,.55); }
+/* The gradient words can't take a text-shadow (see .hero h1 em), so they get
+   a drop-shadow filter instead, which traces the painted letters. */
+.hero.is-home h1 em { filter: drop-shadow(0 2px 5px rgba(0,0,0,.6)); }
+.hero.is-home .hero-sub { text-shadow: 0 1px 2px rgba(0,0,0,.75), 0 0 20px rgba(0,0,0,.6); }
+.hero.is-home .btn-ghost-light { background: rgba(0,0,0,.28); }
+
 .hero-inner {
   display: flex; flex-direction: column; align-items: flex-start;
   justify-content: center;

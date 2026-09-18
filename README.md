@@ -284,6 +284,21 @@ It's built to not cost anyone much:
   data-saver enabled. They see the poster.
 - Playback pauses when the hero scrolls off screen or the tab is hidden.
 
+### The tint over the video
+
+The homepage hero is **not** tinted like the other pages. The inner pages lay a
+dark teal wash over their still photos; over Amanda's footage that turned every
+clip the same murky green, so the homepage (`.hero.is-home` in the CSS) uses a
+neutral black shadow in just two places: a band under the header for the nav
+links, and a soft patch behind the words. Everywhere else the footage shows at
+full colour.
+
+The shadow is as light as it can be while the words stay readable. The area
+behind the text gets as bright as a relative luminance of 0.70 in the summit
+clip (open sky), where bare white text is 1.4:1; the patch plus a heavy shadow
+on the letters themselves carries it. **If a new clip goes in, check its
+brightest frame with the text over it** before assuming the tint still works.
+
 ### Preparing a clip
 
 Every clip so far has arrived **vertical, too fast and too big**, so each one
