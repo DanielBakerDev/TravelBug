@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Lets the "Publish to live site" GitHub Actions workflow upload to the Travel
+  Bug Tours bucket and clear the CloudFront cache, with no stored AWS keys.
+
+# GitHub proves which workflow is calling with a short-lived OIDC token, and
+# the role below only trusts jobs running in the repository's `live`
+# environment. Pull requests, forks and every other workflow are refused.
+
+Parameters:
+  GitHubRepository:
+    Type: String
+    Default: DanielBakerDev/TravelBug
+    Description: owner/name of the repository allowed to publish.
+  WebsiteBucketName:
+    Type: String
+    Description: WebsiteBucketName output of the hosting stack.
+  DistributionId:
+    Type: String
+    Description: DistributionId output of the hosting stack.
+  CreateOidcProvider:
+    Type: String
+    AllowedValues: ['true', 'false']
+    Default: 'true'
+    Description: >-
+      An AWS account can hold only one GitHub OIDC provider. Set to false if
+      `aws iam list-open-id-connect-providers` already lists
+      token.actions.githubusercontent.com.
+
+Conditions:
+  MakeProvider: !Equals [!Ref CreateOidcProvider, 'true']
+
+Resources:
+  GitHubOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: MakeProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+
+  PublishRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Description: Assumed by the TravelBug publish workflow.
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !If
+                - MakeProvider
+                - !Ref GitHubOidcProvider
+                - !Sub 'arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com'
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                token.actions.githubusercontent.com:sub: !Sub 'repo:${GitHubRepository}:environment:live'
+      Policies:
+        - PolicyName: publish-website
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: s3:ListBucket
+                Resource: !Sub 'arn:aws:s3:::${WebsiteBucketName}'
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:DeleteObject
+                Resource: !Sub 'arn:aws:s3:::${WebsiteBucketName}/*'
+              - Effect: Allow
+                Action: cloudfront:CreateInvalidation
+                Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${DistributionId}'
+
+Outputs:
+  PublishRoleArn:
+    Description: Set this as the AWS_PUBLISH_ROLE_ARN repository variable on GitHub.
+    Value: !GetAtt PublishRole.Arn

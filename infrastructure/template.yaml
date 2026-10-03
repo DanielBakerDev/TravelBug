@@ -1,0 +1,77 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Travel Bug Tours enquiry form API
+
+Parameters:
+  SenderEmail:
+    Type: String
+    Description: A verified Amazon SES email address used as the From address.
+  SenderIdentity:
+    Type: String
+    Description: The verified SES identity authorized to send, normally the website domain.
+  RecipientEmail:
+    Type: String
+    Description: Inbox that receives new enquiries.
+  AllowedOrigin:
+    Type: String
+    Description: Exact public website origin, for example https://www.example.com.
+
+Globals:
+  Function:
+    Runtime: nodejs22.x
+    Timeout: 5
+    MemorySize: 128
+    Tracing: Active
+
+Resources:
+  InquiryApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: travel-bug-enquiries
+      StageName: prod
+      EndpointConfiguration: REGIONAL
+      Cors:
+        AllowMethods: "'POST,OPTIONS'"
+        AllowHeaders: "'Content-Type'"
+        AllowOrigin: !Sub "'${AllowedOrigin}'"
+        MaxAge: "'86400'"
+      MethodSettings:
+        - ResourcePath: '/*'
+          HttpMethod: '*'
+          ThrottlingBurstLimit: 10
+          ThrottlingRateLimit: 2
+
+  InquiryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: submit.handler
+      Description: Validates a tour enquiry and forwards it via Amazon SES.
+      Environment:
+        Variables:
+          ALLOWED_ORIGIN: !Ref AllowedOrigin
+          RECIPIENT_EMAIL: !Ref RecipientEmail
+          SENDER_EMAIL: !Ref SenderEmail
+      Policies:
+        - Statement:
+            Effect: Allow
+            Action: ses:SendEmail
+            Resource: '*'
+            Condition:
+              StringEquals:
+                ses:FromAddress: !Ref SenderEmail
+              ForAllValues:StringEquals:
+                ses:Recipients:
+                  - !Ref RecipientEmail
+      Events:
+        SubmitEnquiry:
+          Type: Api
+          Properties:
+            RestApiId: !Ref InquiryApi
+            Path: /enquiries
+            Method: post
+
+Outputs:
+  EnquiryEndpoint:
+    Description: Paste this URL into assets/js/config.js before publishing the site.
+    Value: !Sub 'https://${InquiryApi}.execute-api.${AWS::Region}.amazonaws.com/prod/enquiries'

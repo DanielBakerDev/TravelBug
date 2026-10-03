@@ -1,0 +1,8 @@
+{
+  "name": "travel-bug-enquiry-api",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.0.0"
+  }
+}
