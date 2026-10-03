@@ -1,0 +1,113 @@
+---
+# One page per "combined" trip — trips sold back to back, like the Madagascar
+# Grand Tour. Its dates come from the trips it is made of.
+pagination:
+  data: combinedTrips
+  size: 1
+  alias: trip
+permalink: "{{ trip.page }}.html"
+nav: trips
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as ui with context %}
+{% set pageTitle = trip.name + ', ' + trip.length + ' in ' + trip.years + ' — Travel Bug Tours' %}
+{% set pageDescription = trip.description or trip.blurb %}
+{% set count = trip.windows.length %}
+
+{% block main %}
+<section class="hero trip-hero">
+  <div class="hero-media">
+    <img {{ (trip.hero_image or trip.card_image) | img | safe }} alt="" fetchpriority="high">
+  </div>
+  <div class="wrap hero-inner">
+    <div class="trip-hero-meta reveal">
+      <span class="sticker sticker-lime">{{ trip.country }}</span>
+      {%- if trip.badgeText %}
+      <span class="sticker sticker-{{ trip.badgeColour }}">{{ trip.badgeText }}</span>
+      {%- endif %}
+      <span class="sticker sticker-white">{{ trip.level }}</span>
+    </div>
+    <h1 class="reveal">{{ ui.highlighted(trip.title, trip.title_highlight) }}</h1>
+    <p class="hero-sub reveal">{% if trip.hero_kicker %}{{ trip.hero_kicker }}<br>{% endif %}
+      <strong>{{ trip.length }}</strong> · {{ count | countWord }} departure{{ '' if count == 1 else 's' }} in {{ trip.years }}{% if trip.priceText %} · from {{ trip.priceText }}{% endif %}</p>
+  </div>
+  {{ ui.wave('wave-white', 'hero') }}
+</section>
+
+<section class="section section-tight">
+  <div class="wrap trip-layout">
+
+    <div class="trip-main">
+      {{ ui.partSwitch(trip.country, trip.partSwitch) }}
+
+      <div class="reveal trip-intro">
+        <h2>The idea</h2>
+        {{ trip.intro | md | safe }}
+      </div>
+
+      <h2 class="reveal">The {{ count | countWord }} window{{ '' if count == 1 else 's' }}</h2>
+      <p class="reveal">{{ trip.windows_text }}</p>
+      <div class="table-scroll reveal">
+        <table class="combo-table">
+          <caption class="sr-only">{{ trip.country }} departures in {{ trip.years }}, showing how each
+            {{ trip.parts[0].short_name }} departure joins a {{ trip.parts[1].short_name }} departure</caption>
+          <thead>
+            <tr>{% for part in trip.parts %}<th scope="col">{{ part.short_name }}</th>{% endfor %}<th scope="col">{{ trip.short_name }}</th></tr>
+          </thead>
+          <tbody>
+            {%- for w in trip.windows %}
+            <tr>
+              {%- for leg in w.legs %}
+              <td><a href="{{ leg.url }}">{{ leg.short }}</a></td>
+              {%- endfor %}
+              <td>{{ w.long }}</td>
+            </tr>
+            {%- endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="reveal">Day by day</h2>
+      <p class="reveal">{{ trip.itinerary_text }}</p>
+      <div class="hero-actions reveal">
+        {%- for part in trip.parts %}
+        <a class="btn btn-outline" href="{{ part.departures[0].url }}">{{ trip.legLabels[loop.index0] }}</a>
+        {%- endfor %}
+      </div>
+
+      {% include "included.njk" %}
+    </div>
+
+    <aside class="trip-aside reveal">
+      {{ ui.tripPrice(trip, 'trip-aside-price') }}
+      <ul class="trip-facts">
+        <li><span class="k">Length</span><span class="v">{{ trip.length }}</span></li>
+        <li><span class="k">Departures</span><span class="v">{{ count }} in {{ trip.years }}</span></li>
+        <li><span class="k">Group size</span><span class="v">{{ trip.group_size }}</span></li>
+        <li><span class="k">Level</span><span class="v">{{ trip.level }}</span></li>
+        {%- if trip.deposit %}
+        <li><span class="k">Deposit</span><span class="v">{{ trip.deposit }}</span></li>
+        {%- endif %}
+      </ul>
+      <a class="btn btn-primary btn-block" href="contact.html?trip={{ trip.enquiry | urlencode }}">{{ trip.button_label or 'Request a spot' }}</a>
+      <p class="trip-aside-note">{{ trip.aside_note }}</p>
+
+      <div class="other-dates">
+        <p class="other-dates-label">Pick a window</p>
+        <div class="date-chips">
+        {%- for w in trip.windows %}
+        <a class="date-chip" href="contact.html?trip={{ w.enquiry | urlencode }}">{{ w.long }}</a>
+        {%- endfor %}
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-teal', 'ripple') }}
+
+{{ ui.closing(trip.closing_heading, trip.closing_text | mdInline,
+  { href: 'trips.html', label: 'See all the dates' },
+  { href: 'contact.html', label: 'Ask us something' }) }}
+{% endblock %}

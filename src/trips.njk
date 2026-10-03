@@ -1,0 +1,22 @@
+---
+permalink: trips.html
+nav: trips
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as ui with context %}
+{% set pageTitle = tripsPage.seo.title %}
+{% set pageDescription = tripsPage.seo.description %}
+
+{% block main %}
+{{ ui.pageHero(tripsPage.hero, 'eyebrow-coral') }}
+
+<section class="section section-tight">
+  <div class="wrap">
+{{ ui.tripGrid(trips) }}
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-teal', 'ripple') }}
+
+{{ ui.newsletter(tripsPage.newsletter) }}
+{% endblock %}

@@ -1,0 +1,650 @@
+# Pages CMS configuration — what Amanda sees at https://app.pagescms.org
+#
+# Every save is a commit to `main`. That rebuilds the preview site on GitHub
+# Pages, but it does NOT change the live site: Daniel publishes that by hand
+# (see README, "Editing and publishing").
+#
+# Field `description`s are written for Amanda, not for us.
+
+media:
+  input: assets/img
+  output: /assets/img
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+settings:
+  # Keep anything in a file that the form below doesn't know about, rather
+  # than silently deleting it on save.
+  content:
+    merge: true
+  commit:
+    identity: user
+
+actions:
+  - name: ready-for-review
+    label: Send my changes to Daniel
+    workflow: ready-for-review.yml
+    confirm:
+      title: Send your changes to Daniel?
+      message: He'll get an email with a link to the preview, and will put it on the real website once he's had a look.
+      button: Send
+    fields:
+      - name: note
+        label: Anything Daniel should know? (optional)
+        type: textarea
+
+components:
+  seo:
+    type: object
+    label: Google & link previews
+    fields:
+      - name: title
+        label: Page title
+        type: string
+        description: Shown in the browser tab and as the headline in Google results.
+      - name: description
+        label: Summary
+        type: text
+        description: The short summary under the headline in Google results. One or two sentences.
+
+  hero:
+    type: object
+    label: Top of the page
+    fields:
+      - name: image
+        label: Background photo
+        type: image
+        description: A wide photo works best. It's shown darkened, behind the title.
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: text
+        label: Text under the title
+        type: text
+
+  newsletter:
+    type: object
+    label: Mailing list box (bottom of the page)
+    fields:
+      - name: eyebrow
+        label: Small label
+        type: string
+      - name: heading
+        label: Heading
+        type: string
+      - name: text
+        label: Text
+        type: text
+
+  inline-text:
+    type: rich-text
+    options:
+      format: markdown
+      media: false
+      switcher: false
+
+content:
+  # --------------------------------------------------------------- TRIPS
+  - name: trips
+    label: Trips
+    type: collection
+    path: content/trips
+    format: yaml
+    filename: "{fields.name}.yml"
+    view:
+      primary: name
+      fields: [name, kind]
+      sort: [order, name]
+      default:
+        sort: order
+        order: asc
+    operations:
+      rename: false
+    fields:
+      - name: name
+        label: Trip name
+        type: string
+        required: true
+        description: Used in page titles and the contact form, e.g. "Madagascar Part One".
+      - name: kind
+        label: Type of trip
+        type: select
+        default: dates
+        options:
+          values:
+            - name: dates
+              label: Bookable — has dates and its own page
+            - name: coming-soon
+              label: Coming soon — just a card, no page yet
+            - name: combined
+              label: Two trips back to back (like the Grand Tour) — ask Daniel
+      - name: order
+        label: Position in the list of trips
+        type: number
+        description: 1 shows first, then 2, and so on.
+        options:
+          min: 1
+
+      - name: country
+        label: Country
+        type: string
+        description: Shown on the green sticker at the top of the trip page.
+      - name: card_label
+        label: Small label on the trip card
+        type: string
+        description: e.g. "Madagascar — Part One".
+      - name: title
+        label: Big title
+        type: string
+        description: The headline at the top of the trip page.
+      - name: title_highlight
+        label: Coloured end of the title
+        type: string
+        description: The last few words of the big title, shown in colour. Copy them exactly, or leave empty.
+      - name: card_title
+        label: Title on the trip card
+        type: string
+        description: Only fill this in if the card should say something different from the big title.
+      - name: hero_kicker
+        label: Line under the title
+        type: string
+        description: e.g. "Experience Madagascar Part One". The dates, length and price are added after it.
+      - name: blurb
+        label: Text on the trip card
+        type: text
+        description: Two or three sentences.
+      - name: badge
+        label: Sticker on the trip card
+        type: string
+        description: Leave empty to show how many spots are left on the first date.
+
+      - name: level
+        label: Level
+        type: string
+        description: e.g. "Adventurous".
+      - name: length
+        label: Length
+        type: string
+        description: e.g. "10 days".
+      - name: route
+        label: Route
+        type: string
+        description: e.g. "Tana to Morondava".
+      - name: price_eur
+        label: Price from (€)
+        type: number
+        description: Just the number, e.g. 2400. Leave empty to show "TBC".
+      - name: price_gbp
+        label: Price from (£)
+        type: number
+        description: Just the number, e.g. 2060.
+      - name: deposit
+        label: Deposit
+        type: string
+        description: e.g. "€500".
+      - name: group_size
+        label: Group size
+        type: string
+        description: e.g. "Max 15".
+
+      - name: card_image
+        label: Card photo
+        type: image
+      - name: card_image_alt
+        label: Describe the card photo
+        type: string
+        description: One sentence describing the photo, for people who can't see it.
+      - name: hero_image
+        label: Big photo at the top of the trip page
+        type: image
+        description: Leave empty to use the card photo.
+
+      - name: departures
+        label: Dates
+        type: object
+        description: Each date gets its own page. Change "Spots left" to 0 and it shows as fully booked.
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{start} to {end} — {spots_left} spots left"
+        fields:
+          - name: start
+            label: First day
+            type: date
+            default: ""
+          - name: end
+            label: Last day
+            type: date
+            default: ""
+          - name: spots_left
+            label: Spots left
+            type: number
+            options:
+              min: 0
+          - name: page
+            type: string
+            hidden: true
+
+      - name: intro
+        label: '"The idea" — intro text'
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+          switcher: false
+      - name: gallery
+        label: Photos under the intro
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{alt}"
+        fields:
+          - name: image
+            label: Photo
+            type: image
+          - name: alt
+            label: Describe the photo
+            type: string
+      - name: itinerary
+        label: Day by day
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Day {index}: {title}"
+        fields:
+          - name: title
+            label: Place / headline
+            type: string
+          - name: text
+            label: What happens
+            component: inline-text
+      - name: included
+        label: In the price
+        type: string
+        list: true
+      - name: not_included
+        label: Not in the price
+        type: string
+        list: true
+
+      - name: button_label
+        label: Button text
+        type: string
+        description: Leave empty for "Request a spot".
+      - name: aside_note
+        label: Note under the button
+        type: text
+      - name: closing_heading
+        label: Heading at the bottom of the page
+        type: string
+      - name: closing_text
+        label: Text at the bottom of the page
+        type: text
+        description: "You can write {start}, {end} or {dates} and the right dates are filled in for each page."
+      - name: description
+        label: Summary for Google
+        type: text
+        description: "One or two sentences. Write {dates} where the dates should go."
+
+      # Only used by "combined" trips like the Grand Tour. Daniel sets these up.
+      - name: short_name
+        label: Short name (for trips that join together)
+        type: string
+        description: e.g. "Part One". Only needed for the Madagascar-style trips that link together.
+      - name: windows_text
+        label: Grand Tour only — text above the dates table
+        type: text
+      - name: itinerary_text
+        label: Grand Tour only — text above the day-by-day buttons
+        type: text
+      - name: parts
+        type: string
+        list: true
+        hidden: true
+      - name: page
+        type: string
+        hidden: true
+
+  # --------------------------------------------------------------- PAGES
+  - name: pages
+    label: Pages
+    type: group
+    items:
+      - name: home
+        label: Home page
+        type: file
+        path: content/home.yml
+        format: yaml
+        fields:
+          - name: seo
+            label: Google & link previews
+            type: object
+            fields:
+              - name: title
+                label: Page title
+                type: string
+              - name: description
+                label: Summary for Google
+                type: text
+              - name: share_description
+                label: Summary when the link is shared (WhatsApp, Facebook…)
+                type: text
+          - name: hero
+            label: Top of the page (over the video)
+            type: object
+            fields:
+              - name: eyebrow
+                label: Small label above the title
+                type: string
+              - name: title
+                label: Title, first line
+                type: string
+              - name: title_highlight
+                label: Title, second line (in colour)
+                type: string
+              - name: text
+                label: Text under the title
+                type: text
+          - name: trips
+            label: Trips section
+            type: object
+            fields:
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: heading_highlight
+                label: Underlined end of the heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+          - name: how
+            label: How it works
+            type: object
+            fields:
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                component: inline-text
+              - name: steps
+                label: Steps
+                type: object
+                list:
+                  collapsible:
+                    collapsed: true
+                    summary: "{index}. {title}"
+                fields:
+                  - name: title
+                    label: Step title
+                    type: string
+                  - name: text
+                    label: Step text
+                    component: inline-text
+          - name: numbers
+            label: Numbers section (purple)
+            type: object
+            fields:
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: stats
+                label: Numbers
+                type: object
+                description: Four fit on one row.
+                list: true
+                fields:
+                  - name: number
+                    label: Number
+                    type: string
+                    description: e.g. "19" or "68%".
+                  - name: label
+                    label: Label
+                    type: string
+          - name: about
+            label: About Amanda section
+            type: object
+            fields:
+              - name: photo
+                label: Photo
+                type: image
+                description: A portrait (taller than wide) photo works best.
+              - name: photo_alt
+                label: Describe the photo
+                type: string
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: rich-text
+                options:
+                  format: markdown
+                  media: false
+                  switcher: false
+          - name: reviews
+            label: Reviews
+            type: object
+            fields:
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: quotes
+                label: Reviews
+                type: object
+                list:
+                  collapsible:
+                    collapsed: true
+                    summary: "{by}"
+                fields:
+                  - name: quote
+                    label: What they said
+                    type: text
+                  - name: by
+                    label: Who, where and when
+                    type: string
+                    description: e.g. "Rachel B. — Patagonia, 2025".
+          - name: newsletter
+            component: newsletter
+
+      - name: trips-page
+        label: Trips page
+        type: file
+        path: content/trips-page.yml
+        format: yaml
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: newsletter
+            component: newsletter
+
+      - name: past-journeys
+        label: Past journeys
+        type: file
+        path: content/past-journeys.yml
+        format: yaml
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: journeys
+            label: Past trips
+            type: object
+            description: Drag to reorder.
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - name: name
+                label: Where
+                type: string
+              - name: photo
+                label: Photo
+                type: image
+              - name: photo_alt
+                label: Describe the photo
+                type: string
+          - name: notes
+            label: Notes under the photos
+            component: inline-text
+            list: true
+          - name: newsletter
+            component: newsletter
+
+      - name: about
+        label: About page
+        type: file
+        path: content/about.yml
+        format: yaml
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: photo
+            label: Photo of Amanda
+            type: image
+          - name: photo_alt
+            label: Describe the photo
+            type: string
+          - name: story
+            label: Main text
+            type: rich-text
+            description: Use "Heading 2" for the section headings.
+            options:
+              format: markdown
+              media: false
+              switcher: false
+          - name: expect
+            label: What you can expect (lilac section)
+            type: object
+            fields:
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: good_heading
+                label: Ticks — heading
+                type: string
+              - name: good
+                label: Ticks
+                type: string
+                list: true
+              - name: bad_heading
+                label: Crosses — heading
+                type: string
+              - name: bad
+                label: Crosses
+                type: string
+                list: true
+          - name: closing
+            label: Bottom of the page
+            type: object
+            fields:
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+
+      - name: contact
+        label: Contact page
+        type: file
+        path: content/contact.yml
+        format: yaml
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: form
+            label: Above the form
+            type: object
+            fields:
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+          - name: faq
+            label: Questions and answers
+            type: object
+            fields:
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: questions
+                label: Questions
+                type: object
+                list:
+                  collapsible:
+                    collapsed: true
+                    summary: "{question}"
+                fields:
+                  - name: question
+                    label: Question
+                    type: string
+                  - name: answer
+                    label: Answer
+                    type: text
+
+      - name: site
+        label: Footer & settings
+        type: file
+        path: content/site.yml
+        format: yaml
+        fields:
+          - name: footer_tagline
+            label: Footer — line under the logo
+            type: string
+          - name: footer_note
+            label: Footer — note at the very bottom
+            type: string
+          - name: instagram
+            label: Instagram link
+            type: string
+          - name: tiktok
+            label: TikTok link
+            type: string
+          - name: hide_from_search
+            label: Hide the website from Google
+            type: boolean
+            description: Leave this on until Daniel says the site is ready to be found.
+          - name: email
+            type: string
+            hidden: true

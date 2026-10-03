@@ -1,0 +1,28 @@
+seo:
+  title: Get in touch — Travel Bug Tours
+  description: Ask about a trip, request a spot, or find out whether a departure is right for you.
+
+hero:
+  image: /assets/img/mad-4-canoe.jpg
+  eyebrow: Say hello
+  title: Get in touch
+  text: Questions, a spot on a trip, or just checking whether something's your sort of thing. I answer everything myself.
+
+form:
+  heading: Tell me what you're thinking
+  text: A couple of lines is plenty. I'll come back within two working days — usually sooner unless I'm away with a group.
+
+faq:
+  eyebrow: Before you ask
+  heading: Common questions
+  questions:
+    - question: What's included in the price?
+      answer: Accommodation, internal transport, guides, permits and entry fees, and most meals — the exact split is listed on each trip page. Flights are not included, but I'll tell you which ones to book and when.
+    - question: I'd be travelling on my own. Is that odd?
+      answer: It's the most common way people come. There's no single supplement if you're happy to share a twin room, and if you'd rather have your own it's an optional extra.
+    - question: How fit do I need to be?
+      answer: Our trips are active — expect walking days of three to five hours on uneven ground, and the occasional early start. We go through all of it on the video call before you book, so nobody ends up on the wrong trip.
+    - question: What happens if a trip doesn't fill?
+      answer: Departures run with a minimum of six. If a trip doesn't reach that, I'll tell you at least ten weeks out and you can move to another date or take a full refund.
+    - question: Do I need travel insurance?
+      answer: Yes, and it needs to cover the activities on your trip. I'll ask for the policy number before departure.

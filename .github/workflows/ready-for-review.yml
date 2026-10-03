@@ -1,0 +1,63 @@
+# Behind the "Send my changes to Daniel" button in Pages CMS (see .pages.yml).
+#
+# Opens a GitHub issue assigned to the repository owner — which GitHub emails
+# to him — with links to the preview, the changes since the last publish, and
+# the publish button. Pressing it again before he publishes adds a comment to
+# the same issue rather than opening another.
+name: Ready for review
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS payload as JSON
+        required: true
+        type: string
+
+permissions:
+  issues: write
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v9
+        env:
+          # Passed through the environment, never pasted into the script, so
+          # nothing typed in the note can run as code.
+          PAYLOAD: ${{ inputs.payload }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            let payload = {};
+            try { payload = JSON.parse(process.env.PAYLOAD || '{}'); } catch {}
+
+            const who = payload.triggeredBy?.name || payload.triggeredBy?.email || 'Someone';
+            const note = String(payload.inputs?.note ?? '').trim();
+            const label = 'ready-for-review';
+
+            const body = [
+              `**${who}** has finished making changes to the website.`,
+              ...(note ? ['', `> ${note.split('\n').join('\n> ')}`] : []),
+              '',
+              `- Preview: https://${owner.toLowerCase()}.github.io/${repo}/`,
+              `- What changed since the last publish: https://github.com/${owner}/${repo}/compare/live...main`,
+              `- Publish it: https://github.com/${owner}/${repo}/actions/workflows/publish.yml → Run workflow`,
+            ].join('\n');
+
+            try {
+              await github.rest.issues.getLabel({ owner, repo, name: label });
+            } catch {
+              await github.rest.issues.createLabel({ owner, repo, name: label, color: '00BFA6' });
+            }
+
+            const open = await github.rest.issues.listForRepo({ owner, repo, state: 'open', labels: label });
+            if (open.data.length) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: open.data[0].number, body });
+            } else {
+              await github.rest.issues.create({
+                owner, repo, labels: [label], assignees: [owner],
+                title: 'Website changes ready to publish',
+                body,
+              });
+            }

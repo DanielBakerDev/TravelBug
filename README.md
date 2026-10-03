@@ -7,61 +7,142 @@ Website for Amanda's small-group adventure trips.
 Enquiries open the visitor's mail app addressed to
 `exploretravelbugtours@gmail.com` (set at the top of `assets/js/main.js`).
 
-Plain HTML, CSS and JavaScript — no frontend build step or dependencies. The
-site is hosted in a private Amazon S3 bucket behind CloudFront; deployment
+Amanda edits the words and photos herself in [Pages CMS](https://app.pagescms.org);
+Daniel decides when her changes go live. The pages are built with
+[Eleventy](https://www.11ty.dev/) from the content files she edits. The site
+is hosted in a private Amazon S3 bucket behind CloudFront; deployment
 resources and instructions live in `infrastructure/`.
+
+## Editing and publishing
+
+```
+Amanda saves in Pages CMS ──► commit to main ──► preview rebuilds (GitHub Pages)
+                                                   danielbakerdev.github.io/TravelBug/
+Amanda presses "Send my changes to Daniel" ──► GitHub issue, emailed to Daniel
+Daniel checks the preview, runs "Publish to live site" ──► exploretravelbugtours.com
+```
+
+- **Every save is a commit to `main`.** That rebuilds the preview
+  (`.github/workflows/preview.yml`) within a minute or two. The preview has a
+  yellow "Preview" label pinned to the bottom and is always hidden from search
+  engines.
+- **The live site only changes when Daniel publishes.** Actions tab → "Publish
+  to live site" → Run workflow, or `gh workflow run publish.yml`. It builds
+  `main`, uploads it to S3, clears CloudFront, and moves the `live` git tag to
+  that commit.
+- **What will a publish change?**
+  https://github.com/DanielBakerDev/TravelBug/compare/live...main shows every
+  edit since the last publish, file by file.
+- **"Send my changes to Daniel"** is a button in Pages CMS
+  (`.github/workflows/ready-for-review.yml`). It opens — or comments on — an
+  issue labelled `ready-for-review`, assigned to Daniel, with those three links.
+  Publishing closes it.
+- **Daniel's own edits go through the same path**: push to `main`, check the
+  preview, publish.
+
+Amanda signs in to Pages CMS with her email address — she doesn't need a
+GitHub account. She can edit the content and upload photos; she can't change
+the layout, the code, or `.pages.yml`.
+
+### What Amanda can edit
+
+`.pages.yml` defines the editor. The sidebar shows:
+
+- **Trips** — one entry per trip: text, prices, photos, the day by day, the
+  inclusion lists, and its **Dates**, each with its own spots left. Setting
+  spots left to 0 shows "Fully booked" and turns "Request a spot" into "Join
+  the waiting list". She can add a new trip or a new date; its page is named
+  automatically (`trip-<trip file>-<ddmonyyyy>.html`) and it appears on Home,
+  Trips and in the contact form's dropdown on its own.
+- **Pages** — Home, Trips page, Past journeys, About, Contact, and Footer &
+  settings. Every heading, paragraph and photo on them.
+
+What stays with Daniel: the hero videos, the layout and colours, the logo, and
+the shape of a "combined" trip like the Grand Tour (which trips it joins).
+
+**Photos are shrunk on the way out, not on upload.** `lib/images.js` re-encodes
+any photo over 1600px on its longest side, over 400KB, or carrying EXIF data
+(phone photos carry their GPS position): turned upright, scaled down,
+metadata stripped. The original stays in `assets/img/` as uploaded; only the
+built site gets the small copy. Photos already on the site are under all three
+limits and are copied untouched — `band-summit.jpg` is the one exception, as it
+has camera EXIF. Width and height attributes are read from the processed file,
+so a replacement photo of a different shape needs no other change.
+
+### One-time setup
+
+1. **Pages CMS.** Sign in at https://app.pagescms.org with GitHub, install the
+   Pages CMS GitHub App on the `TravelBug` repository only, open the repo, and
+   invite Amanda by email under Collaborators.
+2. **GitHub Pages.** Settings → Pages → Source: **GitHub Actions**. (It used to
+   serve the repo root from `main`; there's nothing there to serve any more.)
+3. **AWS publishing role.** Deploy `infrastructure/github-publish.yaml` — see
+   `infrastructure/README.md`. It lets the publish workflow sign in to AWS with
+   no stored keys, and only from the `live` environment.
+4. **Repository variables** (Settings → Secrets and variables → Actions →
+   Variables): `AWS_PUBLISH_ROLE_ARN`, `AWS_BUCKET`, `AWS_DISTRIBUTION_ID`.
+5. **The `live` tag** marks what's on the live site, so the compare link works
+   from day one. It starts at the last commit deployed by hand.
 
 ## Files
 
 | Path | What's in it |
 |---|---|
-| `index.html` | Homepage — hero, trip grid, how it works, numbers, about, quotes, newsletter |
-| `trips.html` | All open departures, plus the Egypt coming-soon card |
-| `trip-madagascar-<month>2027.html` | Part One, one page per departure — three of them |
-| `trip-madagascar-p2-<date>2027.html` | Part Two, one page per departure — three of them |
-| `trip-madagascar-grand.html` | The Grand Tour — one page covering all three windows |
-| `trip-madagascar.html` | Redirect to `trips.html`, so the old link doesn't 404 |
-| `past-journeys.html` | Grid of trips already run |
-| `about.html` | Amanda's story |
-| `contact.html` | Enquiry form + FAQ |
+| `content/*.yml` | The words and photo choices for each page — what Amanda edits |
+| `content/trips/*.yml` | One file per trip, including its dates |
+| `src/*.njk` | Page templates. `trip-departure.njk` makes one page per date of every trip; `trip-combined.njk` makes the Grand Tour |
+| `src/_includes/` | The shared header and footer (`base.njk`), cards, waves and the other repeated pieces (`macros.njk`) |
+| `src/static/trip-madagascar.html` | Redirect to `trips.html`, so the old link doesn't 404. Copied as is |
+| `lib/content.js` | Reads `content/` and works out everything derived: page names, date labels, which Part One date joins which Part Two date, the contact dropdown |
+| `lib/dates.js` | How date ranges are written |
+| `lib/images.js` | Photo shrinking, see above |
+| `eleventy.config.js` | Wires the above together |
+| `.pages.yml` | The Pages CMS editor: which fields Amanda sees, with labels and help text written for her |
+| `.github/workflows/` | Preview, publish, and the "send to Daniel" button |
 | `assets/css/styles.css` | All styling. Colour tokens and the contrast rule are at the top |
-| `assets/js/main.js` | Sticky header, mobile menu, scroll reveals, both forms |
+| `assets/js/main.js` | Sticky header, mobile menu, scroll reveals, both forms, hero video list |
 | `assets/img/` | Photos and the logo files, plus `CREDITS.md` listing every source |
-| `assets/video/` | The three hero montage clips |
+| `assets/video/` | The four hero montage clips |
 
-Pages are flat files at the repo root rather than in folders, so every page
-references `assets/…` by the same relative path. Keep it that way — it's the
-main reason nothing breaks without a build step.
+The build writes every page flat into `_site/` (`about.html`, not
+`about/index.html`), so every page references `assets/…` by the same relative
+path. That's what lets one build work both at the domain root and under
+`/TravelBug/` on the preview. Keep it that way.
 
 **Filenames are inconsistent between the two halves** and it is deliberate.
 Part One is named by start month (`jun2027`), which broke down for Part Two
 because two of its departures start in July. Part Two is therefore named by
 start *date* (`p2-09jul2027`). Renaming Part One to match would change three
-URLs that are already pushed, for no gain.
+URLs that are already live, for no gain. Those six names are pinned with a
+hidden `page` value on each date in the trip file; new dates are named
+automatically.
 
 ## Working on it
 
 ```bash
-npx serve . -l 4321
+npm install
+npm run dev
 ```
 
-**One gotcha when testing locally:** `serve` redirects `/contact.html?trip=…`
-to `/contact` and throws the query string away, so the "Request a spot"
-pre-fill looks broken on localhost. GitHub Pages serves `.html` directly and
-keeps the query, so it works in production — test that flow on the live URL,
-not locally. (Setting `cleanUrls: false` in a `serve.json` fixes it locally but
-then every `.html` link needs the extension typed out.)
+That builds into `_site/` and serves it at http://localhost:4321, rebuilding
+when anything in `src/`, `content/` or `assets/` changes. `npm run build` just
+builds.
 
-Then push:
+**Content goes in `content/`, never in the templates.** If Amanda should be able
+to change a piece of text, it needs a field in the content file *and* in
+`.pages.yml`. A field missing from `.pages.yml` is invisible to her, but it is
+kept when she saves (`settings.content.merge`).
 
-```bash
-git add -A && git commit -m "Describe the change" && git push
-```
+**Comments in `content/*.yml` don't survive.** Pages CMS rewrites the whole file
+on save. Notes about content belong in this README or in a field's
+`description` in `.pages.yml`.
 
-**Header and footer are duplicated in every page.** That's the trade-off for
-having no build tool. Changing the nav means editing all six files. If the trip
-count goes much past ten, or a blog gets added, it's worth moving to Eleventy
-or Astro instead.
+**Trip text can use tokens** that fill in per date: `{start}`, `{end}`,
+`{dates}`, and on the Madagascar halves `{combined-dates}` — the joined-up
+Grand Tour window. Bold, italics and links in the rich-text fields arrive as
+Markdown and are rendered with raw HTML switched off.
+
+Then push to `main` — it shows up on the preview, not the live site.
 
 ## The Madagascar trips
 
@@ -86,11 +167,18 @@ chip pointing at its partner.
 | 2 | 20 – 29 Jul | 29 Jul – 7 Aug | 20 Jul – 7 Aug |
 | 3 | 10 – 19 Aug | 19 – 28 Aug | 10 – 28 Aug |
 
-Six departure pages, one per row per half. **Within a half the pages are
-identical except for dates**, so a change to an itinerary, price or inclusion
-list has to be made in all three. Each also links to its two siblings and to
-its partner in the other half, so adding or dropping a departure means editing
-more than just the new file.
+Six departure pages, one per row per half, all made from one trip file per
+half (`content/trips/madagascar-part-one.yml` and `-part-two.yml`). An
+itinerary, price or inclusion-list change is made once and lands on all three
+pages. The sibling chips, the Part One / Part Two / Grand Tour switch and the
+"runs straight into" chip are all worked out by `lib/content.js`.
+
+**Pairing is by position.** The Grand Tour file
+(`madagascar-grand-tour.yml`, `kind: combined`) lists its `parts`, and the
+first date of Part One joins the first date of Part Two, second with second,
+and so on — each list is sorted by start date first. If one half gets a date
+the other doesn't have, that date simply has no partner: no "runs straight
+into" chip, and the plain ending instead of "Carry on south?".
 
 The Grand Tour is a **single page**, not three, because all three windows share
 everything but their dates. It does not repeat the itineraries — it links to
@@ -115,8 +203,8 @@ Two would have made that six.
       on that page says the price is confirmed on the video call, but this
       needs her sign-off before the noindex comes off.
 - [ ] **Part Two has no photographs.** Its hero and card both borrow
-      `mad-1-lemur.jpg` from Part One, marked with a PLACEHOLDER comment in
-      each file. It also has no gallery at all, deliberately — showing Part
+      `mad-1-lemur.jpg` from Part One (the card and hero photo fields in
+      `madagascar-part-two.yml`). It also has no gallery at all, deliberately — showing Part
       One's Tsingy cave on a trip that doesn't go there would be worse than
       showing nothing. Amanda's document has empty photo slots for it.
 - [ ] **Part Two's inclusion list is two lines shorter than Part One's**,
@@ -144,9 +232,12 @@ Two would have made that six.
       These are the ones that matter legally.
 - [ ] **Group size** is set to 15 everywhere. The second document didn't say,
       so it carried over from the first one.
-- [ ] **Remove `<meta name="robots" content="noindex">`** from every page. Now
-      that the trip is real this is mostly about the FAQ terms above — take it
-      off once those are right.
+- [ ] **Let search engines in.** Every page carries
+      `<meta name="robots" content="noindex">` while "Hide the website from
+      Google" is ticked in Pages CMS (Footer & settings, `hide_from_search` in
+      `content/site.yml`). Now that the trip is real this is mostly about the
+      FAQ terms above — untick it once those are right. The preview stays
+      hidden regardless.
 
 Later trips, from the third document. **Uganda / Rwanda / Burundi** now has
 real numbers — February 2028, 12 days or 15 with the Burundi add-on, from
@@ -180,11 +271,13 @@ desaturated to full colour — all from `.trip-card.is-soon` in the CSS. What it
 deliberately does *not* do is carry a `tabindex`, so keyboard and screen-reader
 users are never sent looking for a destination that does not exist.
 
-Every fact on it reads TBC, because none of them are decided. `contact.html`
-has a matching `<option>` so people can still register interest.
+Every fact on it reads TBC, because none of them are decided. The contact
+dropdown gets a matching "Egypt — the trip that's in the works" option so
+people can still register interest.
 
-**To make it real:** swap the whole `<article>` for a copy of a Madagascar card
-pointing at the new page, and drop `is-soon` and `trip-card-inner` with it.
+All of that comes from `kind: coming-soon` in `content/trips/egypt.yml`.
+**To make it real:** in Pages CMS, change its type to "Bookable", add its
+dates, and fill in the rest. The card becomes a link and the pages appear.
 
 ## Logo
 
@@ -245,12 +338,15 @@ public. `assets/img/CREDITS.md` lists which photo is used where.
 attribution required. Both show strangers, so they're next in line to be
 replaced.
 
-To swap any image, keep the same filename and update the `width`/`height`
-attributes wherever it appears — they're set explicitly to stop the page
-jumping as images load.
+To swap a photo, pick or upload a different one in Pages CMS. `width` and
+`height` are filled in from the file at build time (they're there to stop the
+page jumping as images load), so nothing else needs changing. Uploads land in
+`assets/img/` with a slugified filename.
 
-Resize to roughly 1400px wide and save as JPEG before committing — the repo
-shouldn't carry 8MB camera files. Images are about 6MB in total.
+The build shrinks anything large (see "What Amanda can edit"), so the live site
+never serves a camera-sized file. The repository still keeps the original,
+though — if it grows uncomfortably, resizing the originals in `assets/img/` is
+safe. Before Pages CMS, images were about 6MB in total.
 
 ## Hero video
 
@@ -337,8 +433,9 @@ attribute on the `<form>`.
 
 "Register your interest" on the trip page links to
 `contact.html?trip=<trip name>`, and `main.js` uses that to pre-select the
-dropdown and pre-fill the message. If you add a trip, add a matching
-`<option>` in `contact.html` so the names line up exactly.
+dropdown and pre-fill the message. Both the link and the dropdown are built
+from the trip files by the same code in `lib/content.js`, so a new trip or date
+lines up on its own.
 
 Taking actual deposits needs a payment provider. Stripe Payment Links are the
 cheapest route and need no backend.
@@ -377,4 +474,13 @@ one token, `--spectrum`.
 AWS hosts the static site in a private S3 bucket behind CloudFront, with Route
 53 DNS and an ACM certificate. The contact form uses API Gateway, Lambda and
 Amazon SES; it does not use a database. See `infrastructure/README.md` for the
-stack and upload commands.
+stacks.
+
+Publishing is the "Publish to live site" workflow — see "Editing and
+publishing" at the top. `infrastructure/deploy-site.ps1` still works as a
+manual fallback: it builds and uploads `_site/`, but doesn't move the `live`
+tag, so move it by hand afterwards
+(`git tag -f live && git push -f origin refs/tags/live`).
+
+The preview on GitHub Pages and the publishing workflows cost nothing on a
+public repository. Pages CMS's hosted app is free.

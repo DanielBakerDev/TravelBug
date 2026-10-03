@@ -1,0 +1,134 @@
+---
+# One page per departure of every "dates" trip in content/trips/.
+pagination:
+  data: departurePages
+  size: 1
+  alias: entry
+permalink: "{{ entry.dep.page }}.html"
+nav: trips
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as ui with context %}
+{% set trip = entry.trip %}
+{% set dep = entry.dep %}
+{% set family = trip.family %}
+{% set pageTitle = trip.name + ', ' + dep.long + ' — Travel Bug Tours' %}
+{% set pageDescription = (trip.description or trip.blurb) | tokens(dep.tokens) %}
+
+{% block main %}
+<section class="hero trip-hero">
+  <div class="hero-media">
+    <img {{ (trip.hero_image or trip.card_image) | img | safe }} alt="" fetchpriority="high">
+  </div>
+  <div class="wrap hero-inner">
+    <div class="trip-hero-meta reveal">
+      <span class="sticker sticker-lime">{{ trip.country }}</span>
+      {%- if dep.spotsLabel %}
+      <span class="sticker sticker-coral">{{ dep.spotsLabel }}</span>
+      {%- endif %}
+      <span class="sticker sticker-white">{{ trip.level }}</span>
+    </div>
+    <h1 class="reveal">{{ ui.highlighted(trip.title, trip.title_highlight) }}</h1>
+    <p class="hero-sub reveal">{% if trip.hero_kicker %}{{ trip.hero_kicker }}<br>{% endif %}
+      <strong>{{ dep.long }}</strong> · {{ trip.length }}{% if trip.priceText %} · from {{ trip.priceText }}{% endif %}</p>
+  </div>
+  {{ ui.wave('wave-white', 'hero') }}
+</section>
+
+<section class="section section-tight">
+  <div class="wrap trip-layout">
+
+    <div class="trip-main">
+      {%- if dep.partSwitch %}
+      {{ ui.partSwitch(trip.country, dep.partSwitch) }}
+      {%- endif %}
+
+      <div class="reveal trip-intro">
+        <h2>The idea</h2>
+        {{ trip.intro | md | safe }}
+      </div>
+      {%- if trip.gallery and trip.gallery.length %}
+
+      <div class="gallery gallery-spaced reveal">
+        {%- for photo in trip.gallery %}
+        <img {{ photo.image | img | safe }} loading="lazy"
+             alt="{{ photo.alt }}">
+        {%- endfor %}
+      </div>
+      {%- endif %}
+      {%- if trip.itinerary and trip.itinerary.length %}
+
+      <h2 class="reveal">Day by day</h2>
+      <ol class="itinerary reveal">
+        {%- for day in trip.itinerary %}
+        <li class="itin-day">
+          <span class="itin-num">{{ loop.index }}</span>
+          <h3>{{ day.title }}</h3>
+          <p>{{ day.text | mdInline | safe }}</p>
+        </li>
+        {%- endfor %}
+      </ol>
+      {%- endif %}
+
+      {% include "included.njk" %}
+    </div>
+
+    <aside class="trip-aside reveal">
+      {{ ui.tripPrice(trip, 'trip-aside-price') }}
+      <ul class="trip-facts">
+        <li><span class="k">Dates</span><span class="v">{{ dep.shortYear }}</span></li>
+        <li><span class="k">Length</span><span class="v">{{ trip.length }}</span></li>
+        <li><span class="k">Group size</span><span class="v">{{ trip.group_size }}</span></li>
+        <li><span class="k">Level</span><span class="v">{{ trip.level }}</span></li>
+        {%- if dep.spotsLabel %}
+        <li><span class="k">Spots left</span><span class="v">{{ 'Fully booked' if dep.full else dep.spots }}</span></li>
+        {%- endif %}
+        {%- if trip.deposit %}
+        <li><span class="k">Deposit</span><span class="v">{{ trip.deposit }}</span></li>
+        {%- endif %}
+      </ul>
+      <a class="btn btn-primary btn-block" href="contact.html?trip={{ dep.enquiry | urlencode }}">{{ 'Join the waiting list' if dep.full else (trip.button_label or 'Request a spot') }}</a>
+      <p class="trip-aside-note">{{ trip.aside_note }}</p>
+      {%- if trip.departures.length > 1 %}
+
+      <div class="other-dates">
+        <p class="other-dates-label">Same trip, other dates</p>
+        <div class="date-chips">
+        {%- for other in trip.departures %}{% if other.page != dep.page %}
+        <a class="date-chip" href="{{ other.url }}">{{ other.shortYear }}</a>
+        {%- endif %}{% endfor %}
+        </div>
+      </div>
+      {%- endif %}
+      {%- for link in [
+        { label: 'Runs straight into', to: dep.next },
+        { label: 'Runs straight on from', to: dep.previous }
+      ] %}{% if link.to %}
+
+      <div class="other-dates">
+        <p class="other-dates-label">{{ link.label }}</p>
+        <div class="date-chips">
+        <a class="date-chip" href="{{ link.to.dep.url }}">{{ link.to.trip.short_name }}, {{ link.to.dep.shortYear }}</a>
+        </div>
+      </div>
+      {%- endif %}{% endfor %}
+    </aside>
+
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-teal', 'ripple') }}
+
+{#- A departure with no partner in the other half (say Part One gets a fourth
+    date and Part Two doesn't) falls back to the plain ending. -#}
+{% if family and dep.window %}
+{{ ui.closing(trip.closing_heading, trip.closing_text | tokens(dep.tokens) | mdInline,
+  { href: family.url, label: 'See the ' + family.short_name },
+  { href: 'trips.html', label: 'All dates' }) }}
+{% else %}
+{{ ui.closing(trip.closing_heading or 'Not quite the right dates?',
+  (trip.closing_text or 'Have a look at what else is open, or just send us a message and ask.') | tokens(dep.tokens) | mdInline,
+  { href: 'trips.html', label: 'See all the dates' },
+  { href: 'contact.html', label: 'Ask us something' }) }}
+{% endif %}
+{% endblock %}

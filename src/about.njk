@@ -1,0 +1,59 @@
+---
+permalink: about.html
+nav: about
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as ui with context %}
+{% set pageTitle = about.seo.title %}
+{% set pageDescription = about.seo.description %}
+
+{% block main %}
+{{ ui.pageHero(about.hero, 'eyebrow-turquoise') }}
+
+<section class="section section-tight">
+  <div class="wrap about-grid is-top">
+    <div class="about-photo reveal">
+      <img {{ about.photo | img | safe }} loading="lazy"
+           alt="{{ about.photo_alt }}">
+    </div>
+    <div class="about-copy reveal">
+      {{ about.story | md | safe }}
+    </div>
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-lilac', 'swell') }}
+
+<section class="section section-lilac">
+  <div class="wrap">
+    <header class="section-head is-centred reveal">
+      <p class="eyebrow eyebrow-tangerine">{{ about.expect.eyebrow }}</p>
+      <h2>{{ about.expect.heading }}</h2>
+    </header>
+    <div class="included">
+      <div class="included-col reveal">
+        <h3>{{ about.expect.good_heading }}</h3>
+        <ul class="tick-list">
+          {%- for line in about.expect.good %}
+          <li>{{ line }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
+      <div class="included-col reveal">
+        <h3>{{ about.expect.bad_heading }}</h3>
+        <ul class="tick-list cross-list">
+          {%- for line in about.expect.bad %}
+          <li>{{ line }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ ui.wave('on-lilac wave-teal', 'ripple') }}
+
+{{ ui.closing(about.closing.heading, about.closing.text | escape,
+  { href: 'trips.html', label: 'See upcoming trips' },
+  { href: 'contact.html', label: 'Ask us something' }) }}
+{% endblock %}

@@ -1,0 +1,99 @@
+---
+permalink: contact.html
+nav: contact
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as ui with context %}
+{% set pageTitle = contact.seo.title %}
+{% set pageDescription = contact.seo.description %}
+
+{% block main %}
+{{ ui.pageHero(contact.hero, 'eyebrow-sunshine') }}
+
+<section class="section section-tight">
+  <div class="wrap wrap-narrow">
+    <header class="section-head reveal">
+      <p class="eyebrow" id="tripPrefillNote">Enquiries</p>
+      <h2>{{ contact.form.heading }}</h2>
+      <p class="lede">{{ contact.form.text }}</p>
+    </header>
+
+    <div class="form-card reveal">
+      <form id="inquiryForm" novalidate>
+        <div class="field-row">
+          <p class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </p>
+          <p class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </p>
+        </div>
+
+        <div class="field-row">
+          <p class="field">
+            <label for="f-trip">Which trip?</label>
+            {#- Built from the trip files, so it always lists every departure and
+                matches the "Request a spot" links exactly. -#}
+            <select id="f-trip" name="trip">
+              <option value="">Not sure yet</option>
+              {%- for entry in enquiryOptions %}
+              {%- if entry.group %}
+              <optgroup label="{{ entry.group }}">
+                {%- for option in entry.options %}
+                <option>{{ option }}</option>
+                {%- endfor %}
+              </optgroup>
+              {%- else %}
+              <option>{{ entry.option }}</option>
+              {%- endif %}
+              {%- endfor %}
+              <option>A future trip — tell me what's coming up</option>
+              <option>A past trip I'd like to see run again</option>
+            </select>
+          </p>
+          <p class="field">
+            <label for="f-people">How many of you?</label>
+            <input id="f-people" name="people" type="text" placeholder="e.g. just me">
+          </p>
+        </div>
+
+        <p class="field">
+          <label for="f-msg">Anything else</label>
+          <textarea id="f-msg" name="message" rows="6"
+            placeholder="What you're hoping for, anything you're unsure about, dietary or mobility things I should know."></textarea>
+        </p>
+
+        <p class="sr-only" aria-hidden="true">
+          <label for="f-website">Website</label>
+          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </p>
+
+        <button class="btn btn-primary btn-block" type="submit">Send enquiry</button>
+        <p class="form-note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-cream', 'swell') }}
+
+<section class="section section-cream">
+  <div class="wrap wrap-narrow">
+    <header class="section-head is-centred reveal">
+      <p class="eyebrow eyebrow-coral">{{ contact.faq.eyebrow }}</p>
+      <h2>{{ contact.faq.heading }}</h2>
+    </header>
+
+    <div class="faq reveal">
+      {%- for item in contact.faq.questions %}
+      <details>
+        <summary>{{ item.question }}</summary>
+        <p>{{ item.answer }}</p>
+      </details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

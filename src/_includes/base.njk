@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDescription }}">
+<meta name="theme-color" content="#00BFA6">
+{%- if site.hide_from_search or isPreview %}
+<meta name="robots" content="noindex">
+{%- endif %}
+{%- if shareDescription %}
+
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ shareDescription }}">
+<meta property="og:type" content="website">
+{%- endif %}
+
+<link rel="icon" href="assets/img/favicon.png" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+{%- if isPreview %}
+
+<p class="preview-banner">Preview — this isn't the real website yet. Daniel puts it live.</p>
+{%- endif %}
+
+{%- macro navLink(href, key, label, cls) %}
+      <a{% if cls %} class="{{ cls }}"{% endif %} href="{{ href }}"{% if nav == key %} aria-current="page"{% endif %}>{{ label }}</a>
+{%- endmacro %}
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/img/logo-lockup.png" width="640" height="379"
+           alt="Travel Bug Tours" fetchpriority="high">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      {{- navLink('index.html', 'home', 'Home') }}
+      {{- navLink('trips.html', 'trips', 'Trips') }}
+      {{- navLink('past-journeys.html', 'past', 'Past journeys') }}
+      {{- navLink('about.html', 'about', 'About') }}
+      {{- navLink('contact.html', 'contact', 'Get in touch', 'btn btn-sm btn-primary') }}
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+{% block main %}{% endblock %}
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand-lockup" href="index.html">
+        <img src="assets/img/logo-lockup.png" width="640" height="379" loading="lazy"
+             alt="Travel Bug Tours">
+      </a>
+      <p>{{ site.footer_tagline }}</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="trips.html">Trips</a>
+      <a href="past-journeys.html">Past journeys</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="footer-social">
+      {%- if site.instagram %}
+      <a href="{{ site.instagram }}" rel="me noopener" target="_blank">Instagram</a>
+      {%- endif %}
+      {%- if site.tiktok %}
+      <a href="{{ site.tiktok }}" rel="me noopener" target="_blank">TikTok</a>
+      {%- endif %}
+      <a href="mailto:{{ site.email }}">Email us</a>
+    </div>
+  </div>
+  <div class="wrap footer-base">
+    <p>&copy; <span id="year">2026</span> Travel Bug Tours.</p>
+    <p>{{ site.footer_note }}</p>
+  </div>
+</footer>
+
+{%- if nav == 'contact' %}
+<script src="assets/js/config.js"></script>
+{%- endif %}
+<script src="assets/js/main.js"></script>
+</body>
+</html>

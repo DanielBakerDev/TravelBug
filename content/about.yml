@@ -1,0 +1,59 @@
+seo:
+  title: About Amanda — Travel Bug Tours
+  description: Who runs Travel Bug Tours, why the groups are capped at fifteen, and what the trips are actually like.
+
+hero:
+  image: /assets/img/band-summit.jpg
+  eyebrow: About
+  title: Hi — I'm Amanda
+  text: We run 4–6 departures a year, and there's a tour leader on every one of them.
+
+photo: /assets/img/amanda.jpg
+photo_alt: Amanda in a sun hat and hiking gear, striking a pose on a trip
+
+story: |-
+  ## How this started
+
+  On a major cross-continent trip 10 years ago, I met my travel soulmates. Each year since the Mongol Rally in 2016, I have been organizing super adventurous trips for our friends & friends of friends.
+
+  With our group forever expanding, and more bucket list destinations to tick off, we decided to put together a lil company and invite others along to have the time of their lives.
+
+  ## Why fifteen people
+
+  We love a small group! We want you to walk away with a new group of adventure buddies, and fifteen is about the largest number where that still happens — everyone still fits round one table, and nobody spends the trip waiting on a coach.
+
+  It also means we can say yes to places that don't work at scale: the guesthouse with six rooms, the family that cooks for you, the permit that's capped.
+
+  ## Our concept
+
+  Think remote villages, grassroots projects, dynamic hikes, canoeing, ethical animal trekking, dancing with some locals, & so much more.
+
+  Some of our adventures take us off the tourist track and into the complete unknown. We set up a video call to give you more fine details about the program, and make sure you are a match for the group you will be paired with.
+
+  People come solo more often than not, and we don't charge a single supplement for a shared room.
+
+  ## Where the money goes
+
+  We are currently only partnering with local-owned and run hotels, local park guides, and local drivers. In a major goal to spread our money throughout the villages, we hire a number of hiking guides for the national park, and are working to expand our networks so we may help local communities sustain their own businesses.
+
+  One of our project goals is to work with more women-led businesses, giving them the autonomy they deserve to create successful organizations, knowing their work and guidance will nurture entire villages.
+
+expect:
+  eyebrow: The short version
+  heading: What you can expect
+  good_heading: You'll get on with this if…
+  good:
+    - You've travelled a fair bit and want the logistics gone
+    - You're happy eating with the rest of the group most nights
+    - You'd rather walk into a place than be driven past it
+    - You're coming alone and that's fine by you
+  bad_heading: Probably not for you if…
+  bad:
+    - You want a fixed schedule with no unplanned time
+    - You'd prefer a private trip just for your group
+    - Five-star everything is the point of the holiday
+    - You need to be back at the hotel by six
+
+closing:
+  heading: Fancy coming along?
+  text: Have a look at what's open, or just send us a message and ask.

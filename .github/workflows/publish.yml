@@ -1,0 +1,78 @@
+# Puts the current main branch on the live site, https://exploretravelbugtours.com/
+#
+# Run by hand from the Actions tab ("Publish to live site" -> Run workflow) or
+# with `gh workflow run publish.yml`. Before running it, check the preview and
+# what changed since the last publish:
+#   https://github.com/DanielBakerDev/TravelBug/compare/live...main
+#
+# Needs three repository variables (Settings -> Secrets and variables ->
+# Actions -> Variables), all from infrastructure/:
+#   AWS_PUBLISH_ROLE_ARN   PublishRoleArn output of github-publish.yaml
+#   AWS_BUCKET             WebsiteBucketName output of hosting.yaml
+#   AWS_DISTRIBUTION_ID    DistributionId output of hosting.yaml
+name: Publish to live site
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to move the `live` tag
+  id-token: write   # to sign in to AWS without stored keys
+  issues: write     # to close "ready for review" issues
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # Only main is ever published, whichever branch the button was pressed on.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # The AWS role only trusts jobs in this environment.
+    environment:
+      name: live
+      url: https://exploretravelbugtours.com/
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_PUBLISH_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Upload to S3
+        run: aws s3 sync _site "s3://${{ vars.AWS_BUCKET }}" --delete
+      - name: Clear the CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id "${{ vars.AWS_DISTRIBUTION_ID }}" --paths '/*'
+
+      # `live` always points at what's on the live site, so live...main is
+      # exactly what the next publish will change.
+      - name: Mark this commit as live
+        run: |
+          git tag -f live
+          git push -f origin refs/tags/live
+
+      - name: Close review requests
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const open = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'ready-for-review',
+            });
+            for (const issue of open.data) {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: issue.number,
+                body: `Published to https://exploretravelbugtours.com/ from ${context.sha.slice(0, 7)}.`,
+              });
+              await github.rest.issues.update({
+                owner, repo, issue_number: issue.number, state: 'closed', state_reason: 'completed',
+              });
+            }

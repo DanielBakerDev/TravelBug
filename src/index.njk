@@ -1,0 +1,135 @@
+---
+permalink: index.html
+nav: home
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as ui with context %}
+{% set pageTitle = home.seo.title %}
+{% set pageDescription = home.seo.description %}
+{% set shareDescription = home.seo.share_description %}
+
+{% block main %}
+<!-- ================================= HERO ================================= -->
+<section class="hero is-home">
+  <!-- Poster image paints first; main.js fades the clips in over it once they
+       can play. Two <video> elements so one can buffer while the other shows.
+       Skipped entirely for reduced-motion or data-saver — see main.js.
+       The poster is the first frame of the first clip, cropped identically,
+       so the fade from still to moving picture doesn't visibly jump. -->
+  <div class="hero-media">
+    <img src="assets/img/hero-poster.jpg" width="1600" height="900" alt="" fetchpriority="high">
+    <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+  </div>
+  <p class="hero-caption" id="heroCaption" aria-hidden="true"></p>
+  <div class="wrap hero-inner">
+    <p class="eyebrow reveal">{{ home.hero.eyebrow }}</p>
+    <h1 class="reveal">{{ home.hero.title }}<br><em>{{ home.hero.title_highlight }}</em></h1>
+    <p class="hero-sub reveal">{{ home.hero.text }}</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="#trips">See upcoming trips</a>
+      <a class="btn btn-ghost-light" href="#how">How it works</a>
+    </div>
+  </div>
+  {{ ui.wave('wave-white', 'hero') }}
+</section>
+
+<!-- =============================== TRIPS ================================= -->
+<section class="section" id="trips">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="eyebrow eyebrow-coral">{{ home.trips.eyebrow }}</p>
+      <h2>{{ home.trips.heading }} <span class="squiggle">{{ home.trips.heading_highlight }}</span></h2>
+      <p class="lede">{{ home.trips.text }}</p>
+    </header>
+
+{{ ui.tripGrid(trips) }}
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-cream', 'swell') }}
+
+<!-- ============================= HOW IT WORKS ============================= -->
+<section class="section section-cream" id="how">
+  <div class="wrap">
+    <header class="section-head is-centred reveal">
+      <p class="eyebrow eyebrow-turquoise">{{ home.how.eyebrow }}</p>
+      <h2>{{ home.how.heading }}</h2>
+      <p class="lede">{{ home.how.text | mdInline | safe }}</p>
+    </header>
+
+    <ol class="steps">
+      {%- for step in home.how.steps %}
+      <li class="step reveal">
+        <span class="step-num">{{ loop.index }}</span>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.text | mdInline | safe }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+{{ ui.wave('on-cream wave-grape', 'ripple') }}
+
+<!-- =============================== NUMBERS =============================== -->
+<section class="section section-grape">
+  <div class="wrap">
+    <header class="section-head is-centred reveal">
+      <p class="eyebrow">{{ home.numbers.eyebrow }}</p>
+      <h2>{{ home.numbers.heading }}</h2>
+      <p class="lede">{{ home.numbers.text }}</p>
+    </header>
+
+    <ul class="stats reveal">
+      {%- for stat in home.numbers.stats %}
+      <li><span class="stat-num">{{ stat.number }}</span><span class="stat-label">{{ stat.label }}</span></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+{{ ui.wave('on-grape wave-white', 'chop') }}
+
+<!-- ================================ ABOUT ================================ -->
+<section class="section">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal">
+      <img {{ home.about.photo | img | safe }} loading="lazy"
+           alt="{{ home.about.photo_alt }}">
+    </div>
+    <div class="about-copy reveal">
+      <p class="eyebrow eyebrow-tangerine">{{ home.about.eyebrow }}</p>
+      <h2>{{ home.about.heading }}</h2>
+      {{ home.about.text | md | safe }}
+      <a class="btn btn-primary" href="about.html">More about me</a>
+    </div>
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-blush', 'roll') }}
+
+<!-- ============================= TESTIMONIALS ============================= -->
+<section class="section section-blush">
+  <div class="wrap">
+    <header class="section-head is-centred reveal">
+      <p class="eyebrow eyebrow-sunshine">{{ home.reviews.eyebrow }}</p>
+      <h2>{{ home.reviews.heading }}</h2>
+    </header>
+
+    <div class="quotes">
+      {%- for q in home.reviews.quotes %}
+      <figure class="quote reveal">
+        <blockquote>{{ q.quote }}</blockquote>
+        <figcaption>{{ q.by }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{{ ui.wave('on-blush wave-teal', 'drift') }}
+
+<!-- ============================== NEWSLETTER ============================== -->
+{{ ui.newsletter(home.newsletter) }}
+{% endblock %}

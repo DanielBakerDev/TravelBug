@@ -1,0 +1,106 @@
+name: Madagascar Part One
+order: 1
+kind: dates
+country: Madagascar
+card_label: Madagascar — Part One
+short_name: Part One
+hero_kicker: Experience Madagascar Part One
+title: Lemurs, Baobabs, & Canoeing the Wild Tsiribihina
+title_highlight: Canoeing the Wild Tsiribihina
+blurb: Rainforest lemurs, the Avenue of the Baobabs at sunset, and a slow run down through the highlands to the coast. We canoe, wild camp, drive, hike, climb, and dance our way from the capital to the West Coast.
+level: Adventurous
+length: 10 days
+route: Tana to Morondava
+price_eur: 2400
+price_gbp: 2060
+deposit: €500
+group_size: Max 15
+card_image: /assets/img/trip-madagascar.jpg
+card_image_alt: The group watching the sun set behind the Avenue of the Baobabs in Madagascar
+hero_image: /assets/img/trip-madagascar.jpg
+description: Ten days in Madagascar, {dates}. Canoe the Tsiribihina, climb the Tsingy de Bemaraha, and finish at the Avenue of the Baobabs. Max 15 people, from €2,400 / £2,060.
+
+departures:
+  - start: "2027-06-30"
+    end: "2027-07-09"
+    spots_left: 8
+    page: trip-madagascar-jun2027
+  - start: "2027-07-20"
+    end: "2027-07-29"
+    spots_left: 8
+    page: trip-madagascar-jul2027
+  - start: "2027-08-10"
+    end: "2027-08-19"
+    spots_left: 8
+    page: trip-madagascar-aug2027
+
+intro: |-
+  The stunning landscapes of Madagascar are not for the weak — there is little infrastructure, few roads, and no other group tour companies operating. 90% of Madagascar's mammals, plants & reptiles cannot be found anywhere else on Earth, and it is one of 17 of the most biodiverse countries on the planet, so there is so much to see.
+
+  With 112 lemur species, colourful chameleons, and baobabs that look like somebody planted them upside down, we traverse across great distances to show you the unique diversity. This tour is active and dynamic — you will be canoeing across the windy Tsiribihina River, camping under the stars, hiking & climbing the jagged rocks of a UNESCO World Heritage national park, animal spotting during the night, and riding through Madagascar's most famous site: the Avenue of the Baobabs.
+
+  We have a few options for you:
+
+  - **Experience Madagascar Part One: Lemurs, Baobabs, & Canoeing the Wild Tsiribihina** — starting in the capital (Tana), and finishing in Morondava on the west coast.
+  - **Experience Madagascar Part Two: Coast, Canyons, Climbing, & Rainforest** — continues from Morondava, south to Ifaty, and we cover the southern section from canyons to rainforest, finishing back in the capital.
+
+  You may do Part One, Part Two, or the whole **Experience Madagascar Grand Tour**.
+
+gallery:
+  - image: /assets/img/mad-1-lemur.jpg
+    alt: A traveller beside a lemur perched on a rail in the forest
+  - image: /assets/img/mad-2-cave.jpg
+    alt: A local guide sitting inside a sunlit limestone cave
+  - image: /assets/img/mad-3-baobab.jpg
+    alt: Two travellers riding on the roof rack of a 4x4 beneath the baobabs
+  - image: /assets/img/mad-4-canoe.jpg
+    alt: The group spread across pirogues on the Tsiribihina River
+
+itinerary:
+  - title: Antananarivo
+    text: Land, we pick you up from the airport, let you check-in, shower, relax a bit. Then we have our first meal and welcome drinks as a team.
+  - title: Lake Tritiva & Antsirabe
+    text: Morning drive, group lunch, then a loop of the beautiful Lake Tritiva. Join us tonight for drinks & a boogie in town.
+  - title: The Highlands & Miandrivazo
+    text: Say goodbye to roads and cities, we head west into the small-villaged highlands, where the desert meets the river. Afternoon of fun in the sun, in one of Madagascar's warmest areas.
+  - title: Canoe Adventure on the Tsiribihina
+    text: Our first day on the river takes us into the depths of Madagascar, where few get to roam. We pass rural villages, wild lemurs, refreshing with a waterfall swim before setting up camp under the stars.
+  - title: Tsiribihina River
+    text: Today, the landscape begins to change from highlands to jungle, and back to plains and small-village fishing with rice paddies. Our relaxing day takes us past one of the most remote areas of the country, before enjoying dinner, music, and dance by firelight.
+  - title: Belo Sur Tsiribihina
+    text: "We love an adventure, and today we pivot from canoe to 4x4, and onto Madagascar's most interesting self-made transport system: the floating barge boat. Our 4x4s cruise north to the plains, where roads and infrastructure cease to exist, yet the views remain exhilarating."
+  - title: Tsingy de Bemaraha
+    text: Today we hike and via ferrata our way through the UNESCO World Heritage National Park's most jagged landscapes. We traverse between caves, rocks that you could mistake for a moon landing, and dense forests with species of lemurs and birds found only in this park.
+  - title: Kirindy National Park
+    text: "Using our final barge boats, we head south into the best-preserved and best-researched national park in Madagascar: Kirindy. A night hike with an expert guide allows us to see the nocturnal lemurs in action & view the baobabs through a star-studded canopy."
+  - title: Avenue of the Baobabs
+    text: "After a morning walk waking up amongst the playful daytime lemurs, we climb atop our 4x4s, floating under the baobab branches and into one of the best-known sites in Madagascar: Avenue de Baobabs. The brave will taste the rum and fruit from the trees, and the team will enjoy a whole afternoon in the park before heading into Morondava for drinks and a night out."
+  - title: Departure Day or Travel South for Part Two
+    text: "For those finishing up in Madagascar, you may have a day on the coast at your leisure. For those continuing to the South: **Part Two Madagascar: Coast, Canyons, & Rainforest**, the group flies to Tulear, ending up in Ifaty for an afternoon on the stunning beaches & to meet their new team members."
+
+included:
+  - Tour leader with you for the whole trip
+  - Airport pick-up to the group hotel
+  - Local tour, national park & climbing guides
+  - Trip photographer
+  - Eco lodges & hotels, local-owned and locally run
+  - "All activities: canoeing, camping, hiking and the rest"
+  - Drivers, transport & fuel
+  - National park permits & entrance fees
+  - Internal flights
+  - All breakfasts & most dinners
+  - Tips & gratuities
+  - Packing list & support
+
+not_included:
+  - International flights
+  - Travel insurance (required)
+  - Lunches
+  - Your visa (online, or on arrival in the capital)
+  - "Personal items: SIM card, laundry, alcohol"
+  - Optional single room supplement
+
+aside_note: No payment taken here — we'll set up a video call and go through the detail with you.
+
+closing_heading: Carry on south?
+closing_text: This trip finishes in Morondava on {end}. Part Two flies south the same morning, so the two run together as **{combined-dates}** — 19 days, coast to coast.

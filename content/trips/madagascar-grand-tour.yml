@@ -1,0 +1,63 @@
+name: Madagascar Grand Tour
+order: 3
+kind: combined
+parts:
+  - madagascar-part-one
+  - madagascar-part-two
+page: trip-madagascar-grand
+country: Madagascar
+card_label: Madagascar — Grand Tour
+short_name: Grand Tour
+badge: Both halves
+hero_kicker: Experience Madagascar, end to end
+title: The Grand Tour
+title_highlight: Grand Tour
+card_title: The whole island, end to end
+blurb: Part One and Part Two run back to back, with the changeover built in. West coast baobabs, then south through the canyons and the rainforest, and back to the capital. One group, one leader, nineteen days.
+level: Adventurous
+length: 19 days
+route: Tana to Tana
+price_eur: 5200
+price_gbp: 4485
+deposit: €500
+group_size: Max 15
+card_image: /assets/img/mad-3-baobab.jpg
+card_image_alt: Two travellers riding on the roof rack of a 4x4 beneath the baobabs
+hero_image: /assets/img/trip-madagascar.jpg
+description: "Both halves of Madagascar back to back: 19 days from the capital to the west coast, then south through the canyons and rainforest. Three departures in 2027, max 15 people, from €5,200 / £4,485."
+
+intro: |-
+  The Grand Tour is not a third trip. It is Part One and Part Two run back to back, and the two are built to dovetail: Part One finishes in Morondava on the morning Part Two flies south from the capital. Same group, same tour leader, one continuous run.
+
+  Part One takes you from Tana west through the highlands, down the Tsiribihina by canoe, over the jagged rocks of the Tsingy and out to the Avenue of the Baobabs. Part Two picks up on the south-west coast at Ifaty and works back north through the canyons, the climbing at Tsaranoa and the Ranomofana rainforest, finishing back in the capital.
+
+  Nineteen days rather than twenty, because the changeover day belongs to both halves.
+
+windows_text: Each Part One departure runs straight into a Part Two departure. Pick a window and you are booked on both; pick a single row above or below and you are doing half the island.
+itinerary_text: "The full nineteen days are the two itineraries in sequence. They live on their own pages so each stays readable:"
+
+included:
+  - Tour leader with you for the whole trip
+  - Airport pick-up to the group hotel
+  - Local tour, national park & climbing guides
+  - Trip photographer
+  - Eco lodges & hotels, local-owned and locally run
+  - "All activities: canoeing, camping, hiking and the rest"
+  - Drivers, transport & fuel
+  - National park permits & entrance fees
+  - Internal flights
+  - All breakfasts & most dinners
+
+not_included:
+  - International flights
+  - Travel insurance (required)
+  - Lunches
+  - Your visa (online, or on arrival in the capital)
+  - "Personal items: SIM card, laundry, alcohol"
+  - Optional single room supplement
+
+button_label: Ask about the Grand Tour
+aside_note: Price is Part One plus Part Two. Confirm it with us on the video call before you commit to anything.
+
+closing_heading: Nineteen days is a lot
+closing_text: If that is more than you have, either half stands on its own — ten days, and you will not feel like you missed the trip.

@@ -1,0 +1,89 @@
+seo:
+  title: Past journeys — Travel Bug Tours
+  description: Trips Travel Bug Tours has already run — Antarctica, Patagonia, Egypt, Uganda, Rwanda, Burundi, Uzbekistan, Guyana and more.
+
+hero:
+  image: /assets/img/past-antarctica.jpg
+  eyebrow: Been there
+  title: Past journeys
+  text: Trips that have already run. Several of these come back round every couple of years — say the word if one of them is calling.
+
+journeys:
+  - name: Antarctica
+    photo: /assets/img/past-antarctica.jpg
+    photo_alt: The group in expedition jackets standing on the ice in Antarctica
+  - name: Patagonia, Chile
+    photo: /assets/img/past-patagonia.jpg
+    photo_alt: The group posing in front of a glacier and snowfield in Chilean Patagonia
+  - name: Egypt
+    photo: /assets/img/past-egypt.jpg
+    photo_alt: A traveller on a quad bike in the desert with the pyramids of Giza behind
+  - name: Uganda
+    photo: /assets/img/past-uganda.jpg
+    photo_alt: The group larking about under a painted sign marking the equator in Uganda
+  - name: Rwanda
+    photo: /assets/img/past-rwanda.jpg
+    photo_alt: Two travellers walking above a green crater lake in the Rwandan hills
+  - name: Burundi
+    photo: /assets/img/past-burundi.jpg
+    photo_alt: Drummers in red and green robes performing outside a thatched hut in Burundi
+  - name: Bulgaria — ski & snowboard
+    photo: /assets/img/past-bulgaria.jpg
+    photo_alt: Skiers and a snowboarder on a tree-lined piste in Bulgaria
+  - name: Norway — Northern Lights
+    photo: /assets/img/past-norway.jpg
+    photo_alt: The group lined up in the snow under a green aurora in Norway
+  - name: Slovenia
+    photo: /assets/img/past-slovenia.jpg
+    photo_alt: Three travellers on a viewpoint above the rooftops of a Slovenian city
+  - name: Montenegro
+    photo: /assets/img/past-montenegro.jpg
+    photo_alt: The group messing about on the waterfront at Perast, Montenegro
+  - name: Bosnia
+    photo: /assets/img/past-bosnia.jpg
+    photo_alt: Two travellers in front of the old bridge at Mostar, Bosnia
+  - name: London & the UK
+    photo: /assets/img/past-uk.jpg
+    photo_alt: A large group photo in front of Buckingham Palace in London
+  - name: Greece
+    photo: /assets/img/past-greece.jpg
+    photo_alt: Five travellers dressed up on a Greek beach at dusk
+  - name: Italy
+    photo: /assets/img/past-italy.jpg
+    photo_alt: Four travellers taking a photo together at the Trevi Fountain in Rome
+  - name: China
+    photo: /assets/img/past-china.jpg
+    photo_alt: The group on a section of the Great Wall of China winding over the hills
+  - name: Summer Olympics, Paris
+    photo: /assets/img/past-olympics.jpg
+    photo_alt: The group in a stadium crowd with the Eiffel Tower behind at sunset
+  - name: Euros, Germany
+    photo: /assets/img/past-euros.jpg
+    photo_alt: Travellers with painted faces and flags in a packed football stadium
+  - name: Uzbekistan
+    photo: /assets/img/past-uzbekistan.jpg
+    photo_alt: The group in traditional white hats in front of tiled architecture in Uzbekistan
+  - name: Oktoberfest, Munich
+    photo: /assets/img/past-oktoberfest.jpg
+    photo_alt: Travellers in dirndl and lederhosen raising beer steins at Oktoberfest
+  - name: Tunisia
+    photo: /assets/img/past-tunisia.jpg
+    photo_alt: The desert film set of domed buildings used for Star Wars in Tunisia
+  - name: Tomorrowland, Belgium
+    photo: /assets/img/past-tomorrowland.jpg
+    photo_alt: The group in front of the main stage at Tomorrowland festival in Belgium
+  - name: Austria
+    photo: /assets/img/past-austria.jpg
+    photo_alt: Travellers sitting on a bench at a viewpoint above an Austrian city
+  - name: Guyana
+    photo: /assets/img/past-guyana.jpg
+    photo_alt: Kaieteur Falls dropping into the rainforest gorge in Guyana
+
+notes:
+  - "Also on the list: the Winter Olympics in Italy, Trinidad & Tobago, Kazakhstan, Mongolia, and Paraguay & Uruguay."
+  - Want one of these to run again? [Tell us which](contact.html) — enough interest and it goes back on the calendar.
+
+newsletter:
+  eyebrow: Stay in the loop
+  heading: Hear about the next one first
+  text: Repeat departures are usually offered to past travellers and the mailing list before anyone else.

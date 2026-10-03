@@ -1,0 +1,72 @@
+seo:
+  title: Travel Bug Tours — Small-group, big adventures, & far-off destinations.
+  description: Small-group adventure tours to Madagascar, Antarctica, Uganda, Rwanda, Burundi, & more. Max 15 people, everything organized, guide and like-minded travellers bring the fun.
+  share_description: Big trips, small groups. Max 15 people, one guide, everything organized.
+
+hero:
+  eyebrow: Small-group adventures
+  title: Big trips,
+  title_highlight: small groups.
+  text: I'm Amanda. I run a handful of trips a year to some crazy, adventurous places! Max. 15 people, all-organized, all you have to do is sign up for a video call to ensure this trip is the one for you.
+
+trips:
+  eyebrow: Upcoming adventures
+  heading: Where to
+  heading_highlight: next?
+  text: Madagascar in two halves, on three dates each — take one half or run them back to back. Maximum 15 explorers, & they fill up fast. Don't miss your chance to join a dynamic group trip.
+
+how:
+  eyebrow: How it works
+  heading: Four steps and you're on the plane
+  text: Some of our adventures take us off the tourist track and into the complete unknown. We set up a video call to give you more fine details about the program, and make sure you are a match for the group you will be paired with. Interested? [Fill in this form](contact.html) to set up your call.
+  steps:
+    - title: Choose your adventure.
+      text: Read the day-by-day and see if the tour suits you, then [fill in this form](contact.html) to nab your video call with a team member.
+    - title: Keep your spot!
+      text: A 500 euro deposit reserves your spot. The full balance is due three months before our tour begins.
+    - title: I do the boring stuff.
+      text: I book accommodation, internal transport, park permits, local flights & restaurants. I hire tour guides, drivers, local park guides, a photographer, and climbing guides to ensure you have a great adventure.
+    - title: We adventure!
+      text: A small yet mighty group, one guide, and a group chat that stays annoyingly active long after everyone's home. Lifelong memories, and a whole load of photos and videos to look back at when you're home.
+
+numbers:
+  eyebrow: So far
+  heading: A small operation, with a big purpose.
+  text: We love a small group! We want you to walk away with a new group of adventure buddies.
+  stats:
+    - number: "19"
+      label: trips run
+    - number: "28"
+      label: countries
+    - number: "112"
+      label: travellers
+    - number: 68%
+      label: have come back again
+
+about:
+  photo: /assets/img/amanda.jpg
+  photo_alt: Amanda in a sun hat and hiking gear, striking a pose on a trip
+  eyebrow: About
+  heading: Hey there, I'm Amanda
+  text: |-
+    On a major cross-continent trip 10 years ago, I met my travel soulmates. Each year since the Mongol Rally in 2016, I have been organizing super adventurous trips for our friends & friends of friends. With our group forever expanding, and more bucket list destinations to tick off, we decided to put together a lil company and invite others along to have the time of their lives.
+
+    We run 4–6 departures a year, led by a fantastic tour leader that organizes everything for you. Without worries, you get to sit back, relax, get involved in all group activities, & enjoy all the sights. Each day is an adventure with like-minded explorers who are keen for daily adventure.
+
+    Our group members are mostly well-travelled, but do not have the time to worry about logistics.
+
+reviews:
+  eyebrow: Kind words
+  heading: From people who came along
+  quotes:
+    - quote: I booked on my own and spent the first evening quietly panicking about it. By day three I forgot what I was ever worried about. Loved the group dynamic, we still talk every day.
+      by: Rachel B. — Patagonia, 2025
+    - quote: Amanda had a plan B for the weather, and then a plan C. We used both and it was still the best week of my year.
+      by: Marcus & Jo — Egypt, 2026
+    - quote: Fourteen strangers on day one. There's still a group chat and someone's organising a reunion. Can't wait for another trip!
+      by: Priya R. — Madagascar, 2025
+
+newsletter:
+  eyebrow: First refusal
+  heading: Trips go to the list first
+  text: New departures go out by email a fortnight before they're announced here. That's usually when the good spots go.

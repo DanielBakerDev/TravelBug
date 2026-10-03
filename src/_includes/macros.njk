@@ -1,0 +1,161 @@
+{#- Shared pieces of markup. Import with:
+    {% import "macros.njk" as ui with context %} -#}
+
+{#- The six wave outlines. Which one sits where is a design choice, so they
+    are named by shape rather than by colour. -#}
+{% macro wave(classes, shape) -%}
+{%- set paths = {
+  hero:   "M0,48 C180,96 360,8 540,36 C720,64 900,4 1080,32 C1260,60 1380,30 1440,20 L1440,90 L0,90 Z",
+  swell:  "M0,40 C200,4 380,72 560,44 C740,16 920,72 1100,50 C1280,28 1380,44 1440,54 L1440,90 L0,90 Z",
+  ripple: "M0,52 C160,20 340,64 520,44 C700,24 880,68 1060,48 C1240,28 1380,50 1440,40 L1440,90 L0,90 Z",
+  chop:   "M0,36 C180,68 360,12 540,40 C720,68 900,16 1080,44 C1260,72 1380,40 1440,30 L1440,90 L0,90 Z",
+  roll:   "M0,44 C200,12 380,66 560,46 C740,26 920,70 1100,46 C1280,22 1380,42 1440,50 L1440,90 L0,90 Z",
+  drift:  "M0,50 C160,18 340,62 520,42 C700,22 880,66 1060,46 C1240,26 1380,48 1440,38 L1440,90 L0,90 Z"
+} -%}
+<div class="wave {{ classes }}" aria-hidden="true">
+  <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="{{ paths[shape] }}"/></svg>
+</div>
+{%- endmacro %}
+
+{#- The photo header on every inner page. -#}
+{% macro pageHero(hero, eyebrowClass) -%}
+<section class="hero page-hero">
+  <div class="hero-media">
+    <img {{ hero.image | img | safe }} alt="" fetchpriority="high">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow {{ eyebrowClass }} reveal">{{ hero.eyebrow }}</p>
+    <h1 class="reveal">{{ hero.title }}</h1>
+    <p class="hero-sub reveal">{{ hero.text }}</p>
+  </div>
+  {{ wave('wave-white', 'hero') }}
+</section>
+{%- endmacro %}
+
+{#- A heading with its last few words picked out, e.g. "Lemurs, Baobabs, &
+    <em>Canoeing the Wild Tsiribihina</em>". If the highlight isn't the end
+    of the heading it is simply left off, rather than garbling the text. -#}
+{% macro highlighted(text, highlight, tag = 'em') -%}
+{%- set text = text or '' -%}
+{%- if highlight and text.endsWith(highlight) -%}
+{{ text.slice(0, text.length - highlight.length) }}<{{ tag }}>{{ highlight }}</{{ tag }}>
+{%- else -%}
+{{ text }}
+{%- endif -%}
+{%- endmacro %}
+
+{#- Part One / Part Two / Grand Tour, at the top of each Madagascar page. -#}
+{% macro partSwitch(country, links) -%}
+<nav class="part-switch reveal" aria-label="{{ country }} trips">
+        {%- for link in links %}
+        <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.label }}</a>
+        {%- endfor %}
+      </nav>
+{%- endmacro %}
+
+{% macro tripPrice(trip, cls) -%}
+{%- if trip.priceText -%}
+<p class="{{ cls }}{% if '/' in trip.priceText %} is-dual{% endif %}"><span>from</span>{{ trip.priceText }}</p>
+{%- else -%}
+<p class="{{ cls }}"><span>price</span>TBC</p>
+{%- endif -%}
+{%- endmacro %}
+
+{#- One card in the Home and Trips grids. A coming-soon trip has no page, so
+    its card is not a link — see "The Egypt card" in the README. -#}
+{% macro tripCard(trip) -%}
+{%- set soon = trip.kind == 'coming-soon' -%}
+      <article class="trip-card{% if trip.kind == 'combined' %} is-grand{% endif %}{% if soon %} is-soon{% endif %} reveal">
+        {% if soon %}<div class="trip-card-inner">{% else %}<a href="{{ trip.url }}">{% endif %}
+          <div class="trip-card-media">
+            <img {{ trip.card_image | img | safe }} loading="lazy"
+                 alt="{{ trip.card_image_alt }}">
+            {%- if trip.badgeText %}
+            <span class="sticker sticker-{{ trip.badgeColour }} sticker-tilt">{{ trip.badgeText }}</span>
+            {%- endif %}
+            <span class="trip-card-level">{{ trip.level }}</span>
+          </div>
+          <div class="trip-card-body">
+            <p class="trip-card-where">{{ trip.card_label }}</p>
+            <h3>{{ trip.cardTitle }}</h3>
+            <p class="trip-card-blurb">{{ trip.blurb }}</p>
+            <ul class="trip-card-meta">
+              {%- if soon %}
+              <li>Dates to be confirmed</li>
+              <li>{{ trip.length or 'Length to be confirmed' }}</li>
+              {%- else %}
+              <li>{{ trip.length }}</li>
+              <li>{{ trip.route }}</li>
+              {%- endif %}
+            </ul>
+            <div class="trip-card-foot">
+              {{ tripPrice(trip, 'trip-card-price') }}
+              <span class="trip-card-go">{% if soon %}Details to come{% else %}See the trip →{% endif %}</span>
+            </div>
+          </div>
+        {% if soon %}</div>{% else %}</a>{% endif %}
+        {%- if trip.datesLabel %}
+        <div class="trip-card-dates">
+          <p class="other-dates-label">{{ trip.datesLabel }}</p>
+          <div class="date-chips">
+            {%- if trip.kind == 'combined' %}
+            {%- for w in trip.windows %}
+            <a class="date-chip" href="{{ trip.url }}">{{ w.short }}</a>
+            {%- endfor %}
+            {%- else %}
+            {%- for d in trip.departures %}
+            <a class="date-chip" href="{{ d.url }}">{{ d.short }}</a>
+            {%- endfor %}
+            {%- endif %}
+          </div>
+        </div>
+        {%- endif %}
+      </article>
+{%- endmacro %}
+
+{% macro tripGrid(trips) -%}
+    <div class="trip-grid">
+{% for trip in trips %}
+{{ tripCard(trip) }}
+{% endfor %}
+    </div>
+{%- endmacro %}
+
+{#- The teal mailing-list band at the bottom of several pages. The form
+    itself has no backend; main.js turns it into an email. -#}
+{% macro newsletter(block) -%}
+<section class="section section-teal">
+  <div class="wrap wrap-narrow newsletter">
+    <header class="section-head is-centred reveal">
+      {%- if block.eyebrow %}
+      <p class="eyebrow">{{ block.eyebrow }}</p>
+      {%- endif %}
+      <h2>{{ block.heading }}</h2>
+      <p class="lede">{{ block.text }}</p>
+    </header>
+    <form class="newsletter-form reveal" id="newsletterForm" novalidate>
+      <label class="sr-only" for="nl-email">Email address</label>
+      <input id="nl-email" type="email" name="email" placeholder="{{ site.email }}" autocomplete="email" required>
+      <button class="btn btn-coral" type="submit">Join the list</button>
+    </form>
+    <p class="form-note" id="newsletterNote" role="status"></p>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- The same teal band, with two buttons instead of the signup form. `text`
+    arrives as HTML so it can carry bold. -#}
+{% macro closing(heading, textHtml, primary, secondary) -%}
+<section class="section section-teal">
+  <div class="wrap wrap-narrow newsletter">
+    <header class="section-head is-centred reveal">
+      <h2>{{ heading }}</h2>
+      <p class="lede">{{ textHtml | safe }}</p>
+    </header>
+    <div class="hero-actions is-centred reveal">
+      <a class="btn btn-coral" href="{{ primary.href }}">{{ primary.label }}</a>
+      <a class="btn btn-ghost-light" href="{{ secondary.href }}">{{ secondary.label }}</a>
+    </div>
+  </div>
+</section>
+{%- endmacro %}

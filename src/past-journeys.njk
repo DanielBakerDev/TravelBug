@@ -1,0 +1,40 @@
+---
+permalink: past-journeys.html
+nav: past
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as ui with context %}
+{% set pageTitle = pastJourneys.seo.title %}
+{% set pageDescription = pastJourneys.seo.description %}
+
+{% block main %}
+{{ ui.pageHero(pastJourneys.hero, 'eyebrow-tangerine') }}
+
+<section class="section section-tight">
+  <div class="wrap">
+    <div class="past-grid">
+      {%- for journey in pastJourneys.journeys %}
+
+      <article class="past-card reveal">
+        <img {{ journey.photo | img | safe }} loading="lazy"
+             alt="{{ journey.photo_alt }}">
+        <div class="past-card-body">
+          <h3>{{ journey.name }}</h3>
+        </div>
+      </article>
+      {%- endfor %}
+
+    </div>
+    {%- for note in pastJourneys.notes %}
+
+    <p class="note-centred reveal">
+      {{ note | mdInline | safe }}
+    </p>
+    {%- endfor %}
+  </div>
+</section>
+
+{{ ui.wave('on-white wave-teal', 'ripple') }}
+
+{{ ui.newsletter(pastJourneys.newsletter) }}
+{% endblock %}

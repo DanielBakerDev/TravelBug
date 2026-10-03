@@ -930,15 +930,17 @@ img { max-width: 100%; height: auto; display: block; }
 .part-switch a:hover { background: var(--white); color: var(--deep-teal); }
 .part-switch a[aria-current="page"] { background: var(--ink); color: var(--white); }
 
-/* Amanda's "a few options for you" list, on all three Madagascar pages. */
-.option-list { list-style: none; margin: 0 0 1.1em; padding: 0; display: grid; gap: .75rem; }
-.option-list li { position: relative; padding-left: 1.7rem; }
-.option-list li::before {
+/* Any bullet list in a trip's intro text — on the Madagascar pages that's
+   Amanda's "a few options for you". It comes from Pages CMS as a plain list,
+   so it is styled by position rather than by a class. */
+.trip-intro ul { list-style: none; margin: 0 0 1.1em; padding: 0; display: grid; gap: .75rem; }
+.trip-intro li { position: relative; padding-left: 1.7rem; }
+.trip-intro li::before {
   content: ""; position: absolute; left: 0; top: .5em;
   width: 10px; height: 10px; border-radius: 50%;
   background: var(--turquoise);
 }
-.option-list li:nth-child(2)::before { background: var(--coral); }
+.trip-intro li:nth-child(2)::before { background: var(--coral); }
 
 /* Which Part One departure joins which Part Two departure. Narrow screens
    scroll it sideways rather than letting it push the page wide. */
@@ -1124,3 +1126,17 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; justify-content: space-between;
 }
 .footer-base p { margin: 0; }
+
+/* Only on the GitHub Pages preview build (SITE_PREVIEW=1). Pinned to the
+   bottom so it never covers the header, and pointer-events off so it can't
+   get in the way of anything underneath. Sunshine fill, ink text. */
+.preview-banner {
+  position: fixed; left: 50%; bottom: 14px; z-index: 100;
+  transform: translateX(-50%);
+  margin: 0; padding: .45rem 1rem;
+  max-width: calc(100vw - 32px);
+  background: var(--sunshine); color: var(--ink);
+  border-radius: 999px; box-shadow: var(--shadow-md);
+  font-family: var(--font-display); font-weight: 700; font-size: .85rem;
+  text-align: center; pointer-events: none;
+}

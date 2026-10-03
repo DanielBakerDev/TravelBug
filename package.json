@@ -1,0 +1,19 @@
+{
+  "name": "travel-bug-tours",
+  "private": true,
+  "description": "Travel Bug Tours website. Content lives in content/, templates in src/, output in _site/.",
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve --port 4321"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "js-yaml": "^5.4.2",
+    "markdown-it": "^15.0.2",
+    "sharp": "^0.35.5"
+  }
+}
