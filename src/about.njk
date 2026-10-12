@@ -13,13 +13,13 @@ nav: about
 <section class="section section-tight">
   <div class="wrap about-grid is-top">
     <div class="about-photo reveal">
-      <img {{ about.photo | img | safe }} loading="lazy"
-           alt="{{ about.photo_alt }}">
+      {{ ui.photo(about.photo, about.photo_alt, 'loading="lazy"') }}
     </div>
     <div class="about-copy reveal">
       {{ about.story | md | safe }}
     </div>
   </div>
+  {{ ui.gallery(about.gallery, true) }}
 </section>
 
 {{ ui.wave('on-white wave-lilac', 'swell') }}

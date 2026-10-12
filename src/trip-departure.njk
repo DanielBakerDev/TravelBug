@@ -18,7 +18,7 @@ nav: trips
 {% block main %}
 <section class="hero trip-hero">
   <div class="hero-media">
-    <img {{ (trip.hero_image or trip.card_image) | img | safe }} alt="" fetchpriority="high">
+    {{ ui.photo(trip.hero_image or trip.card_image, '', 'fetchpriority="high"') }}
   </div>
   <div class="wrap hero-inner">
     <div class="trip-hero-meta reveal">
@@ -47,15 +47,9 @@ nav: trips
         <h2>The idea</h2>
         {{ trip.intro | md | safe }}
       </div>
-      {%- if trip.gallery and trip.gallery.length %}
 
-      <div class="gallery gallery-spaced reveal">
-        {%- for photo in trip.gallery %}
-        <img {{ photo.image | img | safe }} loading="lazy"
-             alt="{{ photo.alt }}">
-        {%- endfor %}
-      </div>
-      {%- endif %}
+
+      {{ ui.gallery(trip.gallery) }}
       {%- if trip.itinerary and trip.itinerary.length %}
 
       <h2 class="reveal">Day by day</h2>

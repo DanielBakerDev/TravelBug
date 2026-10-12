@@ -1,6 +1,13 @@
 {#- Shared pieces of markup. Import with:
     {% import "macros.njk" as ui with context %} -#}
 
+{#- An <img>, or nothing at all if the photo is missing (see the `img`
+    filter). `attrs` is extra markup such as loading="lazy". -#}
+{% macro photo(src, alt = '', attrs = '') -%}
+{%- set size = src | img -%}
+{%- if size %}<img {{ size | safe }} {{ attrs | safe }} alt="{{ alt }}">{% endif -%}
+{%- endmacro %}
+
 {#- The six wave outlines. Which one sits where is a design choice, so they
     are named by shape rather than by colour. -#}
 {% macro wave(classes, shape) -%}
@@ -21,7 +28,7 @@
 {% macro pageHero(hero, eyebrowClass) -%}
 <section class="hero page-hero">
   <div class="hero-media">
-    <img {{ hero.image | img | safe }} alt="" fetchpriority="high">
+    {{ photo(hero.image, '', 'fetchpriority="high"') }}
   </div>
   <div class="wrap hero-inner">
     <p class="eyebrow {{ eyebrowClass }} reveal">{{ hero.eyebrow }}</p>
@@ -53,6 +60,19 @@
       </nav>
 {%- endmacro %}
 
+{#- A row of photos: trip pages and the About page. Entries with no photo
+    chosen are skipped, and an empty list draws nothing. -#}
+{% macro gallery(items, wrap = false) -%}
+{%- set shots = (items or []) | selectattr('image') -%}
+{%- if shots | length %}
+      {% if wrap %}<div class="wrap">{% endif %}<div class="gallery gallery-spaced reveal">
+        {%- for shot in shots %}
+        {{ photo(shot.image, shot.alt, 'loading="lazy"') }}
+        {%- endfor %}
+      </div>{% if wrap %}</div>{% endif %}
+{%- endif %}
+{%- endmacro %}
+
 {% macro tripPrice(trip, cls) -%}
 {%- if trip.priceText -%}
 <p class="{{ cls }}{% if '/' in trip.priceText %} is-dual{% endif %}"><span>from</span>{{ trip.priceText }}</p>
@@ -68,8 +88,7 @@
       <article class="trip-card{% if trip.kind == 'combined' %} is-grand{% endif %}{% if soon %} is-soon{% endif %} reveal">
         {% if soon %}<div class="trip-card-inner">{% else %}<a href="{{ trip.url }}">{% endif %}
           <div class="trip-card-media">
-            <img {{ trip.card_image | img | safe }} loading="lazy"
-                 alt="{{ trip.card_image_alt }}">
+            {{ photo(trip.card_image, trip.card_image_alt, 'loading="lazy"') }}
             {%- if trip.badgeText %}
             <span class="sticker sticker-{{ trip.badgeColour }} sticker-tilt">{{ trip.badgeText }}</span>
             {%- endif %}

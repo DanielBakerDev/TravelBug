@@ -16,8 +16,7 @@ nav: past
       {%- for journey in pastJourneys.journeys %}
 
       <article class="past-card reveal">
-        <img {{ journey.photo | img | safe }} loading="lazy"
-             alt="{{ journey.photo_alt }}">
+        {{ ui.photo(journey.photo, journey.photo_alt, 'loading="lazy"') }}
         <div class="past-card-body">
           <h3>{{ journey.name }}</h3>
         </div>

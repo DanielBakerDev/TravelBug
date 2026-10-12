@@ -79,6 +79,23 @@ components:
         label: Text
         type: text
 
+  gallery:
+    type: object
+    label: Photos
+    description: Add as many as you like. Drag to change the order, or use the bin to take one off. Two or four look tidiest.
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{alt}"
+    fields:
+      - name: image
+        label: Photo
+        type: image
+      - name: alt
+        label: Describe the photo
+        type: string
+        description: One sentence, for people who can't see it.
+
   inline-text:
     type: rich-text
     options:
@@ -236,19 +253,8 @@ content:
           media: false
           switcher: false
       - name: gallery
+        component: gallery
         label: Photos under the intro
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{alt}"
-        fields:
-          - name: image
-            label: Photo
-            type: image
-          - name: alt
-            label: Describe the photo
-            type: string
       - name: itinerary
         label: Day by day
         type: object
@@ -497,7 +503,7 @@ content:
           - name: journeys
             label: Past trips
             type: object
-            description: Drag to reorder.
+            description: Add a new trip with the button at the bottom. Drag to change the order, or use the bin to take one off.
             list:
               collapsible:
                 collapsed: true
@@ -543,6 +549,9 @@ content:
               format: markdown
               media: false
               switcher: false
+          - name: gallery
+            component: gallery
+            label: Photos under the main text
           - name: expect
             label: What you can expect (lilac section)
             type: object

@@ -95,8 +95,7 @@ nav: home
 <section class="section">
   <div class="wrap about-grid">
     <div class="about-photo reveal">
-      <img {{ home.about.photo | img | safe }} loading="lazy"
-           alt="{{ home.about.photo_alt }}">
+      {{ ui.photo(home.about.photo, home.about.photo_alt, 'loading="lazy"') }}
     </div>
     <div class="about-copy reveal">
       <p class="eyebrow eyebrow-tangerine">{{ home.about.eyebrow }}</p>

@@ -392,7 +392,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* -------------------------------- heroes ------------------------------- */
 .hero { position: relative; isolation: isolate; color: var(--white); }
-.hero-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+/* The fill only shows if a page has no photo (removed in Pages CMS); it keeps
+   the white heading readable. */
+.hero-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; background: var(--deep-teal); }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Montage clips sit over the poster and cross-fade between themselves.
@@ -583,7 +585,9 @@ img { max-width: 100%; height: auto; display: block; }
 .trip-card.is-soon .trip-card-go { color: var(--ink-faint); }
 .trip-card.is-soon:hover .trip-card-go { color: var(--tangerine-d); }
 
-.trip-card-media { position: relative; overflow: hidden; aspect-ratio: 16 / 10; }
+/* Mist fill for a card whose photo has been removed, so it reads as a blank
+   photo space rather than a hole. */
+.trip-card-media { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: var(--mist); }
 .trip-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
 .trip-card:hover .trip-card-media img { transform: scale(1.05); }
 .trip-card-media .sticker { position: absolute; top: .9rem; right: .9rem; box-shadow: var(--shadow-sm); }

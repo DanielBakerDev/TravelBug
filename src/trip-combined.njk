@@ -17,7 +17,7 @@ nav: trips
 {% block main %}
 <section class="hero trip-hero">
   <div class="hero-media">
-    <img {{ (trip.hero_image or trip.card_image) | img | safe }} alt="" fetchpriority="high">
+    {{ ui.photo(trip.hero_image or trip.card_image, '', 'fetchpriority="high"') }}
   </div>
   <div class="wrap hero-inner">
     <div class="trip-hero-meta reveal">
@@ -44,6 +44,8 @@ nav: trips
         <h2>The idea</h2>
         {{ trip.intro | md | safe }}
       </div>
+
+      {{ ui.gallery(trip.gallery) }}
 
       <h2 class="reveal">The {{ count | countWord }} window{{ '' if count == 1 else 's' }}</h2>
       <p class="reveal">{{ trip.windows_text }}</p>

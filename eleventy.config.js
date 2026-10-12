@@ -46,10 +46,17 @@ export default function (eleventyConfig) {
   const relative = (src) => String(src ?? '').replace(/^\/+/, '');
 
   // src, width and height for an <img>, with the size read from the file.
+  // An empty field, or a photo deleted from the media library while still in
+  // use, gives '' and the photo is left off the page. Failing the build
+  // instead would stop the preview updating with no sign to Amanda why.
   eleventyConfig.addFilter('img', (src) => {
+    if (!src) return '';
     const file = relative(src);
     const size = imageSizes.get(file);
-    if (!size) throw new Error(`Image not found in assets/img: "${src}"`);
+    if (!size) {
+      console.warn(`[images] "${src}" is not in assets/img; left off the page.`);
+      return '';
+    }
     return `src="${file}" width="${size.width}" height="${size.height}"`;
   });
 

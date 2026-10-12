@@ -57,6 +57,15 @@ the layout, the code, or `.pages.yml`.
 - **Pages** — Home, Trips page, Past journeys, About, Contact, and Footer &
   settings. Every heading, paragraph and photo on them.
 
+**Photos.** Every trip (Grand Tour included) and the About page have a gallery
+she can add to, remove from and reorder; Past journeys is a list she can do the
+same with. The single photos — page headers, trip cards, Amanda's portrait —
+can be swapped. Removing a photo never breaks the build: an empty photo field,
+a blank gallery entry, or a photo deleted from the media library while still
+in use is simply left off the page (the last one logs `[images] … left off the
+page` in the build). A header or card left with no photo shows a plain fill
+(deep teal / mist) rather than a hole.
+
 What stays with Daniel: the hero videos, the layout and colours, the logo, and
 the shape of a "combined" trip like the Grand Tour (which trips it joins).
 
