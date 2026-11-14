@@ -30,7 +30,7 @@ trips:
 
 
 
-    Choose Part One, Part Two, or combine the whole 19-Day Experience Madagascar
+    Choose Part One, Part Two, or combine the whole 19-Day Madagascar Grand Tour
     package. 
 how:
   eyebrow: How it works
@@ -57,8 +57,10 @@ how:
 numbers:
   eyebrow: So far
   heading: A small operation, with a big purpose.
-  text: We love a small group! We want you to walk away with a new group of
-    adventure buddies.
+  text: "We love a small group! We want you to walk away with a new group of
+    adventure buddies. It is also important to us that we support small
+    communities along the way, hence hiring a number of locals & using
+    locally-owned businesses to better your experience abroad. "
   stats:
     - number: "19"
       label: trips run
