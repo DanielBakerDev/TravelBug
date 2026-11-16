@@ -82,7 +82,7 @@ nav: trips
         {%- endif %}
       </ul>
       <a class="btn btn-primary btn-block" href="contact.html?trip={{ dep.enquiry | urlencode }}">{{ 'Join the waiting list' if dep.full else (trip.button_label or 'Request a spot') }}</a>
-      <p class="trip-aside-note">{{ trip.aside_note }}</p>
+      <p class="trip-aside-note">{{ trip.aside_note | lines | safe }}</p>
       {%- if trip.departures.length > 1 %}
 
       <div class="other-dates">

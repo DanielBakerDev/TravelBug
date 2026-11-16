@@ -29,7 +29,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 {%- if isPreview %}
 
-<p class="preview-banner">Preview — this isn't the real website yet. Daniel puts it live.</p>
+<p class="preview-banner">Preview, updated <time data-built datetime="{{ builtAt }}">{{ builtAtText }}</time>. Daniel puts it live.</p>
 {%- endif %}
 
 {%- macro navLink(href, key, label, cls) %}
@@ -39,7 +39,7 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
-      <img class="brand-logo" src="assets/img/logo-lockup.png" width="640" height="379"
+      <img class="brand-logo" src="assets/img/logo-lockup.png" width="640" height="380"
            alt="Travel Bug Tours" fetchpriority="high">
     </a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
@@ -49,7 +49,7 @@
     <nav class="nav" id="primaryNav" aria-label="Primary">
       {{- navLink('index.html', 'home', 'Home') }}
       {{- navLink('trips.html', 'trips', 'Trips') }}
-      {{- navLink('past-journeys.html', 'past', 'Past journeys') }}
+      {{- navLink('past-journeys.html', 'past', 'Past Journeys') }}
       {{- navLink('about.html', 'about', 'About') }}
       {{- navLink('contact.html', 'contact', 'Get in touch', 'btn btn-sm btn-primary') }}
     </nav>
@@ -66,14 +66,14 @@
   <div class="wrap footer-inner">
     <div class="footer-brand">
       <a class="brand-lockup" href="index.html">
-        <img src="assets/img/logo-lockup.png" width="640" height="379" loading="lazy"
+        <img src="assets/img/logo-lockup.png" width="640" height="380" loading="lazy"
              alt="Travel Bug Tours">
       </a>
       <p>{{ site.footer_tagline }}</p>
     </div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="trips.html">Trips</a>
-      <a href="past-journeys.html">Past journeys</a>
+      <a href="past-journeys.html">Past Journeys</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>

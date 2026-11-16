@@ -310,3 +310,34 @@ if (newsletter) {
 /* --------------------------------- misc -------------------------------- */
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
+
+/* ---------------------------- preview label ---------------------------- */
+/* Only on the GitHub Pages preview. GitHub lets a browser reuse a page for
+   up to ten minutes, so after Amanda saved, clicking back to a page she had
+   already opened could show it from before her change, and the save looked
+   lost. Ask for this page fresh; if that copy comes from a newer build,
+   reload once to show it. */
+const built = document.querySelector('time[data-built]');
+
+if (built) {
+  built.textContent = new Date(built.dateTime).toLocaleString(undefined, {
+    day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit',
+  });
+
+  fetch(location.href, { cache: 'no-store' })
+    .then((r) => (r.ok ? r.text() : ''))
+    .then((html) => {
+      const latest = html.match(/data-built datetime="([^"]+)"/)?.[1];
+      if (!latest || latest <= built.dateTime) return;
+      // Once per build, so a CDN that is a moment behind can't cause a loop.
+      const key = `preview-reloaded-${latest}`;
+      try {
+        if (sessionStorage.getItem(key)) return;
+        sessionStorage.setItem(key, '1');
+      } catch {
+        return;
+      }
+      location.reload();
+    })
+    .catch(() => {});
+}

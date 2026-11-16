@@ -25,7 +25,7 @@ nav: home
   <div class="wrap hero-inner">
     <p class="eyebrow reveal">{{ home.hero.eyebrow }}</p>
     <h1 class="reveal">{{ home.hero.title }}<br><em>{{ home.hero.title_highlight }}</em></h1>
-    <p class="hero-sub reveal">{{ home.hero.text }}</p>
+    <p class="hero-sub reveal">{{ home.hero.text | lines | safe }}</p>
     <div class="hero-actions reveal">
       <a class="btn btn-primary" href="#trips">See upcoming trips</a>
       <a class="btn btn-ghost-light" href="#how">How it works</a>
@@ -40,7 +40,7 @@ nav: home
     <header class="section-head reveal">
       <p class="eyebrow eyebrow-coral">{{ home.trips.eyebrow }}</p>
       <h2>{{ home.trips.heading }} <span class="squiggle">{{ home.trips.heading_highlight }}</span></h2>
-      <p class="lede">{{ home.trips.text }}</p>
+      <p class="lede">{{ home.trips.text | lines | safe }}</p>
     </header>
 
 {{ ui.tripGrid(trips) }}
@@ -78,7 +78,7 @@ nav: home
     <header class="section-head is-centred reveal">
       <p class="eyebrow">{{ home.numbers.eyebrow }}</p>
       <h2>{{ home.numbers.heading }}</h2>
-      <p class="lede">{{ home.numbers.text }}</p>
+      <p class="lede">{{ home.numbers.text | lines | safe }}</p>
     </header>
 
     <ul class="stats reveal">
@@ -119,7 +119,7 @@ nav: home
     <div class="quotes">
       {%- for q in home.reviews.quotes %}
       <figure class="quote reveal">
-        <blockquote>{{ q.quote }}</blockquote>
+        <blockquote>{{ q.quote | lines | safe }}</blockquote>
         <figcaption>{{ q.by }}</figcaption>
       </figure>
       {%- endfor %}

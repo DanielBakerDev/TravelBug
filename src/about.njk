@@ -53,7 +53,7 @@ nav: about
 
 {{ ui.wave('on-lilac wave-teal', 'ripple') }}
 
-{{ ui.closing(about.closing.heading, about.closing.text | escape,
+{{ ui.closing(about.closing.heading, about.closing.text | lines,
   { href: 'trips.html', label: 'See upcoming trips' },
   { href: 'contact.html', label: 'Ask us something' }) }}
 {% endblock %}

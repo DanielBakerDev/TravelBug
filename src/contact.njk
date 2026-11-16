@@ -15,7 +15,7 @@ nav: contact
     <header class="section-head reveal">
       <p class="eyebrow" id="tripPrefillNote">Enquiries</p>
       <h2>{{ contact.form.heading }}</h2>
-      <p class="lede">{{ contact.form.text }}</p>
+      <p class="lede">{{ contact.form.text | lines | safe }}</p>
     </header>
 
     <div class="form-card reveal">
@@ -90,7 +90,7 @@ nav: contact
       {%- for item in contact.faq.questions %}
       <details>
         <summary>{{ item.question }}</summary>
-        <p>{{ item.answer }}</p>
+        <p>{{ item.answer | lines | safe }}</p>
       </details>
       {%- endfor %}
     </div>

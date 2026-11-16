@@ -33,7 +33,7 @@
   <div class="wrap hero-inner">
     <p class="eyebrow {{ eyebrowClass }} reveal">{{ hero.eyebrow }}</p>
     <h1 class="reveal">{{ hero.title }}</h1>
-    <p class="hero-sub reveal">{{ hero.text }}</p>
+    <p class="hero-sub reveal">{{ hero.text | lines | safe }}</p>
   </div>
   {{ wave('wave-white', 'hero') }}
 </section>
@@ -97,7 +97,7 @@
           <div class="trip-card-body">
             <p class="trip-card-where">{{ trip.card_label }}</p>
             <h3>{{ trip.cardTitle }}</h3>
-            <p class="trip-card-blurb">{{ trip.blurb }}</p>
+            <p class="trip-card-blurb">{{ trip.blurb | lines | safe }}</p>
             <ul class="trip-card-meta">
               {%- if soon %}
               <li>Dates to be confirmed</li>
@@ -150,7 +150,7 @@
       <p class="eyebrow">{{ block.eyebrow }}</p>
       {%- endif %}
       <h2>{{ block.heading }}</h2>
-      <p class="lede">{{ block.text }}</p>
+      <p class="lede">{{ block.text | lines | safe }}</p>
     </header>
     <form class="newsletter-form reveal" id="newsletterForm" novalidate>
       <label class="sr-only" for="nl-email">Email address</label>

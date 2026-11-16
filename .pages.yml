@@ -491,7 +491,7 @@ content:
             component: newsletter
 
       - name: past-journeys
-        label: Past journeys
+        label: Past Journeys
         type: file
         path: content/past-journeys.yml
         format: yaml

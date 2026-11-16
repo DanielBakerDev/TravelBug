@@ -54,11 +54,11 @@ the layout, the code, or `.pages.yml`.
   the waiting list". She can add a new trip or a new date; its page is named
   automatically (`trip-<trip file>-<ddmonyyyy>.html`) and it appears on Home,
   Trips and in the contact form's dropdown on its own.
-- **Pages** — Home, Trips page, Past journeys, About, Contact, and Footer &
+- **Pages** — Home, Trips page, Past Journeys, About, Contact, and Footer &
   settings. Every heading, paragraph and photo on them.
 
 **Photos.** Every trip (Grand Tour included) and the About page have a gallery
-she can add to, remove from and reorder; Past journeys is a list she can do the
+she can add to, remove from and reorder; Past Journeys is a list she can do the
 same with. The single photos — page headers, trip cards, Amanda's portrait —
 can be swapped. Removing a photo never breaks the build: an empty photo field,
 a blank gallery entry, or a photo deleted from the media library while still
@@ -290,9 +290,10 @@ dates, and fill in the rest. The card becomes a link and the pages appear.
 
 ## Logo
 
-Amanda's logo arrived as a single 2048px JPEG on a flat white background: the
-mascot on the left, "TRAVEL BUG TOURS" beside him. Three files are cut from it,
-all in `assets/img/`.
+Amanda's logo is the mascot on the left with "TRAVEL BUG TOURS" beside him.
+Since November 2026 the lockup and touch icon come from a 2000px square WebP
+she sent **with a transparent background**. Use that version for any recut.
+Three files are cut from it, all in `assets/img/`.
 
 | File | Where it goes | Rendered at |
 |---|---|---|
@@ -304,7 +305,7 @@ all in `assets/img/`.
 mascot out for the header and set the name in Outfit beside him; Daniel didn't
 like it, and it is gone.
 
-**That is what sets the header height.** The lockup is 1352×800, so the word
+**That is what sets the header height.** The lockup is about 1.7:1, so the word
 TOURS stops being readable below about 70px tall. The header carries it at
 76px, which makes the bar 108px deep — much deeper than a text wordmark would
 need. `--header-h` exists for exactly this reason: the hero's top padding and
@@ -318,17 +319,16 @@ The favicon is a tight crop of the sunglasses and grin, which is the most of
 him that survives at that size. The touch icon is 180px, big enough for the
 real logo, so it gets it.
 
-**How the background was removed:** by connected component, not by turning
-white transparent. The character wears a white shirt and has white highlights
-in his sunglasses, and a global swap would have punched holes in both. Instead
-the white region that touches the border is found and only that is cleared;
-both of those are walled off by black outline so the region never reaches them.
-The cut is then feathered over two pixels, otherwise a pale halo shows up as
-soon as the logo sits on the dark header. The script is in the scratchpad, not
-the repo — rerun it from `travel-bug-logo.jpg` if the artwork is ever redrawn.
+**No background removal any more.** The first version came as a JPEG on
+white, and cutting the white out by hand left white patches in the gaps
+between his arm and the lettering. The transparent file needs only a trim to
+the artwork, a resize to 640px wide (`logo-lockup.png`), and for the touch
+icon, centring on white at 180px, since iOS fills transparency with black.
+The favicon is still the crop from the old JPEG: it shows only the face, so it
+has no gaps for white to show through.
 
-The files are palette PNGs at around 160 colours. The lockup is 59KB that way
-against 336KB as full RGBA, with no banding visible in the gradients.
+The files are palette PNGs. The lockup is 68KB that way against several
+hundred KB as full RGBA, with no banding visible in the gradients.
 
 ## Photos
 

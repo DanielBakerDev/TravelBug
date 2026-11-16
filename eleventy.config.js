@@ -16,6 +16,18 @@ import { processImages, imageSizes } from './lib/images.js';
 
 // No raw HTML: what Amanda types is text, bold, italics, links and lists.
 const markdown = markdownIt({ html: false, linkify: false, typographer: false });
+// For one-paragraph spots (a <p> or a list item): a single Enter is a new line.
+const markdownLines = markdownIt({ html: false, linkify: false, typographer: false, breaks: true });
+
+const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+/* Line breaks Amanda types are saved in the file, but a browser ignores them,
+   so on the page her paragraphs used to run together into one block. These
+   keep them: one Enter starts a new line, a blank line (or several) leaves a
+   gap. The text still sits inside the template's single <p>. */
+const paragraphs = (text) => String(text ?? '').trim().split(/[ \t]*\n(?:[ \t]*\n)+[ \t]*/);
+const joinParagraphs = (parts) => parts.filter(Boolean).join('<br><br>');
 
 export default function (eleventyConfig) {
   // Functions rather than values, so `npm run dev` picks up edits to content/.
@@ -25,6 +37,14 @@ export default function (eleventyConfig) {
   // The GitHub Pages copy (preview.yml sets this): kept out of search engines
   // and labelled, so nobody mistakes it for the live site.
   eleventyConfig.addGlobalData('isPreview', process.env.SITE_PREVIEW === '1');
+  // When this build ran, for the preview label. main.js shows it in the
+  // reader's own time zone and uses it to spot a page the browser kept from an
+  // older build; the UTC text is for anyone with scripts off.
+  const builtAt = new Date();
+  eleventyConfig.addGlobalData('builtAt', builtAt.toISOString());
+  eleventyConfig.addGlobalData('builtAtText', `${builtAt.toLocaleString('en-GB', {
+    timeZone: 'UTC', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
+  })} UTC`);
 
   eleventyConfig.addGlobalData('trips', () => loadTrips());
   eleventyConfig.addGlobalData('departurePages', () => departurePages(loadTrips()));
@@ -61,7 +81,12 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter('md', (text) => markdown.render(String(text ?? '')).trim());
-  eleventyConfig.addFilter('mdInline', (text) => markdown.renderInline(String(text ?? '').trim()));
+  eleventyConfig.addFilter('mdInline', (text) =>
+    joinParagraphs(paragraphs(text).map((p) => markdownLines.renderInline(p).trim())));
+  // Plain text boxes (no bold or links): escaped, with her line breaks kept.
+  // Already escaped, so templates follow it with `| safe`.
+  eleventyConfig.addFilter('lines', (text) =>
+    joinParagraphs(paragraphs(text).map((p) => escapeHtml(p).replace(/[ \t]*\n[ \t]*/g, '<br>'))));
   eleventyConfig.addFilter('tokens', fillTokens);
   eleventyConfig.addFilter('urlencode', (text) => encodeURIComponent(String(text ?? '')));
   eleventyConfig.addFilter('countWord', countWord);

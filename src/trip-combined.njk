@@ -48,7 +48,7 @@ nav: trips
       {{ ui.gallery(trip.gallery) }}
 
       <h2 class="reveal">The {{ count | countWord }} window{{ '' if count == 1 else 's' }}</h2>
-      <p class="reveal">{{ trip.windows_text }}</p>
+      <p class="reveal">{{ trip.windows_text | lines | safe }}</p>
       <div class="table-scroll reveal">
         <table class="combo-table">
           <caption class="sr-only">{{ trip.country }} departures in {{ trip.years }}, showing how each
@@ -70,7 +70,7 @@ nav: trips
       </div>
 
       <h2 class="reveal">Day by day</h2>
-      <p class="reveal">{{ trip.itinerary_text }}</p>
+      <p class="reveal">{{ trip.itinerary_text | lines | safe }}</p>
       <div class="hero-actions reveal">
         {%- for part in trip.parts %}
         <a class="btn btn-outline" href="{{ part.departures[0].url }}">{{ trip.legLabels[loop.index0] }}</a>
@@ -92,7 +92,7 @@ nav: trips
         {%- endif %}
       </ul>
       <a class="btn btn-primary btn-block" href="contact.html?trip={{ trip.enquiry | urlencode }}">{{ trip.button_label or 'Request a spot' }}</a>
-      <p class="trip-aside-note">{{ trip.aside_note }}</p>
+      <p class="trip-aside-note">{{ trip.aside_note | lines | safe }}</p>
 
       <div class="other-dates">
         <p class="other-dates-label">Pick a window</p>
