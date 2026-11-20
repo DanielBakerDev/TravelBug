@@ -63,7 +63,7 @@ numbers:
     - number: "112"
       label: travellers
     - number: 68%
-      label: "returned clients "
+      label: have returned for 2 or more tours with us
 about:
   photo: /assets/img/amanda-guate.jpg
   photo_alt: Amanda in a sun hat and hiking gear, striking a pose on a trip to Guatemala
@@ -94,12 +94,16 @@ reviews:
         it. By day three I forgot what I was ever worried about. Loved the group
         dynamic, we still talk every day.
       by: Rachel B. — Patagonia, 2025
-    - quote: Amanda had a plan B for the weather, and then a plan C. We used both and
-        it was still the best week of my year.
+    - quote: The tour director really made this trip. We agree that this was by far,
+        the best week of our year.
       by: Marcus & Jo — Egypt, 2026
     - quote: Fourteen strangers on day one. There's still a group chat and someone's
         organising a reunion. Can't wait for another trip!
       by: Priya R. — Madagascar, 2025
+    - quote: "Looking forward to the next group trip. It is nice to continually travel
+        with the same people, but none of us are organized enough to get
+        anywhere on our own. "
+      by: Daniel B. - Egypt, Patagonia, Madagascar 2026
 newsletter:
   eyebrow: First refusal
   heading: Trips go to the list first
