@@ -7,8 +7,6 @@ hero:
   image: /assets/img/trip-madagascar.jpg
   eyebrow: Open for booking
   title: Upcoming trips
-  text: |+
-    
 newsletter:
   eyebrow: Nothing quite right?
   heading: Next year's dates go out by email first
