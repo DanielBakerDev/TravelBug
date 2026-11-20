@@ -7,19 +7,8 @@ hero:
   image: /assets/img/trip-madagascar.jpg
   eyebrow: Open for booking
   title: Upcoming trips
-  text: >
-    Part One: Lemurs, Baobabs, & Canoeing the Wild Tsiribhina (10 days)      
-
-
-
-
-    Part Two: Coast, Canyons, Climbing, & Rainforest Adventure (9 days) 
-
-
-
-
-    Choose Part One, Part Two, or combine the whole 19-Day Madagascar Grand Tour
-    package. 
+  text: |+
+    
 newsletter:
   eyebrow: Nothing quite right?
   heading: Next year's dates go out by email first
