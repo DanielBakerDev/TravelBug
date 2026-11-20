@@ -9,9 +9,10 @@ hero:
   text: "Questions, a spot on a trip, or just checking whether something's your
     sort of thing. "
 form:
-  heading: Tell me what you're thinking
-  text: A couple of lines is plenty. I'll come back within two working days —
-    usually sooner unless I'm away with a group.
+  heading: Questions about future tours?
+  text: >
+    Please fill in the questionnaire, we will answer back by email within two
+    working days. 
 faq:
   eyebrow: Before you ask
   heading: Common questions
