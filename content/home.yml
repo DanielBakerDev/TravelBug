@@ -19,19 +19,8 @@ trips:
   eyebrow: Upcoming adventures
   heading: Where to
   heading_highlight: next?
-  text: >
-    Part One: Lemurs, Baobabs, & Canoeing the Wild Tsiribhina (10 days)      
-
-
-
-
-    Part Two: Coast, Canyons, Climbing, & Rainforest Adventure (9 days) 
-
-
-
-
-    Choose Part One, Part Two, or combine the whole 19-Day Madagascar Grand Tour
-    package. 
+  text: |+
+    
 how:
   eyebrow: How it works
   heading: Four steps and you're on the plane
