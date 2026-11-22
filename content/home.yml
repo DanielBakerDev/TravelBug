@@ -38,6 +38,11 @@ trips:
   eyebrow: Upcoming adventures
   heading: Where to
   heading_highlight: next?
+video:
+  youtube: ""
+  eyebrow: See it for yourself
+  heading: Come along for the ride
+  text: ""
 how:
   eyebrow: How it works
   heading: Four steps and you're on the plane

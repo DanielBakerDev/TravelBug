@@ -47,6 +47,28 @@ nav: home
   </div>
 </section>
 
+<!-- ================================ VIDEO ================================= -->
+{%- set videoId = home.video.youtube | youtubeId %}
+{%- if videoId %}
+<section class="section section-video" id="video">
+  <div class="wrap">
+    {%- if home.video.heading or home.video.eyebrow or home.video.text %}
+    <header class="section-head is-centred reveal">
+      {%- if home.video.eyebrow %}<p class="eyebrow eyebrow-coral">{{ home.video.eyebrow }}</p>{% endif %}
+      {%- if home.video.heading %}<h2>{{ home.video.heading }}</h2>{% endif %}
+      {%- if home.video.text %}<p class="lede">{{ home.video.text | lines | safe }}</p>{% endif %}
+    </header>
+    {%- endif %}
+    <div class="video-frame reveal">
+      <iframe src="https://www.youtube-nocookie.com/embed/{{ videoId }}?rel=0"
+        title="{{ home.video.heading or 'Travel Bug Tours video' }}" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+{%- endif %}
+
 {{ ui.wave('on-white wave-cream', 'swell') }}
 
 <!-- ============================= HOW IT WORKS ============================= -->

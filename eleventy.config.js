@@ -90,6 +90,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('tokens', fillTokens);
   eleventyConfig.addFilter('urlencode', (text) => encodeURIComponent(String(text ?? '')));
   eleventyConfig.addFilter('countWord', countWord);
+  // The video ID from whatever YouTube link Amanda pastes (watch?v=, youtu.be/,
+  // shorts/, embed/). Anything else gives '' and the video section is left off.
+  eleventyConfig.addFilter('youtubeId', (url) => {
+    const m = String(url ?? '').trim().match(
+      /(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
+    return m ? m[1] : '';
+  });
 
   return {
     dir: { input: 'src', includes: '_includes', output: '_site' },

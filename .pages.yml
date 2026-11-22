@@ -372,6 +372,23 @@ content:
               - name: text
                 label: Text
                 type: text
+          - name: video
+            label: Video (under the trips)
+            type: object
+            fields:
+              - name: youtube
+                label: YouTube link
+                type: string
+                description: Upload the video to YouTube (Unlisted is fine), press Share, and paste the link here. Leave empty to hide the video section.
+              - name: eyebrow
+                label: Small label
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
           - name: how
             label: How it works
             type: object
