@@ -341,3 +341,88 @@ if (built) {
     })
     .catch(() => {});
 }
+
+/* ---------------------------- photo albums ----------------------------- */
+/* Past Journeys: tapping a card with an album opens it in the <dialog>.
+   Photos live in a <template> per card, so nothing downloads until opened.
+   Arrow keys and swipes move through it; Escape (native) closes it. */
+const album = document.getElementById('album');
+
+if (album && typeof album.showModal === 'function') {
+  const titleEl = album.querySelector('.album-title');
+  const countEl = album.querySelector('.album-count');
+  const stage = album.querySelector('.album-photo');
+  const thumbs = album.querySelector('.album-thumbs');
+  let photos = [];
+  let index = 0;
+  let opener = null;
+
+  const show = (i) => {
+    index = (i + photos.length) % photos.length;
+    stage.replaceChildren(photos[index].cloneNode());
+    stage.firstChild.removeAttribute('loading');
+    countEl.textContent = `${index + 1} of ${photos.length}`;
+    thumbs.querySelectorAll('button').forEach((b, n) => {
+      const on = n === index;
+      b.classList.toggle('is-current', on);
+      if (on) { b.setAttribute('aria-current', 'true'); b.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+      else b.removeAttribute('aria-current');
+    });
+    // Warm the next photo so stepping through feels instant.
+    const next = photos[(index + 1) % photos.length];
+    if (next) new Image().src = next.src;
+  };
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-album]');
+    if (!btn) return;
+    const tpl = document.getElementById(btn.dataset.album);
+    if (!tpl) return;
+    opener = btn;
+    photos = [...tpl.content.querySelectorAll('img')];
+    titleEl.textContent = tpl.dataset.title || '';
+    thumbs.replaceChildren(...photos.map((img, n) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Photo ${n + 1}`);
+      const thumb = img.cloneNode();
+      thumb.removeAttribute('loading');
+      thumb.alt = '';
+      b.append(thumb);
+      b.addEventListener('click', () => show(n));
+      return b;
+    }));
+    album.classList.toggle('is-single', photos.length < 2);
+    album.showModal();
+    document.documentElement.classList.add('has-album-open');
+    show(0);
+  });
+
+  album.addEventListener('click', (e) => {
+    const step = e.target.closest('[data-album-step]');
+    if (step) show(index + Number(step.dataset.albumStep));
+    else if (e.target.closest('[data-album-close]') || e.target === album) album.close();
+  });
+
+  album.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') show(index - 1);
+    if (e.key === 'ArrowRight') show(index + 1);
+  });
+
+  album.addEventListener('close', () => {
+    document.documentElement.classList.remove('has-album-open');
+    stage.replaceChildren();
+    thumbs.replaceChildren();
+    opener?.focus();
+  });
+
+  // Swipe left/right on the photo.
+  let startX = null;
+  stage.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+  stage.addEventListener('pointerup', (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+  });
+}

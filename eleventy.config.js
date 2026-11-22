@@ -80,6 +80,12 @@ export default function (eleventyConfig) {
     return `src="${file}" width="${size.width}" height="${size.height}"`;
   });
 
+  // A past journey's album: its card photo, then the album photos. Blank
+  // entries and photos missing from the media library are skipped, so the
+  // count on the card is always the number you can actually see.
+  eleventyConfig.addFilter('albumShots', (journey) =>
+    [{ image: journey?.photo, alt: journey?.photo_alt }, ...(journey?.album || [])]
+      .filter((shot) => shot?.image && imageSizes.has(relative(shot.image))));
   eleventyConfig.addFilter('md', (text) => markdown.render(String(text ?? '')).trim());
   eleventyConfig.addFilter('mdInline', (text) =>
     joinParagraphs(paragraphs(text).map((p) => markdownLines.renderInline(p).trim())));

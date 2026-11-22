@@ -530,11 +530,16 @@ content:
                 label: Where
                 type: string
               - name: photo
-                label: Photo
+                label: Photo on the card
                 type: image
+                description: Also the first photo in the album.
               - name: photo_alt
                 label: Describe the photo
                 type: string
+              - name: album
+                component: gallery
+                label: Photo album
+                description: Extra photos that open when someone taps the card. Add as many as you like, drag to reorder, or use the bin to take one off. Leave empty and the card is just a photo.
           - name: notes
             label: Notes under the photos
             component: inline-text

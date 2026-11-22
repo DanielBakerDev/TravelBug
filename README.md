@@ -59,7 +59,9 @@ the layout, the code, or `.pages.yml`.
 
 **Photos.** Every trip (Grand Tour included) and the About page have a gallery
 she can add to, remove from and reorder; Past Journeys is a list she can do the
-same with. The single photos — page headers, trip cards, Amanda's portrait —
+same with, and each past trip has its own photo album (any number of photos)
+that opens full screen when the card is tapped; an empty album leaves a plain
+card. The single photos — page headers, trip cards, Amanda's portrait —
 can be swapped. Removing a photo never breaks the build: an empty photo field,
 a blank gallery entry, or a photo deleted from the media library while still
 in use is simply left off the page (the last one logs `[images] … left off the

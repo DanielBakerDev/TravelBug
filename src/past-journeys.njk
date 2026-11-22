@@ -14,12 +14,30 @@ nav: past
   <div class="wrap">
     <div class="past-grid">
       {%- for journey in pastJourneys.journeys %}
+      {#- The album is the card photo followed by the album photos. Blank
+          entries and photos missing from the media library are skipped, so
+          the count on the card is always the number you can actually see. -#}
+      {%- set shots = journey | albumShots %}
+      {%- set hasAlbum = shots | length > 1 %}
 
-      <article class="past-card reveal">
+      <article class="past-card reveal{% if hasAlbum %} has-album{% endif %}">
         {{ ui.photo(journey.photo, journey.photo_alt, 'loading="lazy"') }}
         <div class="past-card-body">
           <h3>{{ journey.name }}</h3>
+          {%- if hasAlbum %}
+          <p class="past-card-count">{{ shots | length }} photos</p>
+          {%- endif %}
         </div>
+        {%- if hasAlbum %}
+        <button type="button" class="past-card-open" data-album="album-{{ loop.index }}">
+          <span class="sr-only">Open the {{ journey.name }} photo album ({{ shots | length }} photos)</span>
+        </button>
+        <template id="album-{{ loop.index }}" data-title="{{ journey.name }}">
+          {%- for shot in shots %}
+          {{ ui.photo(shot.image, shot.alt, 'loading="lazy" decoding="async"') }}
+          {%- endfor %}
+        </template>
+        {%- endif %}
       </article>
       {%- endfor %}
 
@@ -32,6 +50,22 @@ nav: past
     {%- endfor %}
   </div>
 </section>
+
+<!-- One album viewer for the whole page; main.js fills it from the card's
+     <template>, so album photos only download once someone opens it. -->
+<dialog class="album" id="album" aria-labelledby="albumTitle">
+  <div class="album-top">
+    <h2 class="album-title" id="albumTitle"></h2>
+    <p class="album-count" aria-live="polite"></p>
+    <button type="button" class="album-close" data-album-close aria-label="Close the album">&times;</button>
+  </div>
+  <div class="album-stage">
+    <button type="button" class="album-nav is-prev" data-album-step="-1" aria-label="Previous photo">&#8249;</button>
+    <figure class="album-photo"></figure>
+    <button type="button" class="album-nav is-next" data-album-step="1" aria-label="Next photo">&#8250;</button>
+  </div>
+  <div class="album-thumbs"></div>
+</dialog>
 
 {{ ui.wave('on-white wave-teal', 'ripple') }}
 
