@@ -8,7 +8,7 @@ hero:
   eyebrow: Small-group adventures
   title: Big trips,
   title_highlight: Wild destinations.
-  text: >
+  text: >-
     We are on a mission to connect fun, like-minded 25-45 year-old-somethings
     who are seeking adventures in the world’s most out-of-reach places.  
 
@@ -19,30 +19,17 @@ hero:
 
     You should feel good about your tourism dollars being spent fairly. By
     partnering with locals, we are making responsible choices that respect local
-    cultures & environmental protection, directly benefiting host communities. 
-
-
-
-    This partnership gives you insight to hidden experiences from those who
-    directly know and adore the beauty of their country. This allows you to
-    spend your tourism dollars in a fair way while creating a sustainable
-    partnership and a strong network of long-term jobs through our
-    partnerships. 
-
-
-    We have hired locals for a number of roles throughout your tour, providing
-    them with the autonomy of money-earning through shared business. We want our
-    partnerships to sustain & nurture entire villages by providing a strong
-    network of long-term jobs. 
+    cultures & environmental protection, directly benefiting host communities.
+    Through shared business, our partnerships are creating a strong network of
+    long-term jobs, sustaining & nurturing entire villages.
 trips:
   eyebrow: Upcoming adventures
   heading: Where to
   heading_highlight: next?
 video:
-  youtube: "https://youtu.be/3gIYdouUD2I"
+  youtube: https://youtu.be/3gIYdouUD2I
   eyebrow: See it for yourself
   heading: Come along for the ride
-  text: ""
 how:
   eyebrow: How it works
   heading: Four steps and you're on the plane
