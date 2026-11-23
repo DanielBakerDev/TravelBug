@@ -80,6 +80,9 @@ journeys:
   - name: Guyana
     photo: /assets/img/past-guyana.jpg
     photo_alt: Kaieteur Falls dropping into the rainforest gorge in Guyana
+    album:
+      - image: /assets/img/untitledartwork-6.png
+        alt: Test
 notes:
   - "Also on the list: the Winter Olympics in Italy, Trinidad & Tobago,
     Kazakhstan, Mongolia, and Paraguay & Uruguay."
