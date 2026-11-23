@@ -218,6 +218,13 @@ content:
         label: Big photo at the top of the trip page
         type: image
         description: Leave empty to use the card photo.
+      - name: logo_badge
+        label: Trip logo badge
+        type: image
+        description: Optional logo sticker shown on the right of the big photo, like the Madagascar badge. Use a PNG or WebP with a see-through background. Leave empty for none.
+      - name: logo_badge_alt
+        label: Describe the logo badge
+        type: string
 
       - name: departures
         label: Dates

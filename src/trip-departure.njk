@@ -16,11 +16,14 @@ nav: trips
 {% set pageDescription = (trip.description or trip.blurb) | tokens(dep.tokens) %}
 
 {% block main %}
-<section class="hero trip-hero">
+<section class="hero trip-hero{% if trip.logo_badge | img %} has-badge{% endif %}">
   <div class="hero-media">
     {{ ui.photo(trip.hero_image or trip.card_image, '', 'fetchpriority="high"') }}
   </div>
   <div class="wrap hero-inner">
+    {%- if trip.logo_badge | img %}
+    {{ ui.photo(trip.logo_badge, trip.logo_badge_alt, 'class="trip-badge reveal"') }}
+    {%- endif %}
     <div class="trip-hero-meta reveal">
       <span class="sticker sticker-lime">{{ trip.country }}</span>
       {%- if dep.spotsLabel %}

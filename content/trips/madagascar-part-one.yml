@@ -18,6 +18,8 @@ group_size: Max 15
 card_image: /assets/img/trip-madagascar.jpg
 card_image_alt: The group watching the sun set behind the Avenue of the Baobabs in Madagascar
 hero_image: /assets/img/trip-madagascar.jpg
+logo_badge: /assets/img/badge-madagascar.webp
+logo_badge_alt: Travel Bug Tours Madagascar badge, with the bug, baobabs, a lemur and a chameleon
 description: Ten days in Madagascar, {dates}. Canoe the Tsiribihina, climb the Tsingy de Bemaraha, and finish at the Avenue of the Baobabs. Max 15 people, from €2,400 / £2,060.
 
 departures:

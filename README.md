@@ -72,6 +72,12 @@ page` in the build). A header or card left with no photo shows a plain fill
 link (Unlisted is fine) into Home → "Video"; empty hides the section. Videos
 never go in the repo: GitHub refuses files over 100MB.
 
+**Logos.** Besides the header and footer: `share.jpg` is the picture in link
+previews (WhatsApp, Facebook…) on every page; each trip has an optional
+"Trip logo badge" (the Madagascar badge on the three Madagascar trips) shown on
+the right of its big photo; and the mascot silhouette (`bug-waving.png`, tinted
+yellow in CSS) waves beside the mailing-list box.
+
 What stays with Daniel: the hero videos, the layout and colours, the logo, and
 the shape of a "combined" trip like the Grand Tour (which trips it joins).
 

@@ -144,7 +144,8 @@
     itself has no backend; main.js turns it into an email. -#}
 {% macro newsletter(block) -%}
 <section class="section section-teal">
-  <div class="wrap wrap-narrow newsletter">
+  <div class="wrap wrap-narrow newsletter has-bug">
+    <span class="bug-wave" aria-hidden="true"></span>
     <header class="section-head is-centred reveal">
       {%- if block.eyebrow %}
       <p class="eyebrow">{{ block.eyebrow }}</p>
