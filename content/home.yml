@@ -20,10 +20,6 @@ hero:
     You should feel good about your tourism dollars being spent fairly. By
     partnering with locals, our shared business is creating a strong network of
     long-term jobs, sustaining & nurturing entire villages.
-
-
-    Together we are making responsible choices that respect local cultures &
-    environmental protection, directly benefiting host communities.
 trips:
   eyebrow: Upcoming adventures
   heading: Where to
@@ -57,10 +53,15 @@ how:
 numbers:
   eyebrow: So far
   heading: A small operation, with a big purpose.
-  text: "We love a small group! We want you to walk away with a new group of
+  text: >-
+    We love a small group! We want you to walk away with a new group of
     adventure buddies. It is also important to us that we support small
     communities along the way, hence hiring a number of locals & using
-    locally-owned businesses to better your experience abroad. "
+    locally-owned businesses to better your experience abroad. 
+
+
+    Together we are making responsible choices that respect local cultures &
+    environmental protection, directly benefiting host communities.
   stats:
     - number: "19"
       label: trips run
