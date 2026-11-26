@@ -32,6 +32,8 @@ gallery:
     alt: "tourist enjoying African sunset on a safari "
   - image: /assets/img/ugahugo4.jpg
     alt: Gorilla in Uganda
+  - image: /assets/img/ugahugo15.jpg
+    alt: Rhino eating in high grass
 aside_note: Open for booking
 closing_heading: "Now booking for 2028, 2027 is full. "
 included:
@@ -51,3 +53,4 @@ not_included:
   - International flights
   - Travel insurance (required)
   - lunch
+button_label: Request a spot
