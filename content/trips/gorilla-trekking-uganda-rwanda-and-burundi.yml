@@ -1,0 +1,25 @@
+name: Gorilla Trekking Uganda, Rwanda & Burundi
+kind: dates
+order: 4
+country: Uganda, Rwanda, Burundi
+card_label: "Gorillas, Volcanoes National Park, & Drumming to the Beat of Africa "
+title: "Gorillas, Volcanoes National Park, & Drumming to the Beat of Africa "
+card_title: "Gorillas, Volcanoes National Park, & Drumming to the Beat of Africa "
+hero_kicker: "Gorillas, Volcanoes National Park, & Drumming to the Beat of Africa "
+blurb: "We welcome you to some of Africa's best natural wonders: trekking
+  through Bwindi National Park to get close to  arguably the most incredible
+  mammals on earth. "
+level: "Adventurous "
+length: "13 days "
+route: "Entebbe to Bujumbura "
+price_eur: 2200
+price_gbp: 2050
+deposit: €500
+group_size: "15"
+card_image: /assets/img/uga9.jpg
+departures:
+  - start: 2028-02-05
+    end: 2028-02-18
+    spots_left: 9
+  - start: 2027-02-05
+    end: 2027-02-18
