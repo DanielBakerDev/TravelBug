@@ -70,7 +70,7 @@ numbers:
     - number: "112"
       label: travellers
     - number: 68%
-      label: have returned clients
+      label: are returned clients
 about:
   photo: /assets/img/amanda-guate.jpg
   photo_alt: Amanda in a sun hat and hiking gear, striking a pose on a trip to Guatemala
